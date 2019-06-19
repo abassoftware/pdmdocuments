@@ -1,0 +1,17 @@
+:docinfo:
+= pdmDocumentsCo
+Documentation
+:nofooter:
+
+This document describes the pdmDocumentsCo app.
+
+include::subpage.adoc[]
+
+include::additionalpage.adoc[]
+
+== About
+
+pdmDocumentsCo +
+(C) Your Company
+
+https://your-website.com/

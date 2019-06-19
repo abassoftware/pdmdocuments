@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE frame SYSTEM "urn:x-abas.de:abasscreens-1.00.dtd">
+
+<frame frameType="M" msgId="45e3efeab2efe6048d26953fe8864f16">
+ <layout.grid>
+  <metainfo axis="column" grid="0" stretch="zoom" />
+  <metainfo axis="row" grid="0" stretch="zoom" />
+  <cell alignX="fill" alignY="fill" gridX="0" gridY="0">
+   <layout.split axis="row">
+    <pane.split>
+     <layout.notebook>
+      <pane.notebook msgId="d95984c6da90849d3f88401c8ff68171">
+       <layout.grid>
+        <cell gridX="0" gridY="0">
+         <layout.grid>
+          <cell alignX="fill" alignY="fill" gridX="0" gridY="0">
+           <layout.grid>
+            <cell gridX="0" gridY="0" />
+            <cell gridX="1" gridY="0" />
+            <cell gridX="2" gridY="0" />
+            <cell alignY="beginning" gridX="3" gridY="0" />
+            <cell gridX="0" gridY="1">
+             <label msgId="15f40291299d8c47431c7045a05f9cf8" />
+            </cell>
+            <cell gridX="1" gridY="1">
+             <erpfield s3Name="0:yartikel" />
+            </cell>
+            <cell gridX="2" gridY="1">
+             <label msgId="fc91edeb-ced5-494a-91c3-e2e703b3c0dd" />
+            </cell>
+            <cell gridX="3" gridY="1">
+             <erpfield s3Name="0:ybeleg" />
+            </cell>
+            <cell gridX="0" gridY="2">
+             <label msgId="f29e844d051ac2c8cc28426fd6c2bdd7" />
+            </cell>
+            <cell gridX="1" gridY="2">
+             <erpfield dimX="100" s3Name="0:ydokart" />
+            </cell>
+            <cell gridX="2" gridY="2">
+             <label msgId="e6434034cb48693f80cbd1e7c3799e12" />
+            </cell>
+            <cell gridX="3" gridY="2">
+             <erpfield s3Name="0:ystruktur" />
+            </cell>
+           </layout.grid>
+          </cell>
+         </layout.grid>
+        </cell>
+       </layout.grid>
+      </pane.notebook>
+      <pane.notebook msgId="pdmdocuments_owpdm$1">
+       <layout.grid>
+        <cell gridX="0" gridY="0">
+         <layout.grid>
+          <cell gridX="0" gridY="0">
+           <label msgId="f7e53bc9-8081-41b0-b409-35274f517083" />
+          </cell>
+          <cell gridX="1" gridY="0">
+           <erpfield s3Name="0:ypdmsystem" />
+          </cell>
+          <cell gridX="2" gridY="0" />
+          <cell gridX="3" gridY="0" />
+          <cell gridX="0" gridY="1">
+           <label msgId="pdmdocuments_owpdm_fhead_ydrucktypen" />
+          </cell>
+          <cell gridX="1" gridY="1">
+           <erpfield s3Name="0:ydrucktypen" />
+          </cell>
+          <cell gridX="2" gridY="1" />
+          <cell gridX="3" gridY="1" />
+          <cell gridX="0" gridY="2">
+           <label msgId="pdmdocuments_owpdm_fhead_yemailtypen" />
+          </cell>
+          <cell gridX="1" gridY="2">
+           <erpfield s3Name="0:yemailtypen" />
+          </cell>
+          <cell gridX="2" gridY="2" />
+          <cell gridX="3" gridY="2" />
+          <cell gridX="0" gridY="3">
+           <label msgId="e78acd2d-5ead-4c2b-a315-e46f2b14f9fe" />
+          </cell>
+          <cell gridX="1" gridY="3">
+           <erpfield s3Name="0:ybildschirmtypen" />
+          </cell>
+          <cell gridX="2" gridY="3" />
+          <cell gridX="3" gridY="3" />
+          <cell gridX="0" gridY="4" />
+          <cell gridX="1" gridY="4">
+           <erpfield dimX="0" msgId="pdmdocuments_owpdm_fhead_ysaveconfig" s3Name="0:ysaveconfig" />
+          </cell>
+          <cell gridX="2" gridY="4" />
+          <cell gridX="3" gridY="4" />
+         </layout.grid>
+        </cell>
+        <cell gridX="0" gridY="1">
+         <layout.notebook>
+          <pane.notebook msgId="pdmdocuments_owpdm$2" scope="KEYTECH">
+           <layout.grid>
+            <cell gridX="0" gridY="0">
+             <layout.grid>
+              <cell gridX="0" gridY="0">
+               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+              </cell>
+              <cell gridX="1" gridY="0" sizeX="3">
+               <erpfield s3Name="0:yserver" />
+              </cell>
+              <cell gridX="0" gridY="1">
+               <label msgId="eae5a27d-136d-41a3-ae8d-919fe109623f" />
+              </cell>
+              <cell gridX="1" gridY="1">
+               <erpfield s3Name="0:yuser" />
+              </cell>
+              <cell gridX="2" gridY="1">
+               <label msgId="4d3c1aa3-130c-4ba6-a935-675d47340dda" />
+              </cell>
+              <cell gridX="3" gridY="1">
+               <erpfield s3Name="0:ypassword" />
+              </cell>
+             </layout.grid>
+            </cell>
+           </layout.grid>
+          </pane.notebook>
+          <pane.notebook msgId="pdmdocuments_owpdm$3" scope="PROFILE2">
+           <layout.grid>
+            <cell gridX="0" gridY="0">
+             <layout.grid>
+              <cell gridX="0" gridY="0">
+               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+              </cell>
+              <cell gridX="1" gridY="0" sizeX="4">
+               <erpfield s3Name="0:yserver" />
+              </cell>
+              <cell gridX="5" gridY="0">
+               <label msgId="pdmdocuments_owpdm_fhead_ytenant" />
+              </cell>
+              <cell gridX="6" gridY="0">
+               <erpfield s3Name="0:ytenant" />
+              </cell>
+              <cell gridX="0" gridY="1">
+               <label msgId="eae5a27d-136d-41a3-ae8d-919fe109623f" />
+              </cell>
+              <cell gridX="1" gridY="1">
+               <erpfield s3Name="0:yuser" />
+              </cell>
+              <cell gridX="2" gridY="1">
+               <label msgId="4d3c1aa3-130c-4ba6-a935-675d47340dda" />
+              </cell>
+              <cell gridX="3" gridY="1" sizeX="2">
+               <erpfield s3Name="0:ypassword" />
+              </cell>
+              <cell gridX="5" gridY="1">
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldfornumber" />
+              </cell>
+              <cell gridX="6" gridY="1">
+               <erpfield s3Name="0:yfieldfornumber" />
+              </cell>
+              <cell gridX="0" gridY="2">
+               <label msgId="pdmdocuments_owpdm_fhead_ysqlserver" />
+              </cell>
+              <cell gridX="1" gridY="2">
+               <erpfield s3Name="0:ysqlserver" />
+              </cell>
+              <cell gridX="2" gridY="2">
+               <label msgId="pdmdocuments_owpdm_fhead_ysqlport" />
+              </cell>
+              <cell gridX="3" gridY="2" sizeX="2">
+               <erpfield s3Name="0:ysqlport" />
+              </cell>
+              <cell gridX="5" gridY="2">
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldforpartid" />
+              </cell>
+              <cell gridX="6" gridY="2">
+               <erpfield s3Name="0:yfieldforpartid" />
+              </cell>
+              <cell gridX="0" gridY="3">
+               <label msgId="pdmdocuments_owpdm_fhead_ysqluser" />
+              </cell>
+              <cell gridX="1" gridY="3">
+               <erpfield s3Name="0:ysqluser" />
+              </cell>
+              <cell gridX="2" gridY="3">
+               <label msgId="pdmdocuments_owpdm_fhead_ysqlpassword" />
+              </cell>
+              <cell gridX="3" gridY="3" sizeX="2">
+               <erpfield s3Name="0:ysqlpassword" />
+              </cell>
+              <cell gridX="5" gridY="3">
+               <label msgId="pdmdocuments_owpdm_fhead_ydatabase" />
+              </cell>
+              <cell gridX="6" gridY="3">
+               <erpfield s3Name="0:ydatabase" />
+              </cell>
+              <cell gridX="0" gridY="4" />
+              <cell gridX="1" gridY="4" />
+              <cell gridX="2" gridY="4" />
+              <cell gridX="3" gridY="4" />
+              <cell gridX="4" gridY="4" />
+              <cell gridX="5" gridY="4">
+               <label msgId="pdmdocuments_owpdm_fhead_ysqldriver" />
+              </cell>
+              <cell gridX="6" gridY="4">
+               <erpfield s3Name="0:ysqldriver" />
+              </cell>
+             </layout.grid>
+            </cell>
+           </layout.grid>
+          </pane.notebook>
+         </layout.notebook>
+        </cell>
+       </layout.grid>
+      </pane.notebook>
+      <pane.notebook msgId="pdmdocuments_owpdm$0">
+       <layout.grid>
+        <cell gridX="0" gridY="0">
+         <label msgId="pdmdocuments_owpdm_fhead_yanhangliste" />
+        </cell>
+        <cell gridX="1" gridY="0">
+         <erpfield dimX="100" s3Name="0:yanhangliste" />
+        </cell>
+        <cell gridX="0" gridY="1">
+         <label msgId="pdmdocuments_owpdm_fhead_yuebfile" />
+        </cell>
+        <cell gridX="1" gridY="1">
+         <erpfield dimY="3" s3Name="0:yuebfile" />
+        </cell>
+        <cell gridX="0" gridY="2">
+         <label msgId="4b0db36b-dc07-442a-a71c-83c1c404981e" />
+        </cell>
+        <cell gridX="1" gridY="2">
+         <erpfield s3Name="0:ydrucker" />
+        </cell>
+        <cell gridX="0" gridY="3">
+         <label msgId="pdmdocuments_owpdm_fhead_yuebdatei" />
+        </cell>
+        <cell gridX="1" gridY="3">
+         <erpfield dimX="100" s3Name="0:yuebdatei" />
+        </cell>
+       </layout.grid>
+      </pane.notebook>
+     </layout.notebook>
+    </pane.split>
+    <pane.split>
+     <table>
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_yerror" s3Name="1:yerror" />
+      <erpfield dimX="0" msgId="pdmdocuments_owpdm_ftable_yauswahl" s3Name="1:yauswahl" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytstufe" s3Name="1:ytstufe" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytartikel" s3Name="1:ytartikel" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytartikelname" s3Name="1:ytartikelname" />
+      <erpfield access="readOnly" dimX="30" msgId="5ec530b672d5f647cf9146251a254176" s3Name="1:ydateiname" />
+      <erpfield access="readOnly" dimX="0" msgId="042adb5cf4d14a9425cf5416938694ac" s3Name="1:ydatend" />
+      <erpfield access="readOnly" dimX="0" msgId="f0a34e9cfcfe3b12a87828a5fc881831" s3Name="1:ydoktyp" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta1key" s3Name="1:ymeta1key" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta1value" s3Name="1:ymeta1value" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta2key" s3Name="1:ymeta2key" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta2value" s3Name="1:ymeta2value" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymete3key" s3Name="1:ymete3key" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta3value" s3Name="1:ymeta3value" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta4key" s3Name="1:ymeta4key" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymete4value" s3Name="1:ymete4value" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta5key" s3Name="1:ymeta5key" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta5value" s3Name="1:ymeta5value" />
+     </table>
+    </pane.split>
+   </layout.split>
+  </cell>
+ </layout.grid>
+</frame>
+

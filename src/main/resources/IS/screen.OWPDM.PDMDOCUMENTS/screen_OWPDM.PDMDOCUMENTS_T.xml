@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE frame SYSTEM "urn:x-abas.de:abasscreens-1.00.dtd">
+
+<frame frameType="T">
+ <layout.grid>
+  <metainfo axis="column" grid="0" stretch="zoom" />
+  <metainfo axis="row" grid="0" stretch="zoom" />
+  <cell alignX="fill" alignY="fill" gridX="0" gridY="0">
+   <layout.notebook>
+    <pane.notebook msgId="d95984c6da90849d3f88401c8ff68171.1">
+     <layout.grid>
+      <cell gridX="0" gridY="0">
+       <label msgId="368529ce77607a89eb561712047d1fff.1" />
+      </cell>
+      <cell gridX="1" gridY="0" sizeX="3">
+       <erpfield access="readOnly" dimX="127" s3Name="1:ypfad" />
+      </cell>
+      <cell gridX="0" gridY="1">
+       <label msgId="5ec530b672d5f647cf9146251a254176.1" />
+      </cell>
+      <cell gridX="1" gridY="1" sizeX="2">
+       <erpfield access="readOnly" s3Name="1:ydateiname" />
+      </cell>
+      <cell gridX="3" gridY="1" />
+      <cell gridX="0" gridY="2">
+       <label msgId="042adb5cf4d14a9425cf5416938694ac.1" />
+      </cell>
+      <cell gridX="1" gridY="2">
+       <erpfield access="readOnly" s3Name="1:ydatend" />
+      </cell>
+      <cell gridX="2" gridY="2">
+       <label msgId="f0a34e9cfcfe3b12a87828a5fc881831.1" />
+      </cell>
+      <cell gridX="3" gridY="2">
+       <erpfield access="readOnly" s3Name="1:ydoktyp" />
+      </cell>
+     </layout.grid>
+    </pane.notebook>
+   </layout.notebook>
+  </cell>
+ </layout.grid>
+</frame>
+

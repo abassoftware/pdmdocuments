@@ -1,0 +1,46 @@
+[
+  {
+          "databaseName" : "(PrintParameter)",
+          "groupName" : "(PrintDialog)",
+          "editorMode" : "ändern",
+          "event" : "feldaus",
+          "key" : "*",
+          "field" : "drucker",
+          "headOrTable" : "K",
+          "isContinue" : "[C]",
+          "handler" : "java:de.abasgmbh.pdmDocuments.printscreen.PrintDialogEventHandler@pdmDocumentsApp"
+  },{
+          "databaseName" : "(PrintParameter)",
+          "groupName" : "(PrintDialog)",
+          "editorMode" : "ändern",
+          "event" : "buttonnach",
+          "key" : "*",
+          "field" : "budruausw",
+          "headOrTable" : "K",
+          "isContinue" : "[C]",
+          "handler" : "java:de.abasgmbh.pdmDocuments.printscreen.PrintDialogEventHandler@pdmDocumentsApp"
+  },{
+          "databaseName" : "(PrintParameter)",
+          "groupName" : "(PrintDialog)",
+          "editorMode" : "ändern",
+          "event" : "maskein",
+          "key" : "*",
+          "field" : "*",
+          "headOrTable" : "K",
+          "isContinue" : "[C]",
+          "handler" : "java:de.abasgmbh.pdmDocuments.printscreen.PrintDialogEventHandler@pdmDocumentsApp"
+  },{
+          "databaseName" : "(Purchasing)",
+          "groupName" : "(PurchaseOrder)",
+          "editorMode" : "ändern",
+          "event" : "buttonnach",
+          "key" : "*",
+          "field" : "ypdm01budocsammel",
+          "headOrTable" : "K",
+          "isContinue" : "[C]",
+          "handler" : "java:de.abasgmbh.pdmDocuments.purchase.screen.PurchasingEventHandler@pdmDocumentsApp"
+  
+  
+  }
+  
+]
