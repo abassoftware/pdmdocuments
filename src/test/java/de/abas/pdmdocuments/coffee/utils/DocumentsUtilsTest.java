@@ -15,13 +15,15 @@ public class DocumentsUtilsTest {
 
 	@Test
 	public void testGetPageFormat() {
-		File testfilepdf = new File("test.pdf");
-		File testfiletiff = new File("test.tif");
+		File testfilepdf = new File("src/test/resources/base/owpdm/test.pdf");
+		File testfiletiff = new File("src/test/resources/base/owpdm/test.tif");
 		String testpdf = null;
 		String testtiff = null;
 		try {
 			testpdf = DocumentsUtil.getPageFormat(testfilepdf);
 			testtiff = DocumentsUtil.getPageFormat(testfiletiff);
+			assertEquals(testpdf, "A4");
+			assertEquals(testtiff, "SO");
 		} catch (IOException e) {
 			fail(e.getMessage());
 
