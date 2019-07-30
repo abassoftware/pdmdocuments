@@ -121,7 +121,7 @@
             </cell>
            </layout.grid>
           </pane.notebook>
-          <pane.notebook msgId="pdmdocuments_owpdm$3" scope="PROFILE2">
+          <pane.notebook msgId="pdmdocuments_owpdm$3" scope="PROFILE">
            <layout.grid>
             <cell gridX="0" gridY="0">
              <layout.grid>
@@ -206,6 +206,20 @@
             </cell>
            </layout.grid>
           </pane.notebook>
+          <pane.notebook msgId="pdmdocuments_owpdm$4" scope="COFFEE">
+           <layout.grid>
+            <cell gridX="0" gridY="0">
+             <layout.grid>
+              <cell gridX="0" gridY="0">
+               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+              </cell>
+              <cell gridX="1" gridY="0" sizeX="3">
+               <erpfield s3Name="0:yserver" />
+              </cell>
+             </layout.grid>
+            </cell>
+           </layout.grid>
+          </pane.notebook>
          </layout.notebook>
         </cell>
        </layout.grid>
@@ -250,16 +264,6 @@
       <erpfield access="readOnly" dimX="30" msgId="5ec530b672d5f647cf9146251a254176" s3Name="1:ydateiname" />
       <erpfield access="readOnly" dimX="0" msgId="042adb5cf4d14a9425cf5416938694ac" s3Name="1:ydatend" />
       <erpfield access="readOnly" dimX="0" msgId="f0a34e9cfcfe3b12a87828a5fc881831" s3Name="1:ydoktyp" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta1key" s3Name="1:ymeta1key" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta1value" s3Name="1:ymeta1value" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta2key" s3Name="1:ymeta2key" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta2value" s3Name="1:ymeta2value" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymete3key" s3Name="1:ymete3key" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta3value" s3Name="1:ymeta3value" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta4key" s3Name="1:ymeta4key" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymete4value" s3Name="1:ymete4value" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta5key" s3Name="1:ymeta5key" />
-      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ymeta5value" s3Name="1:ymeta5value" />
      </table>
     </pane.split>
    </layout.split>
