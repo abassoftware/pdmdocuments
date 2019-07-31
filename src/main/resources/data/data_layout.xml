@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ABASData>
+    <RecordSet tableNumber="88:6" tableName="Druckparameter:Ausgabekanal" identifier="classname" standard="true" importOnce="false" importMode="normal">
+        <Record id="(171,88,0)">
+            <Head>
+                <Field name="id" abasType="ID88">(171,88,0)</Field>
+                <Field name="classname" abasType="GLC40">DataGeneratorFOPCallMultiplePrintFiles</Field>
+            </Head>
+        </Record>
+    </RecordSet>
+    <RecordSet tableNumber="65:1" tableName="Infosystem:Infosystem" identifier="classname" standard="true" importOnce="false" importMode="normal">
+        <Record id="(629,65,0)">
+            <Head>
+                <Field name="id" abasType="ID65">(629,65,0)</Field>
+                <Field name="classname" abasType="GLC40">PdmDocuments</Field>
+            </Head>
+        </Record>
+    </RecordSet>
+    <RecordSet tableNumber="88:3" tableName="Druckparameter:Layout" identifier="datagenfop" standard="false" importOnce="false" importMode="normal">
+        <Record id="(1196,88,0)">
+            <Head>
+                <Field name="id" abasType="ID88">(1196,88,0)</Field>
+                <Field name="guid" abasType="GLA38">d2b80195-e4be-4bd1-af93-bfe109915f06</Field>
+                <Field name="such" abasType="SWK88">PDMDOCUMENT</Field>
+                <Field name="name" abasType="T46">Dokumente aus dem PDM-System Drucken</Field>
+                <Field name="geprueft" abasType="B1">1</Field>
+                <Field name="aktiv" abasType="B1">1</Field>
+                <Field name="kanal" abasType="ID88:6">(171,88,0)</Field>
+                <Field name="arb" abasType="GLU20">owpdm</Field>
+                <Field name="kontext" abasType="VID12">(629,65,0)</Field>
+                <Field name="datagenfop" abasType="GL80">java:de.abasgmbh.pdmDocuments.coffee.printlayout.FopMultiLayoutPrintAfter@pdmco</Field>
+            </Head>
+        </Record>
+    </RecordSet>
+</ABASData>

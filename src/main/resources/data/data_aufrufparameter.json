@@ -1,0 +1,30 @@
+{
+  "roots" : [
+    
+    {
+      "dbnr" : 87,
+      "grnr" : 9,
+      "headfields" : [ "id", "guid", "such", "name", "zielobj" , "kontexttyp" ,"aufrktxt" , "zieltab" , "aufrtab" , "icontxt" , "dialogart" ,"arb" , "zielmodus" , "aufrbedtyp" , "aufrbed" ,  "aufrzieltyp" , "aufrziel" ],
+      "tablefields" : ["zid", "zielaktion" , "zielvar" , "aufrwtyp" , "aufrwert" , "aufrpflicht"],
+      "criteria" : "such=PDMDOCUMENTS!PDMDOCUMENTS"
+    }    
+  ],"dependents" : [
+                {
+                        "dbnr" : 12,
+                        "grnr" : 26,
+                        "identifier" : "vgrtxt14",
+                        "standard" : true,
+                        "headfields" : [ "id", "vgrtxt14" ],
+                        "tablefields" : []
+        },{
+                        "dbnr" : 65,
+                        "grnr" : 1,
+                        
+                        "standard" : true,
+                        "identifier" : "classname",
+                        "headfields" : [ "id", "classname" ],
+                        "tablefields" : []
+                }
+        ]
+  
+}

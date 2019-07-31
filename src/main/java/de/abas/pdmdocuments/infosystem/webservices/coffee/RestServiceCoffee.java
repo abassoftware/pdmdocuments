@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,11 @@ public class RestServiceCoffee extends AbstractRestService {
 
 	private static final String PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT = "pdmDocument.restservice.keytech.error.jsonToObject";
 
-	private static final String GETFILE_URL = "%1s/download?json={\"FileId\":%2,\"Version\":%3}";
+	private static final String GETFILE_URL_PART1 = "http://%1s/download?json=";
+	private static final String GETFILE_URL_PART2 = "{\"FileId\":%1s,\"Version\":%2s}";
 
-	private static final String GETCOFFEEDOCS_URL = "%1s/listing?json={\"Extension\":\"\",\"Variables\":[{\"Name\":\"ABAS_Identnummer\",\"Option\":106,\"Value\":\"%2s\"}],\"FileId\":0,\"Version\":0}";
+	private static final String GETCOFFEEDOCS_URL_PART1 = "http://%1s/listing?json=";
+	private static final String GETCOFFEEDOCS_URL_PART2 = "{\"Extension\":\"\",\"Variables\":[{\"Name\":\"ABAS_Identnummer\",\"Option\":106,\"Value\":\"%2s\"}],\"FileId\":0,\"Version\":0}";
 
 	public RestServiceCoffee(String server, String user, String password) {
 		super();
@@ -54,47 +57,53 @@ public class RestServiceCoffee extends AbstractRestService {
 	}
 
 	private ArrayList<PdmDocument> getDocumentsFromCoffee(String abasIdNo) throws PdmDocumentsException {
-
-		String url = String.format(GETCOFFEEDOCS_URL, this.server, abasIdNo);
-
-		String jsonString = callRestservice(url);
-
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		List<CoffeeDocs> response;
 		try {
+			String url_part1 = String.format(GETCOFFEEDOCS_URL_PART1, this.server);
+			String url_part2 = URLEncoder.encode(String.format(GETCOFFEEDOCS_URL_PART2, abasIdNo), "UTF-8");
+			String url = url_part1 + url_part2;
+			String jsonString = callRestservice(url);
+
+			ObjectMapper mapper = new ObjectMapper();
+			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 			response = mapper.readValue(jsonString, new TypeReference<List<CoffeeDocs>>() {
 			});
+
+			List<CoffeeDocs> listCoffeeDocs = response;
+
+			ArrayList<PdmDocument> pdmDocumentList = new ArrayList<>();
+
+			for (CoffeeDocs coffedocs : listCoffeeDocs) {
+
+				String urlDocFile_Part1 = String.format(GETFILE_URL_PART1, this.server);
+
+				String urlDocFile_Part2 = URLEncoder.encode(
+						String.format(GETFILE_URL_PART2, coffedocs.getFileID(), coffedocs.getLatestVersion()), "UTF-8");
+
+				String urlDocFile = urlDocFile_Part1 + urlDocFile_Part2;
+
+				PdmDocument pdmDocument = new PdmDocument(coffedocs.getFileName(), coffedocs.getExtension(),
+						urlDocFile);
+
+				pdmDocument.addDocMetaData("FileID", coffedocs.getFileID());
+				pdmDocument.addDocMetaData("FileName", coffedocs.getFileName());
+				pdmDocument.addDocMetaData("FilePath", coffedocs.getFilePath());
+				pdmDocument.addDocMetaData("LocalVersion", coffedocs.getLocalVersion());
+				pdmDocument.addDocMetaData("LatestVersion", coffedocs.getLatestVersion());
+				pdmDocument.addDocMetaData("CheckedIn", coffedocs.getCheckedIn());
+				pdmDocument.addDocMetaData("CheckedInBy", coffedocs.getCheckedInBy());
+				pdmDocument.addDocMetaData("CheckedInDate", coffedocs.getCheckedInDate());
+
+				pdmDocumentList.add(pdmDocument);
+
+			}
+
+			return pdmDocumentList;
+
 		} catch (IOException e) {
 			throw new PdmDocumentsException(
 					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT, "ResponsePDMProductId"), e);
 		}
-
-		List<CoffeeDocs> listCoffeeDocs = response;
-
-		ArrayList<PdmDocument> pdmDocumentList = new ArrayList<>();
-
-		for (CoffeeDocs coffedocs : listCoffeeDocs) {
-
-			String urlDocFile = String.format(GETFILE_URL, this.server, coffedocs.getFileID(),
-					coffedocs.getLatestVersion());
-
-			PdmDocument pdmDocument = new PdmDocument(coffedocs.getFileName(), coffedocs.getExtension(), urlDocFile);
-
-			pdmDocument.addDocMetaData("FileID", coffedocs.getFileID());
-			pdmDocument.addDocMetaData("FileName", coffedocs.getFileName());
-			pdmDocument.addDocMetaData("FilePath", coffedocs.getFilePath());
-			pdmDocument.addDocMetaData("LocalVersion", coffedocs.getLocalVersion());
-			pdmDocument.addDocMetaData("LatestVersion", coffedocs.getLatestVersion());
-			pdmDocument.addDocMetaData("CheckedIn", coffedocs.getCheckedIn());
-			pdmDocument.addDocMetaData("CheckedInBy", coffedocs.getCheckedInBy());
-			pdmDocument.addDocMetaData("CheckedInDate", coffedocs.getCheckedInDate());
-
-			pdmDocumentList.add(pdmDocument);
-
-		}
-
-		return pdmDocumentList;
 
 	}
 

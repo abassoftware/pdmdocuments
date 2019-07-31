@@ -1,0 +1,31 @@
+{
+  "roots" : [
+    
+    {
+      "dbnr" : 88,
+      "grnr" : 3,
+      "identifier" : "datagenfop",
+      "headfields" : [ "id", "guid", "such", "name",  "geprueft" ,"aktiv" , "kanal" ,"arb","kontext","datagenfop"],
+      "tablefields" : [],
+      "criteria" : "such==PDMDOCUMENT"
+    }
+    
+  ],"dependents" : [
+                {
+                        "dbnr" : 88,
+                        "grnr" : 6,
+                        "identifier" : "classname",
+                        "standard" : true,
+                        "headfields" : [ "id", "classname" ],
+                        "tablefields" : []
+                }, {
+                        "dbnr" : 65,
+                        "grnr" : 1,
+                        "standard" : true,
+                        "identifier" : "classname",
+                        "headfields" : [ "id", "classname" ],
+                        "tablefields" : []
+                }
+                
+        ]
+}
