@@ -33,8 +33,8 @@ public abstract class AbstractRestService implements DocumentsInterface {
 	protected static final int TEST_TIMEOUT = 5000;
 
 	protected String server;
-	protected String pdmProductID;
-	protected String pdmDocumentTyp;
+//	protected String pdmProductID;
+//	protected String pdmDocumentTyp;
 	protected String user;
 	protected String password;
 
@@ -55,18 +55,18 @@ public abstract class AbstractRestService implements DocumentsInterface {
 		this.server = serveradresse;
 
 	}
+//
+//	@Override
+//	public void setProduct(String pdmProductID) {
+//		this.pdmProductID = pdmProductID;
+//
+//	}
 
-	@Override
-	public void setProduct(String pdmProductID) {
-		this.pdmProductID = pdmProductID;
-
-	}
-
-	@Override
-	public void setDocumentTyp(String pdmDocumentTyp) {
-		this.pdmDocumentTyp = pdmDocumentTyp;
-
-	}
+//	@Override
+//	public void setDocumentTyp(String pdmDocumentTyp) {
+//		this.pdmDocumentTyp = pdmDocumentTyp;
+//
+//	}
 
 	protected String callRestservice(String url) throws PdmDocumentsException {
 
