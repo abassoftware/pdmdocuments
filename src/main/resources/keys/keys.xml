@@ -8,7 +8,7 @@
                 <Field name="nummer" abasType="NK12">3011</Field>
                 <Field name="such" abasType="SWK12">V-04-02</Field>
                 <Field name="name" abasType="T64">Einkauf Kopf</Field>
-                <Field name="bname" abasType="GL50">Kopf</Field>
+                <Field name="bname" abasType="GL50">EKKopf</Field>
                 <Field name="bgrliste" abasType="GL85">4:2</Field>
                 <Field name="bart" abasType="A46">automatisch  (Kopf)</Field>
                 <Field name="baart" abasType="A193">beides</Field>
@@ -27,7 +27,7 @@
                 <Field name="nummer" abasType="NK12">3012</Field>
                 <Field name="such" abasType="SWK12">V-04-02</Field>
                 <Field name="name" abasType="T64">Verkauf Kopf</Field>
-                <Field name="bname" abasType="GL50">Kopf</Field>
+                <Field name="bname" abasType="GL50">VKKopf</Field>
                 <Field name="bgrliste" abasType="GL85">4:2</Field>
                 <Field name="bart" abasType="A46">automatisch  (Kopf)</Field>
                 <Field name="baart" abasType="A193">beides</Field>

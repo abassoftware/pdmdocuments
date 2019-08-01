@@ -17,7 +17,7 @@ esdk {
 		screens=["Purchasing:PurchaseOrder":["A"]]
         infosystems = ["IS.OWPDM.PDMDOCUMENTS"]
         tables = ["Einkauf"]
-        data = ["data.json", "enum.json" ]
+        data = ["data_aufrufparamter.json" , "data_layout.layout" ]
         keys = ["3011","3012"]
         enums = ["PdmSystems"]
         workdirs = [ "owpdm" ]
