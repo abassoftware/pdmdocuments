@@ -111,7 +111,7 @@ public class RestServiceCoffee extends AbstractRestService {
 	public Boolean testConnection() {
 		InputStream is = null;
 		try {
-			URL url = new URL(this.server);
+			URL url = new URL("http://" + this.server);
 			URLConnection con = url.openConnection();
 			con.setConnectTimeout(TEST_TIMEOUT);
 			is = con.getInputStream();

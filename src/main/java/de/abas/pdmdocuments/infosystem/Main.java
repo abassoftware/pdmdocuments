@@ -94,6 +94,7 @@ public class Main {
 
 		getConfigInMask(head, ctx);
 		Boolean noErrorsInPDM = true;
+
 		log.info(Util.getMessage("pdmDocument.info.startvalues", head.getYartikel(), head.getYbeleg(),
 				head.getYdrucker(), head.getYanhangliste()));
 
@@ -197,8 +198,14 @@ public class Main {
 				String fileExtension = row.getYdatend();
 				String oldPath = row.getYpfad();
 				String newPath = oldPath.substring(0, oldPath.lastIndexOf("/"));
-				String profileid = row.getYdateiname().substring(0, row.getYdateiname().indexOf('_'));
-				String newFilename = number + "_" + name + "_" + profileid;
+				String docId = "";
+				if (row.getYmeta1key().equals("FileID")) {
+					docId = row.getYmeta1value();
+				} else if (row.getYdateiname().indexOf('_') != -1) {
+					docId = row.getYdateiname().substring(0, row.getYdateiname().indexOf('_'));
+				}
+
+				String newFilename = number + "_" + name + "_" + docId;
 				newFilename = Util.replaceUmlaute(newFilename.replaceAll(" ", "_"));
 				newFilename = Util.replaceSonderzeichen(newFilename);
 				newFilename = newFilename + "." + fileExtension;
