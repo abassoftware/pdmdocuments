@@ -32,8 +32,6 @@ public class FopMultiLayoutPrintAfter implements DataGenerator, DatagenFopGenera
 				String maskYpfad = screenBuf.getStringValue("ypfad");
 				if (!maskYpfad.isEmpty()) {
 					String aktttmp = printBuffer.getStringValue("actTempDir");
-					// String string =
-					// PrintDialogEditor.META.actTempDir.toString();
 
 					String outputTempDir = aktttmp + "output/";
 					File file = new File(maskYpfad);

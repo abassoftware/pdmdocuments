@@ -28,13 +28,11 @@ import de.abas.pdmdocuments.infosystem.utils.Util;
 public abstract class AbstractRestService implements DocumentsInterface {
 
 	protected static final Logger log = Logger.getLogger(AbstractRestService.class);
-	protected static final org.apache.log4j.Logger log4j = org.apache.log4j.Logger.getLogger(AbstractRestService.class);
+
 	private static final String TIMESTAMP = Util.getTimestamp();
 	protected static final int TEST_TIMEOUT = 5000;
 
 	protected String server;
-//	protected String pdmProductID;
-//	protected String pdmDocumentTyp;
 	protected String user;
 	protected String password;
 
@@ -55,33 +53,21 @@ public abstract class AbstractRestService implements DocumentsInterface {
 		this.server = serveradresse;
 
 	}
-//
-//	@Override
-//	public void setProduct(String pdmProductID) {
-//		this.pdmProductID = pdmProductID;
-//
-//	}
-
-//	@Override
-//	public void setDocumentTyp(String pdmDocumentTyp) {
-//		this.pdmDocumentTyp = pdmDocumentTyp;
-//
-//	}
 
 	protected String callRestservice(String url) throws PdmDocumentsException {
 
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget target = client.target(url);
 		target.register(new BasicAuthentication(this.user, this.password));
-
+		log.info("call url - " + url);
 		javax.ws.rs.core.Response response = target.request().get();
 		if (response.getStatus() == 200) {
-			log4j.info("ok - " + url);
+			log.info("ok - " + url);
 
 			String value;
 			try {
 				value = response.readEntity(String.class);
-				log4j.debug("Response : " + value);
+				log.debug("Response : " + value);
 			} finally {
 				response.close();
 			}
@@ -90,7 +76,7 @@ public abstract class AbstractRestService implements DocumentsInterface {
 			if (response.getStatus() == 404) {
 				return "404";
 			}
-			log4j.error(url + " " + response.getStatus() + " " + response.getStatusInfo() + " "
+			log.error(url + " " + response.getStatus() + " " + response.getStatusInfo() + " "
 					+ response.getMetadata().toString());
 			throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.keytech.error.getfilehttprequest",
 					response.getStatus() + " " + response.getMetadata().toString()));

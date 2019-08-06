@@ -167,7 +167,7 @@ public class RestServiceProcad extends AbstractRestService {
 							"ResponsePDMProductId"), e);
 				}
 			} else {
-				log4j.error(Util.getMessage("pdmDocument.restservice.procad.error.Dokument.notfound", proString));
+				log.error(Util.getMessage("pdmDocument.restservice.procad.error.Dokument.notfound", proString));
 			}
 		}
 
@@ -258,7 +258,7 @@ public class RestServiceProcad extends AbstractRestService {
 			return true;
 		}
 		return false;
-
+//		no return
 	}
 
 	private Boolean testRestServer() {
