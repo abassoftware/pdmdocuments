@@ -1,13 +1,35 @@
 [
   {
-    "databaseName": "(Customer)",
-    "groupName": "(Customer)",
+    "databaseName": "(PrintParameter)",
+    "groupName": "(PrintDialog)",
     "editorMode": "*",
-    "event": "feldpruef",
+    "event": "maskein",
     "key": "*",
-    "field": "plz",
+    "field": "",
     "headOrTable": "K",
     "isContinue": "[C]",
-    "handler": "java:de.abas.pdmdocuments.coffee.ZipCodeEventHandler@pdmco"
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler.java@pdmco"
+  },
+  {
+    "databaseName": "(PrintParameter)",
+    "groupName": "(PrintDialog)",
+    "editorMode": "*",
+    "event": "feldaus",
+    "key": "*",
+    "field": "printer",
+    "headOrTable": "K",
+    "isContinue": "[C]",
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler.java@pdmco"
+  },
+  {
+    "databaseName": "(PrintParameter)",
+    "groupName": "(PrintDialog)",
+    "editorMode": "*",
+    "event": "buttonnach",
+    "key": "*",
+    "field": "selectPrinter",
+    "headOrTable": "K",
+    "isContinue": "[C]",
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler.java@pdmco"
   }
 ]

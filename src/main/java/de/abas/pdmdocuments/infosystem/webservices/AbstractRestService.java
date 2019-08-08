@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.ProcessingException;
 
 import org.apache.log4j.Logger;
 import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
@@ -68,6 +69,12 @@ public abstract class AbstractRestService implements DocumentsInterface {
 			try {
 				value = response.readEntity(String.class);
 				log.debug("Response : " + value);
+			} catch (ProcessingException e) {
+				log.error(e.getMessage());
+				throw new PdmDocumentsException("Prozessfehler :" + e.getMessage());
+			} catch (IllegalStateException e) {
+				log.error(e.getMessage());
+				throw new PdmDocumentsException("IllegalState-Fehler :" + e.getMessage());
 			} finally {
 				response.close();
 			}

@@ -65,15 +65,15 @@ public class PrintDialogEventHandler {
 					head.setAttachmentFileList("");
 					BufferFactory buffInst = BufferFactory.newInstance();
 					ParentScreenBuffer parentbuffer = buffInst.getParentScreenBuffer();
-					if (parentbuffer.isVarDefined("ypdm01anhanglist")) {
-						String uebdatei = parentbuffer.getStringValue("ypdm01anhanglist");
-						if (uebdatei != null) {
-							if (!uebdatei.isEmpty()) {
-								head.setAttachmentFileList(uebdatei);
-							}
-						}
-
-					}
+//					if (parentbuffer.isVarDefined("ypdm01anhanglist")) {
+//						String uebdatei = parentbuffer.getStringValue("ypdm01anhanglist");
+//						if (uebdatei != null) {
+//							if (!uebdatei.isEmpty()) {
+//								head.setAttachmentFileList(uebdatei);
+//							}
+//						}
+//
+//					}
 					if (head.getAttachmentFileList().isEmpty()) {
 						head.setAttachmentFileList(Util.gettempFile("rmtmp", "pdmDoc", "TMP").toString());
 					}

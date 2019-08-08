@@ -59,11 +59,15 @@ public class RestServiceCoffee extends AbstractRestService {
 	private ArrayList<PdmDocument> getDocumentsFromCoffee(String abasIdNo) throws PdmDocumentsException {
 		List<CoffeeDocs> response;
 		try {
-			String url_part1 = String.format(GETCOFFEEDOCS_URL_PART1, this.server);
-			String url_part2 = URLEncoder.encode(String.format(GETCOFFEEDOCS_URL_PART2, abasIdNo), "UTF-8");
-			String url = url_part1 + url_part2;
+			String urlPart1 = String.format(GETCOFFEEDOCS_URL_PART1, this.server);
+			String urlPart2 = URLEncoder.encode(String.format(GETCOFFEEDOCS_URL_PART2, abasIdNo), "UTF-8");
+			String url = urlPart1 + urlPart2;
 			String jsonString = callRestservice(url);
-
+			log.debug("json: \n" + jsonString);
+			if (jsonString.contains("Status Code")) {
+				throw new PdmDocumentsException(
+						Util.getMessage("pdmDocument.restservice.procad.error.InternalServerError", jsonString));
+			}
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 			response = mapper.readValue(jsonString, new TypeReference<List<CoffeeDocs>>() {
@@ -75,12 +79,12 @@ public class RestServiceCoffee extends AbstractRestService {
 
 			for (CoffeeDocs coffedocs : listCoffeeDocs) {
 
-				String urlDocFile_Part1 = String.format(GETFILE_URL_PART1, this.server);
+				String urlDocFilePart1 = String.format(GETFILE_URL_PART1, this.server);
 
-				String urlDocFile_Part2 = URLEncoder.encode(
+				String urlDocFilePart2 = URLEncoder.encode(
 						String.format(GETFILE_URL_PART2, coffedocs.getFileID(), coffedocs.getLatestVersion()), "UTF-8");
 
-				String urlDocFile = urlDocFile_Part1 + urlDocFile_Part2;
+				String urlDocFile = urlDocFilePart1 + urlDocFilePart2;
 
 				PdmDocument pdmDocument = new PdmDocument(coffedocs.getFileName(), coffedocs.getExtension(),
 						urlDocFile);
@@ -101,8 +105,9 @@ public class RestServiceCoffee extends AbstractRestService {
 			return pdmDocumentList;
 
 		} catch (IOException e) {
+			log.error(e);
 			throw new PdmDocumentsException(
-					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT, "ResponsePDMProductId"), e);
+					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT, "CoffeeDocs"), e);
 		}
 
 	}
