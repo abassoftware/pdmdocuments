@@ -24,9 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
-import de.abas.pdmdocuments.infosystem.data.DocMetaData;
-import de.abas.pdmdocuments.infosystem.data.PdmDocument;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class PdmDocumentTest {
 	private PdmDocument pdmDocTest;
@@ -146,7 +144,8 @@ public class PdmDocumentTest {
 
 			} catch (PdmDocumentsException e) {
 
-				assertThat(e.getMessage(), is(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname)));
+				assertThat(e.getMessage(),
+						is(UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname)));
 			}
 
 		} catch (PdmDocumentsException e) {

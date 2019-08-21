@@ -17,6 +17,12 @@ import de.abas.pdmdocuments.infosystem.config.Configuration;
 
 public class ConfigurationTest {
 
+	private static final String HOST = "localhost";
+	private static final String DOKART = "dokart";
+	private static final String FILE_TYPES_SCREEN = "fileTypesScreen";
+	private static final String FILE_TYPES_PRINTER = "fileTypesPrinter";
+	private static final String FILE_TYPES_EMAIL = "fileTypesEmail";
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -49,10 +55,10 @@ public class ConfigurationTest {
 
 //		assertNull(config.getPdmSystem());
 		try {
-			config.initConfiguration("localhost", "restUser", "restPassword", "restTenant", "partFieldName",
+			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
 					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", "fileTypesEmail", "fileTypesPrinter", "fileTypesScreen", "dokart");
-			assertEquals("localhost", config.getRestServer());
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+			assertEquals(HOST, config.getRestServer());
 			assertEquals("restUser", config.getRestUser());
 			assertEquals("restPassword", config.getRestPassword());
 			assertEquals("restTenant", config.getRestTenant());
@@ -66,10 +72,10 @@ public class ConfigurationTest {
 			assertEquals("sqlDriver", config.getSqlDriver());
 			assertEquals("sqlUser", config.getSqlUser());
 			assertEquals("sqlPassword", config.getSqlPassword());
-			assertEquals("fileTypesEmail", config.getFileTypesEmail());
-			assertEquals("fileTypesPrinter", config.getFileTypesPrinter());
-			assertEquals("fileTypesScreen", config.getFileTypesScreen());
-			assertEquals("dokart", config.getDokart());
+			assertEquals(FILE_TYPES_EMAIL, config.getFileTypesEmail());
+			assertEquals(FILE_TYPES_PRINTER, config.getFileTypesPrinter());
+			assertEquals(FILE_TYPES_SCREEN, config.getFileTypesScreen());
+			assertEquals(DOKART, config.getDokart());
 
 		} catch (PdmDocumentsException e) {
 			Assert.fail(e.getMessage());
@@ -84,7 +90,7 @@ public class ConfigurationTest {
 		try {
 			config.initConfiguration("localhost1", "restUser1", "restPassword1", "restTenant1", "partFieldName",
 					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", "fileTypesEmail", "fileTypesPrinter", "fileTypesScreen", "dokart");
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 
 			assertEquals("localhost1", config.getRestServer());
 			assertEquals("restUser1", config.getRestUser());
@@ -108,9 +114,9 @@ public class ConfigurationTest {
 	public void testSetSqlConnection() {
 		Configuration config = Configuration.getInstance();
 		try {
-			config.initConfiguration("localhost", "restUser", "restPassword", "restTenant", "partFieldName",
+			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
 					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", "fileTypesEmail", "fileTypesPrinter", "fileTypesScreen", "dokart");
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 
 			assertEquals("sqlServer", config.getSqlServer());
 			assertEquals("sqlUser", config.getSqlUser());
