@@ -130,7 +130,7 @@ Z#2#isytartikel#P2:1#1#Artikel#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isytartikelname#PT2:1#1#Bezeichnung#(65)#(65)#(0)######1#3#1#0##1##
 Z#2#isypfad#GL250#1#Dateipfad#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isydateiname#GL100#1#Dateiname#(65)#(65)#(0)######1#1#1#0##1##
-Z#2#isydatend#GL5#1#Datei Typ#(65)#(65)#(0)######1#1#1#0##1##
+Z#2#isydatend#GL10#1#Datei Typ#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isydoktyp#GL30#1#Dokument Typ#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isybuanzeigen#BU4#1#Dokumentanzeigen#(65)#(65)#(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmco####1#1#1#0##1##
 Z#2#isymeta1key#GL20#1#Meta 1#(65)#(65)#(0)######1#1#1#0##1##
