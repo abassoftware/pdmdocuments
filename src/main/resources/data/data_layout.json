@@ -5,7 +5,7 @@
       "dbnr" : 88,
       "grnr" : 3,
       "identifier" : "datagenfop",
-      "headfields" : [ "id", "guid", "such", "name",  "geprueft" ,"aktiv" , "kanal" ,"arb","kontext","datagenfop"],
+      "headfields" : [ "id", "guid", "such", "name",  "geprueft" ,"aktiv" , "kanal" ,"arb","kontext","datagenfop","keindokument"],
       "tablefields" : [],
       "criteria" : "such==PDMDOCUMENT"
     }

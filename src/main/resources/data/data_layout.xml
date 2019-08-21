@@ -28,7 +28,8 @@
                 <Field name="kanal" abasType="ID88:6">(171,88,0)</Field>
                 <Field name="arb" abasType="GLU20">owpdm</Field>
                 <Field name="kontext" abasType="VID12">(629,65,0)</Field>
-                <Field name="datagenfop" abasType="GL80">java:de.abasgmbh.pdmDocuments.coffee.printlayout.FopMultiLayoutPrintAfter@pdmco</Field>
+                <Field name="datagenfop" abasType="GL80">java:de.abas.pdmdocuments.printlayout.FopMultiLayoutPrintAfter@pdmco</Field>
+                <Field name="keindokument" abasType="B1">1</Field>
             </Head>
         </Record>
     </RecordSet>
