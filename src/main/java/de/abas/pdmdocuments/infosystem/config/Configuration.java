@@ -2,7 +2,7 @@ package de.abas.pdmdocuments.infosystem.config;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class Configuration {
 
@@ -67,7 +67,7 @@ public class Configuration {
 			String fileTypesEmail, String fileTypesPrinter, String fileTypesScreen, String dokart)
 			throws PdmDocumentsException {
 
-		checkRestServerInfo(restServer, restUser, restPassword);
+		checkRestServerInfo(restServer);
 		this.restServer = restServer;
 		this.restUser = restUser;
 		this.restPassword = restPassword;
@@ -89,7 +89,7 @@ public class Configuration {
 
 	public void setRestServer(String restServer, String restUser, String restPassword, String restTenant)
 			throws PdmDocumentsException {
-		if (checkRestServerInfo(restServer, restUser, restPassword)) {
+		if (checkRestServerInfo(restServer)) {
 			this.restServer = restServer;
 			this.restUser = restUser;
 			this.restPassword = restPassword;
@@ -116,14 +116,14 @@ public class Configuration {
 		this.fileTypesScreen = fileTypesScreen;
 	}
 
-	private Boolean checkRestServerInfo(String restServer, String restUser, String restPassword)
-			throws PdmDocumentsException {
+	private Boolean checkRestServerInfo(String restServer) throws PdmDocumentsException {
 		if (restServer != null) {
 			if (restServer.isEmpty()) {
-				throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.restServerNotSet"));
+				throw new PdmDocumentsException(
+						UtilwithAbasConnection.getMessage("pdmDocument.error.restServerNotSet"));
 			}
 		} else {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.restServerNotSet"));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.error.restServerNotSet"));
 		}
 
 		return true;

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.utils.DocumentsUtil;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class PdmDocument {
 
@@ -41,7 +41,7 @@ public class PdmDocument {
 		try {
 			this.pageformat = DocumentsUtil.getPageFormat(this.file);
 		} catch (IOException e) {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.formatcheck.error.io"));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.formatcheck.error.io"));
 		}
 	}
 
@@ -63,7 +63,7 @@ public class PdmDocument {
 		try {
 			this.pageformat = DocumentsUtil.getPageFormat(this.file);
 		} catch (IOException e) {
-			this.error = this.error + " " + Util.getMessage("pdmDocument.formatcheck.error.io");
+			this.error = this.error + " " + UtilwithAbasConnection.getMessage("pdmDocument.formatcheck.error.io");
 		}
 	}
 
@@ -82,7 +82,8 @@ public class PdmDocument {
 		if (!metaDataList.containsKey(valueName)) {
 			this.metaDataList.put(valueName, docMetaData);
 		} else {
-			throw new PdmDocumentsException(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
 		}
 
 	}
@@ -94,7 +95,8 @@ public class PdmDocument {
 		if (!metaDataList.containsKey(valueName)) {
 			this.metaDataList.put(valueName, docMetaData);
 		} else {
-			throw new PdmDocumentsException(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
 		}
 
 	}
@@ -106,7 +108,8 @@ public class PdmDocument {
 		if (!metaDataList.containsKey(valueName)) {
 			this.metaDataList.put(valueName, docMetaData);
 		} else {
-			throw new PdmDocumentsException(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
 		}
 
 	}
@@ -118,7 +121,8 @@ public class PdmDocument {
 		if (!metaDataList.containsKey(valueName)) {
 			this.metaDataList.put(valueName, docMetaData);
 		} else {
-			throw new PdmDocumentsException(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
 		}
 
 	}
@@ -138,7 +142,8 @@ public class PdmDocument {
 		if (!metaDataList.containsKey(valueName)) {
 			this.metaDataList.put(valueName, docMetaData);
 		} else {
-			throw new PdmDocumentsException(Util.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, valueName));
 		}
 	}
 
@@ -192,8 +197,8 @@ public class PdmDocument {
 			for (String typ : fileListTyp) {
 				if (!typ.isEmpty()) {
 					if (typ.trim().equalsIgnoreCase(this.filetyp)) {
-						log.trace(Util.getMessage("pdmDocument.checkdocument.includePdmDoc", this.getFilename(),
-								Arrays.toString(fileListTyp)));
+						log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc",
+								this.getFilename(), Arrays.toString(fileListTyp)));
 						return true;
 					}
 					allempty = false;
@@ -202,10 +207,11 @@ public class PdmDocument {
 
 		}
 		if (allempty) {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.includePdmDoc.emptyTypliste", this.getFilename()));
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc.emptyTypliste",
+					this.getFilename()));
 			return true;
 		} else {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.excludePdmDoc", this.getFilename(),
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.excludePdmDoc", this.getFilename(),
 					Arrays.toString(fileListTyp)));
 			return false;
 		}
@@ -222,7 +228,8 @@ public class PdmDocument {
 			for (String filenameFromList : fileNameList) {
 				if (!filenameFromList.isEmpty()) {
 					if (filenameFromList.trim().equalsIgnoreCase(pdmFileName)) {
-						log.trace(Util.getMessage("pdmDocument.checkdocument.includeFilenameList", this.getFilename()));
+						log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includeFilenameList",
+								this.getFilename()));
 						return true;
 					}
 					allempty = false;
@@ -230,10 +237,12 @@ public class PdmDocument {
 			}
 		}
 		if (allempty) {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.includeFilenameList.emptyList", this.getFilename()));
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includeFilenameList.emptyList",
+					this.getFilename()));
 			return true;
 		} else {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.excludeFilenameList", this.getFilename()));
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.excludeFilenameList",
+					this.getFilename()));
 			return false;
 		}
 
@@ -249,7 +258,8 @@ public class PdmDocument {
 			for (String doctyp : doctypList) {
 				if (!doctyp.isEmpty()) {
 					if (doctyp.trim().equalsIgnoreCase(pdmDocumenttyp)) {
-						log.trace(Util.getMessage("pdmDocument.checkdocument.includeDoctypList", this.getFilename()));
+						log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includeDoctypList",
+								this.getFilename()));
 						return true;
 					}
 					allempty = false;
@@ -257,10 +267,12 @@ public class PdmDocument {
 			}
 		}
 		if (allempty) {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.includeDoctypList.emptyList", this.getFilename()));
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includeDoctypList.emptyList",
+					this.getFilename()));
 			return true;
 		} else {
-			log.trace(Util.getMessage("pdmDocument.checkdocument.excludeDoctypList", this.getFilename()));
+			log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.excludeDoctypList",
+					this.getFilename()));
 			return false;
 		}
 

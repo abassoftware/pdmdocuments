@@ -25,6 +25,7 @@ import de.abas.erp.jfop.rt.api.annotation.RunFopWith;
 import de.abas.jfop.base.buffer.BufferFactory;
 import de.abas.jfop.base.buffer.ParentScreenBuffer;
 import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 @EventHandler(head = PrintDialogEditor.class)
 @RunFopWith(EventHandlerRunner.class)
@@ -65,21 +66,15 @@ public class PrintDialogEventHandler {
 					head.setAttachmentFileList("");
 					BufferFactory buffInst = BufferFactory.newInstance();
 					ParentScreenBuffer parentbuffer = buffInst.getParentScreenBuffer();
-//					if (parentbuffer.isVarDefined("ypdm01anhanglist")) {
-//						String uebdatei = parentbuffer.getStringValue("ypdm01anhanglist");
-//						if (uebdatei != null) {
-//							if (!uebdatei.isEmpty()) {
-//								head.setAttachmentFileList(uebdatei);
-//							}
-//						}
-//
-//					}
+					if (parentbuffer.isVarDefined("yanhangliste")) {
+						head.setAttachmentFileList(parentbuffer.getStringValue("yanhangliste"));
+					}
 					if (head.getAttachmentFileList().isEmpty()) {
 						head.setAttachmentFileList(Util.gettempFile("rmtmp", "pdmDoc", "TMP").toString());
 					}
 
 				} catch (IOException e) {
-					Util.showErrorBox(ctx, "printscreen.error.tempFile");
+					UtilwithAbasConnection.showErrorBox(ctx, "printscreen.error.tempFile");
 				}
 
 			}

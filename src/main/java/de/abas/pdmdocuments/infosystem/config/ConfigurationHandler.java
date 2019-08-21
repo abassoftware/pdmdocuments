@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class ConfigurationHandler {
 
@@ -62,7 +62,7 @@ public class ConfigurationHandler {
 
 				if (pdmSystem == null) {
 					throw new PdmDocumentsException(
-							Util.getMessage("pdmDocument.error.pdmsystemnull", pdmSystemString));
+							UtilwithAbasConnection.getMessage("pdmDocument.error.pdmsystemnull", pdmSystemString));
 				}
 
 				String sqlServer = configProperties.getProperty(PDM_CONFIG_SQL_SERVER);
@@ -89,13 +89,15 @@ public class ConfigurationHandler {
 						sqlPassword, fileTypesEmail, fileTypesPrinter, fileTypesScreen, dokart);
 
 			} catch (IOException e) {
-				throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.loadKonfiguration"), e);
+				throw new PdmDocumentsException(
+						UtilwithAbasConnection.getMessage("pdmDocument.error.loadKonfiguration"), e);
 			} catch (NumberFormatException e) {
-				throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.sqlport"), e);
+				throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.error.sqlport"), e);
 			}
 
 		} else {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.loadKonfiguration.noFile"));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.loadKonfiguration.noFile"));
 		}
 
 		return config;
@@ -137,21 +139,16 @@ public class ConfigurationHandler {
 			configProperties.store(out, "---config PDMDocuments---");
 			out.close();
 		} catch (IOException e) {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.error.saveConfiguration"));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.error.saveConfiguration"));
 		}
 	}
 
 	private static void checkandCreateConfigFile(File propertiesFile) throws IOException {
-		if (!propertiesFile.exists()) {
+		if (!propertiesFile.exists() && !propertiesFile.getParentFile().exists()) {
 
-			String path = propertiesFile.getParent();
+			Files.createDirectory(Paths.get(propertiesFile.toPath().getParent().toUri()));
+			Files.createFile(propertiesFile.toPath());
 
-			File dir = new File(path);
-
-			if (!propertiesFile.getParentFile().exists()) {
-				Files.createDirectory(Paths.get(propertiesFile.toPath().getParent().toUri()));
-				Files.createFile(propertiesFile.toPath());
-			}
 		}
 	}
 

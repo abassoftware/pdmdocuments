@@ -12,13 +12,11 @@ import de.abas.erp.jfop.rt.api.annotation.RunFopWith;
 import de.abas.jfop.base.buffer.BufferFactory;
 import de.abas.jfop.base.buffer.PrintBuffer;
 import de.abas.jfop.base.buffer.ScreenBuffer;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 import de.abas.print.engine.DataGenerator;
-import de.abas.print.generator.DatagenFopGenerator;
-import de.abas.print.generator.FieldListProvider;
 
 @RunFopWith(EventHandlerRunner.class)
-public class FopMultiLayoutPrintAfter implements DataGenerator, DatagenFopGenerator {
+public class FopMultiLayoutPrintAfter implements DataGenerator {
 	Logger logger = Logger.getLogger(FopMultiLayoutPrintAfter.class);
 
 	@Override
@@ -33,60 +31,22 @@ public class FopMultiLayoutPrintAfter implements DataGenerator, DatagenFopGenera
 				if (!maskYpfad.isEmpty()) {
 					String aktttmp = printBuffer.getStringValue("actTempDir");
 
-					String outputTempDir = aktttmp + "output/";
+					String outputTempDir = aktttmp + "output";
 					File file = new File(maskYpfad);
-					File outputDir = new File(outputTempDir + file.getName());
+					File outputDir = new File(outputTempDir, file.getName());
 
 					try {
-						logger.info(Util.getMessage("pdmdocuments.log.copyfile", file.toPath().toString(),
-								outputDir.toPath().toString()));
+						logger.info(UtilwithAbasConnection.getMessage("pdmdocuments.log.copyfile",
+								file.toPath().toString(), outputDir.toPath().toString()));
 						Files.copy(file.toPath(), outputDir.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					} catch (IOException e) {
 						logger.error(e);
-						logger.error(Util.getMessage("main.error.copyFile", e.getMessage()));
+						logger.error(UtilwithAbasConnection.getMessage("main.error.copyFile", e.getMessage()));
 						return 1;
 					}
 				}
-
 			}
 		}
 		return 0;
 	}
-
-	@Override
-	public void buildExtensions() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setFieldListProvider(FieldListProvider arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setRecordCaptionExpression(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setUseCDATA(boolean arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setUseCommonHVarFop(boolean arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void writeFop(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

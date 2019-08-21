@@ -18,7 +18,6 @@ import org.w3c.dom.events.EventException;
 import de.abas.eks.jfop.annotation.Stateful;
 import de.abas.eks.jfop.remote.FO;
 import de.abas.eks.jfop.remote.FOe;
-import de.abas.erp.api.gui.TextBox;
 import de.abas.erp.api.session.GUIInformation;
 import de.abas.erp.axi.screen.ScreenControl;
 import de.abas.erp.axi2.EventHandlerRunner;
@@ -74,6 +73,7 @@ import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.config.ConfigurationHandler;
 import de.abas.pdmdocuments.infosystem.data.PdmDocument;
 import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 @Stateful
 @EventHandler(head = PdmDocuments.class, row = PdmDocuments.Row.class)
@@ -95,7 +95,7 @@ public class Main {
 		getConfigInMask(head, ctx);
 		Boolean noErrorsInPDM = true;
 
-		log.info(Util.getMessage("pdmDocument.info.startvalues", head.getYartikel(), head.getYbeleg(),
+		log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.startvalues", head.getYartikel(), head.getYbeleg(),
 				head.getYdrucker(), head.getYanhangliste()));
 
 		if (head.getYdrucker() != null) {
@@ -167,17 +167,18 @@ public class Main {
 					fileWriter.close();
 
 				} else {
-					Util.showErrorBox(ctx, Util.getMessage("main.error.noConnection", head.getYserver()));
+					UtilwithAbasConnection.showErrorBox(ctx,
+							UtilwithAbasConnection.getMessage("main.error.noConnection", head.getYserver()));
 				}
 			} catch (PdmDocumentsException | IOException e) {
-				Util.showErrorBox(ctx, e.getMessage());
+				UtilwithAbasConnection.showErrorBox(ctx, e.getMessage());
 			}
 		} else {
-			Util.showErrorBox(ctx, Util.getMessage("main.error.noProduct"));
+			UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.error.noProduct"));
 		}
 
 		if (!noErrorsInPDM) {
-			Util.showErrorBox(ctx, Util.getMessage("main.error.errorInTable"));
+			UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.error.errorInTable"));
 		}
 
 		if (!head.getReportFoot().isEmpty()) {
@@ -227,7 +228,7 @@ public class Main {
 					}
 
 				} catch (IOException e) {
-					throw new PdmDocumentsException(Util.getMessage("error.renameFile.move"), e);
+					throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("error.renameFile.move"), e);
 				}
 
 			}
@@ -243,10 +244,10 @@ public class Main {
 
 		EnumPrinterType printertyp = printer.getPrinterType();
 		if (printertyp == EnumPrinterType.EmailClientSend || printertyp == EnumPrinterType.EmailClientView) {
-			log.info(Util.getMessage("pdmDocument.info.is.emailprinter", printer.getSearchExt()));
+			log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.is.emailprinter", printer.getSearchExt()));
 			return true;
 		} else {
-			log.info(Util.getMessage("pdmDocument.info.is.no.emailprinter", printer.getSearchExt()));
+			log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.is.no.emailprinter", printer.getSearchExt()));
 			return false;
 		}
 
@@ -258,10 +259,10 @@ public class Main {
 		if (printertyp == EnumPrinterType.Printer || printertyp == EnumPrinterType.Terminal
 				|| printertyp == EnumPrinterType.StandardWorkStationPrinter
 				|| printertyp == EnumPrinterType.LocalPrinter) {
-			log.info(Util.getMessage("pdmDocument.info.is.realprinter", printer.getSearchExt()));
+			log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.is.realprinter", printer.getSearchExt()));
 			return true;
 		} else {
-			log.info(Util.getMessage("pdmDocument.info.is.no.realprinter", printer.getSearchExt()));
+			log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.is.no.realprinter", printer.getSearchExt()));
 			return false;
 		}
 
@@ -328,7 +329,7 @@ public class Main {
 	}
 
 	private ArrayList<PdmDocument> checkFilename(List<PdmDocument> pdmDocuments, PdmDocuments head) {
-		ArrayList<String> fileNameList;
+		List<String> fileNameList;
 		ArrayList<PdmDocument> newList = null;
 		try {
 			fileNameList = getyuebDateiArray(head);
@@ -470,7 +471,7 @@ public class Main {
 	// for (String typ : typlist) {
 	// if (!typ.isEmpty()) {
 	// if (typ.trim().toUpperCase().equals(filetyp.toUpperCase())) {
-	// log.trace(Util.getMessage("pdmDocument.checkdocument.includePdmDoc",
+	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc",
 	// pdmDocument.getFilename(),
 	// Arrays.toString(typlist)));
 	// return true;
@@ -481,11 +482,11 @@ public class Main {
 	// }
 	//
 	// if (allempty) {
-	// log.trace(Util.getMessage("pdmDocument.checkdocument.includePdmDoc.emptyTypliste",
+	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc.emptyTypliste",
 	// pdmDocument.getFilename()));
 	// return true;
 	// } else {
-	// log.trace(Util.getMessage("pdmDocument.checkdocument.excludePdmDoc",
+	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.excludePdmDoc",
 	// pdmDocument.getFilename(),
 	// Arrays.toString(typlist)));
 	// return false;
@@ -509,7 +510,7 @@ public class Main {
 			ConfigurationHandler.saveConfigurationtoFile(config);
 		} catch (PdmDocumentsException e) {
 			log.error(e);
-			Util.showErrorBox(ctx, Util.getMessage("main.saveconfiguration.error"));
+			UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.saveconfiguration.error"));
 
 		}
 
@@ -544,7 +545,8 @@ public class Main {
 			}
 		} catch (PdmDocumentsException e) {
 
-			Util.showErrorBox(ctx, Util.getMessage("pdmDocument.error.yauswahl") + "/n" + e.getMessage());
+			UtilwithAbasConnection.showErrorBox(ctx,
+					UtilwithAbasConnection.getMessage("pdmDocument.error.yauswahl") + "/n" + e.getMessage());
 		}
 
 	}
@@ -574,8 +576,6 @@ public class Main {
 				printbuf.assign(MASKKONTEXTFOP, UserEnumPdmSystems.COFFEE.name().toUpperCase());
 			}
 
-			TextBox box = new TextBox(ctx, "Fehler", printbuf.getStringValue(MASKKONTEXTFOP));
-			box.show();
 		}
 
 	}
@@ -588,7 +588,7 @@ public class Main {
 
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(Util.getMessage("error.create.Tempfile", e.getMessage()));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("error.create.Tempfile", e.getMessage()));
 
 		}
 	}
@@ -601,7 +601,7 @@ public class Main {
 
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(Util.getMessage("error.create.Tempfile", e.getMessage()));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("error.create.Tempfile", e.getMessage()));
 		}
 
 	}
@@ -614,7 +614,7 @@ public class Main {
 
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(Util.getMessage("error.create.Tempfile", e.getMessage()));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("error.create.Tempfile", e.getMessage()));
 
 		}
 
@@ -623,7 +623,7 @@ public class Main {
 	private void deleteFilenametoFile(File tempFile, String ydateiname) throws FileNotFoundException, IOException {
 		String filenameString = "";
 
-		ArrayList<String> fileListArray = Util.readStringListFromFile(tempFile);
+		List<String> fileListArray = Util.readStringListFromFile(tempFile);
 
 		if (fileListArray.contains(ydateiname)) {
 			fileListArray.remove(ydateiname);
@@ -644,7 +644,7 @@ public class Main {
 
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(Util.getMessage("error.create.Tempfile", e.getMessage()));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("error.create.Tempfile", e.getMessage()));
 
 		}
 
@@ -653,7 +653,7 @@ public class Main {
 	private void addFilenametoFile(File tempFile, String ydateiname) throws IOException {
 		// String filenameString = "";
 
-		ArrayList<String> fileListArray = Util.readStringListFromFile(tempFile);
+		List<String> fileListArray = Util.readStringListFromFile(tempFile);
 
 		if (!fileListArray.contains(ydateiname)) {
 			fileListArray.add(ydateiname);
@@ -709,8 +709,8 @@ public class Main {
 	//
 	// }
 
-	private ArrayList<String> getyuebDateiArray(PdmDocuments head) throws IOException {
-		ArrayList<String> fileListArray = new ArrayList<String>();
+	private List<String> getyuebDateiArray(PdmDocuments head) throws IOException {
+		List<String> fileListArray = new ArrayList<String>();
 		if (!head.getYuebdatei().isEmpty()) {
 			File tempFile = new File(head.getYuebdatei());
 			// String stringfromFile = Util.readStringFromFile(tempFile);
@@ -810,7 +810,8 @@ public class Main {
 			head.setYdokart(config.getDokart());
 
 		} catch (PdmDocumentsException e) {
-			Util.showErrorBox(ctx, Util.getMessage("pdmDocument.error.loadKonfiguration") + "/n" + e.getMessage());
+			UtilwithAbasConnection.showErrorBox(ctx,
+					UtilwithAbasConnection.getMessage("pdmDocument.error.loadKonfiguration") + "/n" + e.getMessage());
 		}
 
 	}
@@ -884,10 +885,12 @@ public class Main {
 			List<Product> productQueryList = queryproduct.execute();
 
 			if (productQueryList.size() == 0) {
-				throw new PdmDocumentsException(Util.getMessage("error.sammellist.productnotfound", productNumber));
+				throw new PdmDocumentsException(
+						UtilwithAbasConnection.getMessage("error.sammellist.productnotfound", productNumber));
 			}
 			if (productQueryList.size() > 1) {
-				throw new PdmDocumentsException(Util.getMessage("error.sammellist.productnotunique", productNumber));
+				throw new PdmDocumentsException(
+						UtilwithAbasConnection.getMessage("error.sammellist.productnotunique", productNumber));
 			}
 			productList.add(productQueryList.get(0));
 
@@ -1101,7 +1104,8 @@ public class Main {
 
 		ArrayList<Product> listProduct = new ArrayList<Product>();
 		String criteria = "head=" + beleg.getId().toString() + ";@filingmode=(Both)";
-		log.info(Util.getMessage("start.selection.SalesOrPurchase", System.currentTimeMillis(), criteria));
+		log.info(UtilwithAbasConnection.getMessage("start.selection.SalesOrPurchase", System.currentTimeMillis(),
+				criteria));
 		Selection<? extends SelectableRecord> selectionStorage = ExpertSelection
 				.create(new TableDescriptor(database, group, FieldQuantum.Table), criteria);
 		de.abas.erp.db.Query<? extends SelectableRecord> query = ctx.createQuery(selectionStorage);
@@ -1113,7 +1117,8 @@ public class Main {
 				listProduct.add(product);
 			}
 		}
-		log.info(Util.getMessage("end.selection.SalesOrPurchase", System.currentTimeMillis(), criteria));
+		log.info(UtilwithAbasConnection.getMessage("end.selection.SalesOrPurchase", System.currentTimeMillis(),
+				criteria));
 		return listProduct;
 	}
 

@@ -3,8 +3,6 @@ package de.abas.pdmdocuments.infosystem.webservices.procad;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.NoRouteToHostException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -12,25 +10,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.data.PdmDocument;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 import de.abas.pdmdocuments.infosystem.webservices.AbstractRestService;
 
 public class RestServiceProcad extends AbstractRestService {
 
-	private static String TESTSERVICE_URL = "http://%1s/procad/profile/api/version";
-	// https://{server}:{port}/procad/profile/api/{tenant}/
-	private static String BASE_URL = "http://%1s/procad/profile/api/%2s/";
-	private static String SEARCHPRODUCT_URL = "objects/Part?query='%3s'='%4s'";
-	private static String GETDOCUMENT_INFO = "objects/Document/%3s/";
-	private static String GETDOCUMENT_FILE = "objects/Document/%3s/file";
+	private static final String SERVER_ERREICHBAR = "Server erreichbar";
+	private static final String TESTSERVICE_URL = "http://%1s/procad/profile/api/version";
+	/*
+	 * Auf der URL https://{server}:{port}/procad/profile/api/{tenant}/
+	 */
+	private static final String BASE_URL = "http://%1s/procad/profile/api/%2s/";
+	private static final String SEARCHPRODUCT_URL = "objects/Part?query='%3s'='%4s'";
+	private static final String GETDOCUMENT_INFO = "objects/Document/%3s/";
+	private static final String GETDOCUMENT_FILE = "objects/Document/%3s/file";
 	private String tenant;
 
 	private Configuration config;
@@ -54,8 +53,8 @@ public class RestServiceProcad extends AbstractRestService {
 
 		String jsonString = callRestservice(url);
 		if (jsonString.equals("404")) {
-			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.error.ProductID.notfound", "abasidno"));
+			throw new PdmDocumentsException(UtilwithAbasConnection
+					.getMessage("pdmDocument.restservice.procad.error.ProductID.notfound", "abasidno"));
 		}
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -63,66 +62,60 @@ public class RestServiceProcad extends AbstractRestService {
 		ResponsePDMProductId response;
 		try {
 			response = mapper.readValue(jsonString, ResponsePDMProductId.class);
-		} catch (JsonParseException e) {
-			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject", "ResponsePDMProductId"), e);
-		} catch (JsonMappingException e) {
-			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject", "ResponsePDMProductId"), e);
 		} catch (IOException e) {
-			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject", "ResponsePDMProductId"), e);
+			throw new PdmDocumentsException(UtilwithAbasConnection
+					.getMessage("pdmDocument.restservice.procad.error.jsonToObject", "ResponsePDMProductId"), e);
 		}
 
 		List<PartObject> elementsList = response.getObjectsList();
 		if (elementsList.size() == 1) {
-			// return elementsList.get(0).getKey();
+
 			Values values = elementsList.get(0).getValues();
 			Map<String, Object> prop = values.getAdditionalProperties();
 
 			if (prop.containsKey(config.getPartFieldName())) {
 				Object objektID = prop.get(config.getPartProFileIDFieldName());
 				if (objektID instanceof String) {
-					String objStringID = (String) objektID;
-					return objStringID;
+					return (String) objektID;
+
 				}
 				if (objektID instanceof Integer) {
 					Integer objIntegerID = (Integer) objektID;
-					String objStringID = objIntegerID.toString();
-					return objStringID;
+					return objIntegerID.toString();
+
 				}
 			}
 			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.ResultFalseField", abasIdNo));
-		} else if (elementsList.size() == 0) {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.procad.noResult", abasIdNo));
+					UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.ResultFalseField", abasIdNo));
+		} else if (elementsList.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.noResult", abasIdNo));
 		} else {
 			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.procad.moreThanOneResult", abasIdNo));
+					UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.moreThanOneResult", abasIdNo));
 		}
 
 	}
 
 	@Override
-	public ArrayList<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
+	public List<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
 		String pdmProductID = searchPdmProductID(abasIdNo);
-		ArrayList<String> procadDocuments = getDokumentsFromSQL(pdmProductID);
-		ArrayList<PdmDocument> pdmDocs = getPdmDocumentsfromProcad(procadDocuments);
-		ArrayList<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocs, fileTypList);
+		List<String> procadDocuments = getDokumentsFromSQL(pdmProductID);
+		List<PdmDocument> pdmDocs = getPdmDocumentsfromProcad(procadDocuments);
+		List<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocs, fileTypList);
 		getFilesforPDMDocs(filterpdmDocumentsList);
 		return filterpdmDocumentsList;
 	}
 
-	private ArrayList<PdmDocument> getPdmDocumentsfromProcad(ArrayList<String> procadDocuments)
-			throws PdmDocumentsException {
-		ArrayList<PdmDocument> pdmDocs = new ArrayList<PdmDocument>();
+	private List<PdmDocument> getPdmDocumentsfromProcad(List<String> procadDocuments) throws PdmDocumentsException {
+		List<PdmDocument> pdmDocs = new ArrayList<>();
 		ProcadDocument response;
 
 		for (String proString : procadDocuments) {
-			String testString = BASE_URL + GETDOCUMENT_INFO;
+//			String testString = BASE_URL + GETDOCUMENT_INFO;
 			String urlDocInfo = String.format(BASE_URL + GETDOCUMENT_INFO, this.server, this.tenant, proString);
 			String urlDocFile = String.format(BASE_URL + GETDOCUMENT_FILE, this.server, this.tenant, proString);
-			log.info(Util.getMessage("pdmDocument.restservice.procad.searchDokid", proString));
+			log.info(UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.searchDokid", proString));
 			String jsonString = callRestservice(urlDocInfo);
 
 			if (!jsonString.equals("404")) {
@@ -153,21 +146,17 @@ public class RestServiceProcad extends AbstractRestService {
 
 						//
 					} else {
-						log.error(Util.getMessage("pdmDocument.restservice.procad.error.noFiletoDocID", proString));
+						log.error(UtilwithAbasConnection
+								.getMessage("pdmDocument.restservice.procad.error.noFiletoDocID", proString));
 					}
 
-				} catch (JsonParseException e) {
-					throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject",
-							"ResponsePDMProductId"), e);
-				} catch (JsonMappingException e) {
-					throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject",
-							"ResponsePDMProductId"), e);
 				} catch (IOException e) {
-					throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.procad.error.jsonToObject",
-							"ResponsePDMProductId"), e);
+					throw new PdmDocumentsException(UtilwithAbasConnection.getMessage(
+							"pdmDocument.restservice.procad.error.jsonToObject", "ResponsePDMProductId"), e);
 				}
 			} else {
-				log.error(Util.getMessage("pdmDocument.restservice.procad.error.Dokument.notfound", proString));
+				log.error(UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.error.Dokument.notfound",
+						proString));
 			}
 		}
 
@@ -196,15 +185,14 @@ public class RestServiceProcad extends AbstractRestService {
 		return intValue;
 	}
 
-	private ArrayList<String> getDokumentsFromSQL(String pdmProductID) throws PdmDocumentsException {
+	private List<String> getDokumentsFromSQL(String pdmProductID) throws PdmDocumentsException {
 
 		SQLConnectionHandler sqlConnHandler = new SQLConnectionHandler(config);
 
 		String sqlQuery = "select vb_objidnr2 from " + config.getSqldatabase() + ".dbo.VERBIND where vb_objidnr1 ="
 				+ pdmProductID + " and vb_objtyp1 =2 and vb_objtyp2=3";
-		ArrayList<String> result = sqlConnHandler.executeQuery(sqlQuery);
+		return sqlConnHandler.executeQuery(sqlQuery);
 
-		return result;
 	}
 
 	public boolean testRestService(String urlString) {
@@ -215,19 +203,13 @@ public class RestServiceProcad extends AbstractRestService {
 			URLConnection con = url.openConnection();
 
 			is = con.getInputStream();
-			log.info("Server erreichbar");
+			log.info(SERVER_ERREICHBAR);
 			return true;
-		} catch (NoRouteToHostException e) {
-			log.error(e);
-			return false;
 		} catch (FileNotFoundException e) {
-			log.info("Server erreichbar", e);
+			log.info(SERVER_ERREICHBAR, e);
 			// Server ist erreichbar, aber es ist keine richtige Seite
 			// verfuegbar
 			return true;
-		} catch (MalformedURLException e) {
-			log.error(e);
-			return false;
 		} catch (IOException e) {
 			log.error(e);
 			return false;
@@ -236,6 +218,7 @@ public class RestServiceProcad extends AbstractRestService {
 				try {
 					is.close();
 				} catch (IOException e) {
+					log.error(e);
 				}
 		}
 
@@ -243,22 +226,20 @@ public class RestServiceProcad extends AbstractRestService {
 
 	@Override
 	public Boolean testConnection() throws PdmDocumentsException {
-		if (testRestServer() && testSQLServer()) {
-			return true;
-		}
-
-		return false;
+		return (testRestServer() && testSQLServer());
 
 	}
 
-	private boolean testSQLServer() throws PdmDocumentsException {
+	private boolean testSQLServer() {
 
-		SQLConnectionHandler sqlConn = new SQLConnectionHandler(config);
-		if (sqlConn != null) {
-			return true;
+		try {
+			new SQLConnectionHandler(config);
+		} catch (Exception e) {
+			log.error(e);
+			return false;
 		}
-		return false;
-//		no return
+		return true;
+
 	}
 
 	private Boolean testRestServer() {
@@ -270,19 +251,13 @@ public class RestServiceProcad extends AbstractRestService {
 			con.setConnectTimeout(TEST_TIMEOUT);
 
 			is = con.getInputStream();
-			log.info("Server erreichbar");
+			log.info(SERVER_ERREICHBAR);
 			return true;
-		} catch (NoRouteToHostException e) {
-			log.error(e);
-			return false;
 		} catch (FileNotFoundException e) {
-			log.info("Server erreichbar", e);
+			log.info(SERVER_ERREICHBAR, e);
 			// Server ist erreichbar, aber es ist keine richtige Seite
 			// verfuegbar
 			return true;
-		} catch (MalformedURLException e) {
-			log.error(e);
-			return false;
 		} catch (IOException e) {
 			log.error(e);
 			return false;
@@ -291,6 +266,7 @@ public class RestServiceProcad extends AbstractRestService {
 				try {
 					is.close();
 				} catch (IOException e) {
+					log.error(e);
 				}
 		}
 	}

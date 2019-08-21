@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.data.PdmDocument;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 import de.abas.pdmdocuments.infosystem.webservices.AbstractRestService;
 
 public class RestServiceKeytech extends AbstractRestService {
@@ -52,18 +52,19 @@ public class RestServiceKeytech extends AbstractRestService {
 		try {
 			response = mapper.readValue(jsonString, ResponsePDMProductId.class);
 		} catch (IOException e) {
-			throw new PdmDocumentsException(
-					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "ResponsePDMProductId"), e);
+			throw new PdmDocumentsException(UtilwithAbasConnection
+					.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "ResponsePDMProductId"), e);
 		}
 
 		ArrayList<Elements> elementsList = response.getElementsList();
 		if (elementsList.size() == 1) {
 			return elementsList.get(0).getKey();
 		} else if (elementsList.isEmpty()) {
-			throw new PdmDocumentsException(Util.getMessage("pdmDocument.restservice.keytech.noResult", abasIdNo));
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.restservice.keytech.noResult", abasIdNo));
 		} else {
 			throw new PdmDocumentsException(
-					Util.getMessage("pdmDocument.restservice.keytech.moreThanOneResult", abasIdNo));
+					UtilwithAbasConnection.getMessage("pdmDocument.restservice.keytech.moreThanOneResult", abasIdNo));
 		}
 
 	}
@@ -81,7 +82,8 @@ public class RestServiceKeytech extends AbstractRestService {
 			pdmLinks = mapper.readValue(jsonString, PDMLinks.class);
 		} catch (IOException e) {
 			throw new PdmDocumentsException(
-					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "PDMLink"), e);
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "PDMLink"),
+					e);
 		}
 
 		return pdmLinks;
@@ -89,11 +91,11 @@ public class RestServiceKeytech extends AbstractRestService {
 	}
 
 	@Override
-	public ArrayList<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
+	public List<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
 		String pdmProductID = searchPdmProductID(abasIdNo);
-		ArrayList<PdmDocument> pdmDocumentList = getDocumentsFromKeytech(pdmProductID);
+		List<PdmDocument> pdmDocumentList = getDocumentsFromKeytech(pdmProductID);
 
-		ArrayList<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocumentList, fileTypList);
+		List<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocumentList, fileTypList);
 
 		getFilesforPDMDocs(filterpdmDocumentsList);
 
@@ -149,8 +151,8 @@ public class RestServiceKeytech extends AbstractRestService {
 			response = mapper.readValue(jsonString, FileInfoList.class);
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(
-					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "FileInfoList"), e);
+			throw new PdmDocumentsException(UtilwithAbasConnection
+					.getMessage(PDM_DOCUMENT_RESTSERVICE_KEYTECH_ERROR_JSON_TO_OBJECT, "FileInfoList"), e);
 		}
 
 		return response.getFileInfoList();

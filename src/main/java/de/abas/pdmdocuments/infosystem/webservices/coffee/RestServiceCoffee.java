@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.data.PdmDocument;
-import de.abas.pdmdocuments.infosystem.utils.Util;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 import de.abas.pdmdocuments.infosystem.webservices.AbstractRestService;
 
 public class RestServiceCoffee extends AbstractRestService {
@@ -44,11 +44,11 @@ public class RestServiceCoffee extends AbstractRestService {
 	}
 
 	@Override
-	public ArrayList<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
+	public List<PdmDocument> getAllDocuments(String abasIdNo, String[] fileTypList) throws PdmDocumentsException {
 
 		ArrayList<PdmDocument> pdmDocumentList = getDocumentsFromCoffee(abasIdNo);
 
-		ArrayList<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocumentList, fileTypList);
+		List<PdmDocument> filterpdmDocumentsList = filterPdmDocs(pdmDocumentList, fileTypList);
 
 		getFilesforPDMDocs(filterpdmDocumentsList);
 
@@ -65,8 +65,8 @@ public class RestServiceCoffee extends AbstractRestService {
 			String jsonString = callRestservice(url);
 			log.debug("json: \n" + jsonString);
 			if (jsonString.contains("Status Code")) {
-				throw new PdmDocumentsException(
-						Util.getMessage("pdmDocument.restservice.procad.error.InternalServerError", jsonString));
+				throw new PdmDocumentsException(UtilwithAbasConnection
+						.getMessage("pdmDocument.restservice.procad.error.InternalServerError", jsonString));
 			}
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -106,8 +106,8 @@ public class RestServiceCoffee extends AbstractRestService {
 
 		} catch (IOException e) {
 			log.error(e);
-			throw new PdmDocumentsException(
-					Util.getMessage(PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT, "CoffeeDocs"), e);
+			throw new PdmDocumentsException(UtilwithAbasConnection
+					.getMessage(PDM_DOCUMENT_RESTSERVICE_COFFEE_ERROR_JSON_TO_OBJECT, "CoffeeDocs"), e);
 		}
 
 	}
@@ -116,9 +116,11 @@ public class RestServiceCoffee extends AbstractRestService {
 	public Boolean testConnection() {
 		InputStream is = null;
 		try {
-			URL url = new URL("http://" + this.server);
+			System.setProperty("http.nonProxyHosts", this.server.substring(0, this.server.indexOf(':')));
+			URL url = new URL("http://" + this.server + "/search");
 			URLConnection con = url.openConnection();
 			con.setConnectTimeout(TEST_TIMEOUT);
+
 			is = con.getInputStream();
 			log.info("Server erreichbar");
 			return true;
@@ -136,6 +138,7 @@ public class RestServiceCoffee extends AbstractRestService {
 					is.close();
 				} catch (IOException e) {
 				}
+
 		}
 
 	}
