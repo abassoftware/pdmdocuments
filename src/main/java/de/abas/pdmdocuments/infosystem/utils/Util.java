@@ -3,48 +3,37 @@ package de.abas.pdmdocuments.infosystem.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import de.abas.eks.jfop.remote.EKS;
-import de.abas.erp.api.gui.TextBox;
-import de.abas.erp.db.DbContext;
-
 public class Util {
 
-	private final static String MESSAGE_BASE = "de.abasgmbh.pdmDocuments.infosystem.messages";
-	private static String[][] UMLAUT_REPLACEMENTS = { { new String("Ä"), "Ae" }, { new String("Ü"), "Ue" },
-			{ new String("Ö"), "Oe" }, { new String("ä"), "ae" }, { new String("ü"), "ue" }, { new String("ö"), "oe" },
-			{ new String("ß"), "ss" } };
-	private static String[][] SONDERZEICHEN_REPLACEMENTS = { { new String("/"), "_" }, { new String(" "), "_" },
-			{ new String(";"), "_" }, { new String("\\"), "_" }, { new String("="), "_" } };
-	private static Locale locale = Locale.ENGLISH;
+	private static final String MESSAGE_BASE = "de.abasgmbh.pdmDocuments.infosystem.messages";
 
-	private static Locale getLocale() {
-		try {
-			return EKS.getFOPSessionContext().getOperatingLangLocale();
-		} catch (final NullPointerException e) {
-			return locale;
-		}
+	private static final String[][] UMLAUT_REPLACEMENTS = { { "Ä", "Ae" }, { "Ü", "Ue" }, { "Ö", "Oe" }, { "ä", "ae" },
+			{ "ü", "ue" }, { "ö", "oe" }, { "ß", "ss" } };
+
+	private static final String[][] SONDERZEICHEN_REPLACEMENTS = { { "/", "_" }, { " ", "_" }, { ";", "_" },
+			{ "\\", "_" }, { "=", "_" } };
+
+	private Util() {
+		throw new IllegalStateException("Utility class");
 	}
 
-	public static String getMessage(String key) {
-		final ResourceBundle rb = ResourceBundle.getBundle(MESSAGE_BASE, getLocale());
+	public static String getMessage(String key, Locale locale) {
+		final ResourceBundle rb = ResourceBundle.getBundle(MESSAGE_BASE, locale);
 		return rb.getString(key);
 	}
 
-	public static String getMessage(String key, Object... params) {
-		final ResourceBundle rb = ResourceBundle.getBundle(MESSAGE_BASE, getLocale());
-		String rbname = rb.getBaseBundleName();
-		Enumeration<String> rbvalues = rb.getKeys();
+	public static String getMessage(String key, Locale locale, Object... params) {
+		final ResourceBundle rb = ResourceBundle.getBundle(MESSAGE_BASE, locale);
 		return MessageFormat.format(rb.getString(key), params);
 	}
 
@@ -55,21 +44,14 @@ public class Util {
 	}
 
 	public static String replaceUmlaute(String orig) {
-		String result = orig;
 
-		result = replaceZeichen(orig, UMLAUT_REPLACEMENTS);
-
-		return result;
+		return replaceZeichen(orig, UMLAUT_REPLACEMENTS);
 	}
 
 	public static String replaceSonderzeichen(String orig) {
-		String result = orig;
 
-		result = orig.replaceAll("\\W", "_");
+		return replaceZeichen(orig, SONDERZEICHEN_REPLACEMENTS);
 
-		// result = replaceZeichen(orig, SONDERZEICHEN_REPLACEMENTS);
-
-		return result;
 	}
 
 	public static String replaceZeichen(String orig, String[][] replacements) {
@@ -82,44 +64,47 @@ public class Util {
 		return result;
 	}
 
-	public static void showErrorBox(DbContext ctx, String message) {
-		new TextBox(ctx, Util.getMessage("main.exception.title"), message).show();
+	public static String readStringFromFile(File tempFile) throws IOException {
+		StringBuilder filenameBuilder = new StringBuilder();
+		try (BufferedReader buffReader = new BufferedReader(new FileReader(tempFile))) {
+
+			while (buffReader.ready()) {
+				String line = buffReader.readLine();
+				filenameBuilder.append(line);
+			}
+		}
+
+		return filenameBuilder.toString();
 	}
 
-	public static String readStringFromFile(File tempFile) throws FileNotFoundException, IOException {
-		String filenameString = "";
-		BufferedReader buffReader = new BufferedReader(new FileReader(tempFile));
-		while (buffReader.ready()) {
-			String line = buffReader.readLine();
-			filenameString = filenameString + line;
-		}
-		buffReader.close();
-		return filenameString;
-	}
+	public static List<String> readStringListFromFile(File tempFile) throws IOException {
+		List<String> filenameList = new ArrayList<>();
 
-	public static ArrayList<String> readStringListFromFile(File tempFile) throws FileNotFoundException, IOException {
-		ArrayList<String> filenameList = new ArrayList<String>();
-		BufferedReader buffReader = new BufferedReader(new FileReader(tempFile));
-		while (buffReader.ready()) {
-			String line = buffReader.readLine();
-			filenameList.add(line);
+		try (BufferedReader buffReader = new BufferedReader(new FileReader(tempFile))) {
+			while (buffReader.ready()) {
+				String line = buffReader.readLine();
+				filenameList.add(line);
+			}
 		}
-		buffReader.close();
+
 		return filenameList;
 	}
 
 	public static void writeStringtoFile(File tempFile, String filenameStringOut) throws IOException {
-		BufferedWriter buffWriter = new BufferedWriter(new FileWriter(tempFile));
-		buffWriter.write(filenameStringOut);
-		buffWriter.close();
+
+		try (BufferedWriter buffWriter = new BufferedWriter(new FileWriter(tempFile))) {
+			buffWriter.write(filenameStringOut);
+		}
+
 	}
 
-	public static void writeStringtoFile(File tempFile, ArrayList<String> filenameListout) throws IOException {
-		BufferedWriter buffWriter = new BufferedWriter(new FileWriter(tempFile));
-		for (String filename : filenameListout) {
-			buffWriter.append(filename + System.getProperty("line.separator"));
+	public static void writeStringtoFile(File tempFile, List<String> filenameListout) throws IOException {
+
+		try (BufferedWriter buffWriter = new BufferedWriter(new FileWriter(tempFile))) {
+			for (String filename : filenameListout) {
+				buffWriter.append(filename + System.getProperty("line.separator"));
+			}
 		}
-		buffWriter.close();
 	}
 
 	public static File gettempFile(String verzeichnis, String praefix, String extension) throws IOException {
