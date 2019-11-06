@@ -1,19 +1,10 @@
 package de.abas.pdmdocuments.infosystem.config;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
-import de.abas.pdmdocuments.infosystem.config.Configuration;
 
 public class ConfigurationTest {
 
@@ -23,62 +14,45 @@ public class ConfigurationTest {
 	private static final String FILE_TYPES_PRINTER = "fileTypesPrinter";
 	private static final String FILE_TYPES_EMAIL = "fileTypesEmail";
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testGetInstance() {
 		Configuration config = Configuration.getInstance();
 		Configuration config2 = Configuration.getInstance();
 
-		assertTrue(config.getClass().equals(Configuration.class));
+		Assertions.assertTrue(config.getClass().equals(Configuration.class));
 		// Get Instance delivery always the same Object
-		assertEquals(config, config2);
+		Assertions.assertEquals(config, config2);
 	}
 
 	@Test
 	public void testInitConfiguration() {
 		Configuration config = Configuration.getInstance();
 
-//		assertNull(config.getPdmSystem());
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
 					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
 					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
-			assertEquals(HOST, config.getRestServer());
-			assertEquals("restUser", config.getRestUser());
-			assertEquals("restPassword", config.getRestPassword());
-			assertEquals("restTenant", config.getRestTenant());
-			assertEquals("partFieldName", config.getPartFieldName());
-			assertEquals("partProFileIDFieldName", config.getPartProFileIDFieldName());
-			assertEquals(UserEnumPdmSystems.KEYTECH, config.getPdmSystem());
-			assertEquals("sqlServer", config.getSqlServer());
-			assertEquals(new Integer("2222"), config.getSqlPort());
-			assertEquals("2222", config.getSqlPortString());
-			assertEquals("sqldatabase", config.getSqldatabase());
-			assertEquals("sqlDriver", config.getSqlDriver());
-			assertEquals("sqlUser", config.getSqlUser());
-			assertEquals("sqlPassword", config.getSqlPassword());
-			assertEquals(FILE_TYPES_EMAIL, config.getFileTypesEmail());
-			assertEquals(FILE_TYPES_PRINTER, config.getFileTypesPrinter());
-			assertEquals(FILE_TYPES_SCREEN, config.getFileTypesScreen());
-			assertEquals(DOKART, config.getDokart());
+			Assertions.assertEquals(HOST, config.getRestServer());
+			Assertions.assertEquals("restUser", config.getRestUser());
+			Assertions.assertEquals("restPassword", config.getRestPassword());
+			Assertions.assertEquals("restTenant", config.getRestTenant());
+			Assertions.assertEquals("partFieldName", config.getPartFieldName());
+			Assertions.assertEquals("partProFileIDFieldName", config.getPartProFileIDFieldName());
+			Assertions.assertEquals(UserEnumPdmSystems.KEYTECH, config.getPdmSystem());
+			Assertions.assertEquals("sqlServer", config.getSqlServer());
+			Assertions.assertEquals(new Integer("2222"), config.getSqlPort());
+			Assertions.assertEquals("2222", config.getSqlPortString());
+			Assertions.assertEquals("sqldatabase", config.getSqldatabase());
+			Assertions.assertEquals("sqlDriver", config.getSqlDriver());
+			Assertions.assertEquals("sqlUser", config.getSqlUser());
+			Assertions.assertEquals("sqlPassword", config.getSqlPassword());
+			Assertions.assertEquals(FILE_TYPES_EMAIL, config.getFileTypesEmail());
+			Assertions.assertEquals(FILE_TYPES_PRINTER, config.getFileTypesPrinter());
+			Assertions.assertEquals(FILE_TYPES_SCREEN, config.getFileTypesScreen());
+			Assertions.assertEquals(DOKART, config.getDokart());
 
 		} catch (PdmDocumentsException e) {
-			Assert.fail(e.getMessage());
+			Assertions.fail(e.getMessage());
 		}
 
 	}
@@ -92,20 +66,21 @@ public class ConfigurationTest {
 					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
 					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 
-			assertEquals("localhost1", config.getRestServer());
-			assertEquals("restUser1", config.getRestUser());
-			assertEquals("restPassword1", config.getRestPassword());
-			assertEquals("restTenant1", config.getRestTenant());
+			Assertions.assertEquals("localhost1", config.getRestServer());
+			Assertions.assertEquals("restUser1", config.getRestUser());
+			Assertions.assertEquals("restPassword1", config.getRestPassword());
+			Assertions.assertEquals("restTenant1", config.getRestTenant());
 
 			config.setRestServer("localhost2", "restUser2", "restPassword2", "restTenant2");
 
-			assertEquals("localhost2", config.getRestServer());
-			assertEquals("restUser2", config.getRestUser());
-			assertEquals("restPassword2", config.getRestPassword());
-			assertEquals("restTenant2", config.getRestTenant());
-
+			Assertions.assertEquals("localhost2", config.getRestServer());
+			Assertions.assertEquals("restUser2", config.getRestUser());
+			Assertions.assertEquals("restPassword2", config.getRestPassword());
+			Assertions.assertEquals("restTenant2", config.getRestTenant());
+			Assertions.assertThrows(PdmDocumentsException.class,
+					() -> config.setRestServer("", "restUser2", "restPassword2", "restTenant2"));
 		} catch (PdmDocumentsException e) {
-			Assert.fail(e.getMessage());
+			Assertions.fail(e.getMessage());
 		}
 
 	}
@@ -115,28 +90,29 @@ public class ConfigurationTest {
 		Configuration config = Configuration.getInstance();
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", Integer.valueOf(2222),
+					"sqldatabase", "sqlDriver", "sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER,
+					FILE_TYPES_SCREEN, DOKART);
 
-			assertEquals("sqlServer", config.getSqlServer());
-			assertEquals("sqlUser", config.getSqlUser());
-			assertEquals("sqlPassword", config.getSqlPassword());
-			assertEquals("sqlDriver", config.getSqlDriver());
-			assertEquals("sqldatabase", config.getSqldatabase());
-			assertEquals(new Integer(2222), config.getSqlPort());
+			Assertions.assertEquals("sqlServer", config.getSqlServer());
+			Assertions.assertEquals("sqlUser", config.getSqlUser());
+			Assertions.assertEquals("sqlPassword", config.getSqlPassword());
+			Assertions.assertEquals("sqlDriver", config.getSqlDriver());
+			Assertions.assertEquals("sqldatabase", config.getSqldatabase());
+			Assertions.assertEquals(Integer.valueOf(2222), config.getSqlPort());
 
 			config.setSqlConnection("sqlServer2", 3333, "sqldatabase2", "sqlUser2", "sqlPassword2", "sqlDriver2");
 
-			assertEquals("sqlServer2", config.getSqlServer());
-			assertEquals("sqlUser2", config.getSqlUser());
-			assertEquals("sqlPassword2", config.getSqlPassword());
-			assertEquals("sqlDriver2", config.getSqlDriver());
-			assertEquals("sqldatabase2", config.getSqldatabase());
-			assertEquals(new Integer(3333), config.getSqlPort());
+			Assertions.assertEquals("sqlServer2", config.getSqlServer());
+			Assertions.assertEquals("sqlUser2", config.getSqlUser());
+			Assertions.assertEquals("sqlPassword2", config.getSqlPassword());
+			Assertions.assertEquals("sqlDriver2", config.getSqlDriver());
+			Assertions.assertEquals("sqldatabase2", config.getSqldatabase());
+			Assertions.assertEquals(Integer.valueOf(3333), config.getSqlPort());
 
 		} catch (PdmDocumentsException e) {
 
-			Assert.fail(e.getMessage());
+			Assertions.fail(e.getMessage());
 		}
 
 	}
@@ -152,129 +128,103 @@ public class ConfigurationTest {
 		String fileTypesScreenNew = fileTypesScreen + "1";
 		String fileTypesPrinterNew = fileTypesPrinter + "1";
 		config.setFiletypes(fileTypesEmailNew, fileTypesPrinterNew, fileTypesScreenNew);
-		assertEquals(fileTypesEmailNew, config.getFileTypesEmail());
-		assertNotEquals(fileTypesEmail, config.getFileTypesEmail());
-		assertEquals(fileTypesScreenNew, config.getFileTypesScreen());
-		assertNotEquals(fileTypesScreen, config.getFileTypesScreen());
-		assertEquals(fileTypesPrinterNew, config.getFileTypesPrinter());
-		assertNotEquals(fileTypesPrinter, config.getFileTypesPrinter());
+		Assertions.assertEquals(fileTypesEmailNew, config.getFileTypesEmail());
+		Assertions.assertNotEquals(fileTypesEmail, config.getFileTypesEmail());
+		Assertions.assertEquals(fileTypesScreenNew, config.getFileTypesScreen());
+		Assertions.assertNotEquals(fileTypesScreen, config.getFileTypesScreen());
+		Assertions.assertEquals(fileTypesPrinterNew, config.getFileTypesPrinter());
+		Assertions.assertNotEquals(fileTypesPrinter, config.getFileTypesPrinter());
 	}
 
-//	@Test
-//	public void testGetRestServer() {
-//		Configuration config = Configuration.getInstance();
-//		config.setRestServer(restServer, restUser, restPassword, restTenant);
-//		restserver = config.getRestServer();
-//	}
-//
-//	@Test
-//	public void testGetRestUser() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetRestPassword() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetRestTenant() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetPdmSystem() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlServer() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlPort() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlPortString() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlDriver() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqldatabase() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlUser() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetSqlPassword() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetFileTypesEmail() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetFileTypesPrinter() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetFileTypesScreen() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetPdmSystem() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetPartFieldName() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetPartFieldName() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetPartProFileIDFieldName() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetPartProFileIDFieldName() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetSqlDriver() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testGetDokart() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testSetDokart() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	public void testcheckRestServerInfo() {
+		Configuration config = Configuration.getInstance();
+		Assertions.assertThrows(PdmDocumentsException.class, () -> config.checkRestServerInfo(null),
+				"If checkRestServer runs with null it should throw an PdmDocumentsException");
+		Assertions.assertThrows(PdmDocumentsException.class, () -> config.checkRestServerInfo(""),
+				"If checkRestServer runs with an empty String it should throw an PdmDocumentsException");
 
+		try {
+			Assertions.assertTrue(config.checkRestServerInfo("server"));
+		} catch (PdmDocumentsException e) {
+			Assertions.fail("It shouldn´t throw an Exception");
+
+		}
+
+	}
+
+	@Test
+	public void testGetSqlPort() {
+		Configuration config = Configuration.getInstance();
+		try {
+			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
+					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver",
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+			Assertions.assertEquals(null, config.getSqlPort());
+		} catch (PdmDocumentsException e) {
+			Assertions.fail(e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	public void testGetSqlPortString() {
+		Configuration config = Configuration.getInstance();
+		try {
+			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
+					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver",
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+			Assertions.assertEquals("", config.getSqlPortString());
+		} catch (PdmDocumentsException e) {
+			Assertions.fail(e.getMessage());
+
+		}
+
+	}
+
+//	
+	@Test
+	public void testSetPdmSystem() {
+		Configuration config = Configuration.getInstance();
+		config.setPdmSystem(UserEnumPdmSystems.COFFEE);
+		Assertions.assertEquals(UserEnumPdmSystems.COFFEE, config.getPdmSystem());
+		config.setPdmSystem(null);
+		Assertions.assertEquals(null, config.getPdmSystem());
+
+	}
+
+	@Test
+	public void testSetPartFieldName() {
+		Configuration config = Configuration.getInstance();
+
+		config.setPartFieldName("partfield");
+
+		Assertions.assertEquals("partfield", config.getPartFieldName());
+
+	}
+
+	@Test
+	public void testSetPartProFileIDFieldName() {
+		Configuration config = Configuration.getInstance();
+		config.setPartProFileIDFieldName("partProFileIDFieldName");
+
+		Assertions.assertEquals("partProFileIDFieldName", config.getPartProFileIDFieldName());
+	}
+
+	@Test
+	public void testSetSqlDriver() {
+		Configuration config = Configuration.getInstance();
+		config.setSqlDriver("sqlDriver");
+		Assertions.assertEquals("sqlDriver", config.getSqlDriver());
+	}
+
+	@Test
+	public void testGetDokart() {
+		Configuration config = Configuration.getInstance();
+		config.setDokart("testdokart");
+		Assertions.assertEquals("testdokart", config.getDokart());
+	}
+
+//
 }

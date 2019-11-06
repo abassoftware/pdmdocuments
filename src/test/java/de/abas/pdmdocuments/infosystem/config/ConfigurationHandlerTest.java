@@ -1,35 +1,21 @@
 package de.abas.pdmdocuments.infosystem.config;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.io.File;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
-import de.abas.pdmdocuments.infosystem.config.Configuration;
-import de.abas.pdmdocuments.infosystem.config.ConfigurationHandler;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class ConfigurationHandlerTest {
 	Configuration config = Configuration.getInstance();
 	File configFile = new File(ConfigurationHandler.getCONFIGFile());
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		config.initConfiguration("localhost", "restUser", "restPassword", "restTenant", "partFieldName",
@@ -39,7 +25,7 @@ public class ConfigurationHandlerTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		deleteConfigFileandDirectory();
 	}
@@ -48,11 +34,32 @@ public class ConfigurationHandlerTest {
 	public void testLoadConfiguration() {
 		try {
 			Configuration testconfig = ConfigurationHandler.loadConfiguration();
-			assertEquals(UserEnumPdmSystems.KEYTECH, testconfig.getPdmSystem());
+			Assertions.assertEquals(UserEnumPdmSystems.KEYTECH, testconfig.getPdmSystem());
 		} catch (PdmDocumentsException e) {
-			fail(e.getMessage());
+			Assertions.fail(e.getMessage());
 
 		}
+
+		try {
+			Configuration testconfig2 = ConfigurationHandler.loadConfiguration();
+
+			testconfig2.setPdmSystem(null);
+			ConfigurationHandler.saveConfigurationtoFile(testconfig2);
+			Configuration testconfig3 = ConfigurationHandler.loadConfiguration();
+			Assertions.fail("It should throw a PdmDocumentsExceotion");
+		} catch (PdmDocumentsException e) {
+			Assertions.assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.pdmsystemnull", ""),
+					e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	public void testConfigurationsHandler() {
+
+		Assertions.assertThrows(IllegalAccessException.class, () -> ConfigurationHandler.class.newInstance(),
+				"Utility class should be private");
 
 	}
 
@@ -62,9 +69,9 @@ public class ConfigurationHandlerTest {
 		try {
 			config.setPdmSystem(UserEnumPdmSystems.PROFILE);
 			ConfigurationHandler.saveConfigurationtoFile(config);
-			assertTrue(configFile.exists());
+			Assertions.assertTrue(configFile.exists());
 		} catch (PdmDocumentsException e) {
-			fail(e.getMessage());
+			Assertions.fail(e.getMessage());
 		}
 
 	}
