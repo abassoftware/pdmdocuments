@@ -68,6 +68,7 @@ import de.abas.erp.db.selection.SelectionBuilder;
 import de.abas.erp.db.util.ContextHelper;
 import de.abas.erp.jfop.rt.api.annotation.RunFopWith;
 import de.abas.jfop.base.buffer.BufferFactory;
+import de.abas.jfop.base.buffer.GlobalTextBuffer;
 import de.abas.jfop.base.buffer.PrintBuffer;
 import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.config.ConfigurationHandler;
@@ -178,7 +179,15 @@ public class Main {
 		}
 
 		if (!noErrorsInPDM) {
-			UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.error.errorInTable"));
+			BufferFactory buffact = BufferFactory.newInstance();
+			GlobalTextBuffer textbuf = buffact.getGlobalTextBuffer();
+			Boolean grafik = textbuf.getBooleanValue("grafik");
+			if (grafik) {
+				UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.error.errorInTable"));
+			} else {
+				UtilwithAbasConnection.shownoticebar(ctx, screenControl,
+						UtilwithAbasConnection.getMessage("main.error.errorInTable"));
+			}
 		}
 
 		if (!head.getReportFoot().isEmpty()) {

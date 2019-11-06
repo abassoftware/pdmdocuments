@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import de.abas.eks.jfop.remote.EKS;
 import de.abas.erp.api.gui.TextBox;
+import de.abas.erp.axi.screen.ScreenControl;
 import de.abas.erp.db.DbContext;
 
 public class UtilwithAbasConnection {
@@ -34,4 +35,8 @@ public class UtilwithAbasConnection {
 		return Util.getMessage(key, getLocale(), params);
 	}
 
+	public static void shownoticebar(DbContext ctx, ScreenControl screenControl, String message) {
+
+		screenControl.setNote(Util.getMessage("main.exception.title", getLocale()) + " " + message, true);
+	}
 }

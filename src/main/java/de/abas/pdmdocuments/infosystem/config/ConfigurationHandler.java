@@ -37,7 +37,7 @@ public class ConfigurationHandler {
 	private static final String PDM_CONFIG_DOKART = "pdm.config.dokart";
 
 	private ConfigurationHandler() {
-		throw new IllegalStateException("Utility class");
+		throw new IllegalStateException("Utility class should be private");
 	}
 
 	public static Configuration loadConfiguration() throws PdmDocumentsException {

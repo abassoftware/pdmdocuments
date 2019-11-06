@@ -85,6 +85,15 @@ public class Configuration {
 		this.fileTypesPrinter = fileTypesPrinter;
 		this.fileTypesScreen = fileTypesScreen;
 		this.dokart = dokart;
+		checkPdmSystem();
+
+	}
+
+	private void checkPdmSystem() throws PdmDocumentsException {
+		if (this.pdmSystem == null) {
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.checkPdmSystem.isnull"));
+		}
+
 	}
 
 	public void setRestServer(String restServer, String restUser, String restPassword, String restTenant)
@@ -116,7 +125,7 @@ public class Configuration {
 		this.fileTypesScreen = fileTypesScreen;
 	}
 
-	private Boolean checkRestServerInfo(String restServer) throws PdmDocumentsException {
+	protected Boolean checkRestServerInfo(String restServer) throws PdmDocumentsException {
 		if (restServer != null) {
 			if (restServer.isEmpty()) {
 				throw new PdmDocumentsException(
