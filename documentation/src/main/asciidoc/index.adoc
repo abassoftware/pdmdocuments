@@ -1,17 +1,65 @@
 :docinfo:
-= pdmDocumentsCo
+= pdmDocuments
 Documentation
+
+PDMDocuments ist ein Infosystem, welches über eine Rest-Api auf das PDM-System zugreift und 
+die mit dem Artikel verknüpften Dokumente abholt und anzeigt.
+Das Infosystem ist durch ein Layout in den Druckprozess eingebunden und druckt zu einem Beleg die freigegeben Zeichnungen.
+
+Derzeit ist der Zugriff auf die folgenden PDM-System implementiert : 
+- Keytech
+- ProFile
+- SolidWorksPDM (Lösung von dem SolidWorks-Partner Coffee)    
+
+== Technische Vorraussetzungen
+abas: 
+Cloud-Connect
+
+Keytech:
+Keytech-RestAPI
+User für den Zugriff
+
+ProFile:
+ProFile RestAPI 
+User für den Zugriff
+
+SolidWorks:
+RestAPI von Coffee
+User für den Zugriff
+ 
+
+== Installation
+PDMDocuments wird mit dem abas-esdk-Installer installiert.
+
+pdm-<Version>.jar 
+
+Es wird das Infosystem PDMDOCUMENTS, das Layout PDMDOCUMENTS, Aufrufparameter
+und die entsprechenden Programme installiert  
+
+
+=== Nacharbeiten
+
+Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts
+
+== 
+
+
+
+
 :nofooter:
 
-This document describes the pdmDocumentsCo app.
+
 
 include::subpage.adoc[]
 
 include::additionalpage.adoc[]
 
+== Partner  
+
+
 == About
 
-pdmDocumentsCo +
-(C) Your Company
+pdmDocuments +
+(C) abas Software GmbH
 
-https://your-website.com/
+https://www.abas-erp.com/
