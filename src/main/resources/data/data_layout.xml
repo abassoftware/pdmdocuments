@@ -23,6 +23,9 @@
                 <Field name="guid" abasType="GLA38">d2b80195-e4be-4bd1-af93-bfe109915f06</Field>
                 <Field name="such" abasType="SWK88">PDMDOCUMENT</Field>
                 <Field name="name" abasType="T46">Dokumente aus dem PDM-System Drucken</Field>
+                <Field name="name2" abasType="T46">Print documents from the PDM system</Field>
+                <Field name="name3" abasType="T46">Imprimer des documents à partir du système PDM</Field>
+                <Field name="name14" abasType="T46">Print documents from the PDM system</Field>
                 <Field name="geprueft" abasType="B1">1</Field>
                 <Field name="aktiv" abasType="B1">1</Field>
                 <Field name="kanal" abasType="ID88:6">(171,88,0)</Field>
