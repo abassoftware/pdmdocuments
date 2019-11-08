@@ -4,7 +4,7 @@
     {
       "dbnr" : 87,
       "grnr" : 9,
-      "headfields" : [ "id", "guid", "such", "name", "zielobj" , "kontexttyp" ,"aufrktxt" , "zieltab" , "aufrtab" , "icontxt" , "dialogart" ,"arb" , "zielmodus" , "aufrbedtyp" , "aufrbed" ,  "aufrzieltyp" , "aufrziel" ],
+      "headfields" : [ "id", "guid", "such", "name", "name2" , "name3" , "name14" , "zielobj" , "kontexttyp" ,"aufrktxt" , "zieltab" , "aufrtab" , "icontxt" , "dialogart" ,"arb" , "zielmodus" , "aufrbedtyp" , "aufrbed" ,  "aufrzieltyp" , "aufrziel" ],
       "tablefields" : ["zid", "zielaktion" , "zielvar" , "aufrwtyp" , "aufrwert" , "aufrpflicht"],
       "criteria" : "such=PDMDOCUMENTS!PDMDOCUMENTS"
     }    
