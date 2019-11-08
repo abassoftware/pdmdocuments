@@ -172,7 +172,7 @@
         <Record id="(43447,87,0)">
             <Head>
                 <Field name="id" abasType="ID87">(43447,87,0)</Field>
-                <Field name="guid" abasType="GLA38">98778596-5e8b-4087-bb23-0e3b2e5bc917</Field>
+                <Field name="guid" abasType="GLA38">acfcb766-159e-4415-9379-1831cdb9d04a</Field>
                 <Field name="such" abasType="SWK87">PDMDOCUMENTSPRODLIST</Field>
                 <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
                 <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
