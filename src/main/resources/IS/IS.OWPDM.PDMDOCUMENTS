@@ -2,7 +2,7 @@ V#21
 K#0#PDMDOCUMENTS#Dokumente aus dem PDM-System holen#(65)#isrein/screen.OWPDM.PDMDOCUMENTS#25B.1##
 K#(0)#(0)###0#0#PdmDocuments#1
 K#0#(1)#
-K#java:de.abas.pdmdocuments.infosystem.Main@pdmco#####
+K#java:de.abas.pdmdocuments.infosystem.Main@pdmdo#####
 K#######
 K#owpdm#(127)##(116)#(98)###0#0#
 K#is/VERBOTEN##is/VERBOTEN###is/VERBOTEN###
@@ -69,7 +69,7 @@ Z#0#isisref##0####(0)######0#0#0#0##0##
 Z#0#isselect##0####(1)######0#0#0#0##0##
 Z#0#isauswahl##0####(1)######0#0#0#0##0##
 Z#0#isstufe##0####(1)######0#0#0#0##0##
-Z#0#isbstart##0####(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmco####1#0#0#0##0##
+Z#0#isbstart##0####(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmdo####1#0#0#0##0##
 Z#0#isstartzeit##0####(0)######0#0#0#0##0##
 Z#1#isyartikel#P2:1#0#Artikel#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isystruktur#B#0#Dokumente aus der Struktur holen#(65)#(65)#(2)######1#1#1#0##1##
@@ -79,11 +79,11 @@ Z#1#isydwg#B#0#dwg Dateien#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isydxf#B#0#dxf Dateien#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyalle#B#0#alle Dateitypen#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isydokart#GL255#0#Dokumentenart#(65)#(65)#(2)######1#1#1#0##1##
-Z#1#isypdmsystem#AZL1000007#0#PDM-SYSTEM#(65)#(65)#(2)#####java:de.abas.pdmdocuments.infosystem.Main@pdmco#1#1#1#0##1##
+Z#1#isypdmsystem#AZL1000007#0#PDM-SYSTEM#(65)#(65)#(2)#####java:de.abas.pdmdocuments.infosystem.Main@pdmdo#1#1#1#0##1##
 Z#1#isyserver#GL100#0#PDM -Server#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyuser#GL30#0#Benutzer#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isypassword#GL30#0#Passwort#(65)#(65)#(2)######1#1#1#0##1##
-Z#1#isysaveconfig#BU3#0#Konfiguration speichern#(65)#(65)#(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmco####1#1#1#0##1##
+Z#1#isysaveconfig#BU3#0#Konfiguration speichern#(65)#(65)#(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmdo####1#1#1#0##1##
 Z#1#isyuebfile#TN#0#Übergabe für Druck#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyanhangliste#GL#0#Anhangsliste#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isybeleg#VP11#0#Beleg#(65)#(65)#(2)######1#1#1#0##1##
@@ -124,7 +124,7 @@ Z#0#istbaumiconz##1####(0)######0#2#0#0##0##
 Z#0#istmenuemoeglich##1####(0)######0#0#0#0##0##
 Z#0#istmenuean##1####(0)######0#0#0#0##0##
 Z#0#istmenueendeaktion##1####(0)######0#0#0#0##0##
-Z#2#isyauswahl#B#1#Auswahl#(65)#(65)#(2)#####java:de.abas.pdmdocuments.infosystem.Main@pdmco#1#1#1#0##1##
+Z#2#isyauswahl#B#1#Auswahl#(65)#(65)#(2)#####java:de.abas.pdmdocuments.infosystem.Main@pdmdo#1#1#1#0##1##
 Z#2#isytstufe#IP4#1#Stufe#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isytartikel#P2:1#1#Artikel#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isytartikelname#PT2:1#1#Bezeichnung#(65)#(65)#(0)######1#3#1#0##1##
@@ -132,7 +132,7 @@ Z#2#isypfad#GL250#1#Dateipfad#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isydateiname#GL100#1#Dateiname#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isydatend#GL10#1#Datei Typ#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isydoktyp#GL30#1#Dokument Typ#(65)#(65)#(0)######1#1#1#0##1##
-Z#2#isybuanzeigen#BU4#1#Dokumentanzeigen#(65)#(65)#(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmco####1#1#1#0##1##
+Z#2#isybuanzeigen#BU4#1#Dokumentanzeigen#(65)#(65)#(1)##java:de.abas.pdmdocuments.infosystem.Main@pdmdo####1#1#1#0##1##
 Z#2#isymeta1key#GL20#1#Meta 1#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isymeta1value#GL100#1#Meta 1#(65)#(65)#(0)######1#1#1#0##1##
 Z#2#isymeta2key#GL20#1#Meta 2#(65)#(65)#(0)######1#1#1#0##1##

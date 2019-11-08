@@ -8,7 +8,7 @@
     "field": "",
     "headOrTable": "K",
     "isContinue": "[C]",
-    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmco"
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmdo"
   },
   {
     "databaseName": "(PrintParameter)",
@@ -19,7 +19,7 @@
     "field": "drucker",
     "headOrTable": "K",
     "isContinue": "[C]",
-    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmco"
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmdo"
   },
   {
     "databaseName": "(PrintParameter)",
@@ -30,6 +30,6 @@
     "field": "budruausw",
     "headOrTable": "K",
     "isContinue": "[C]",
-    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmco"
+    "handler": "java:de.abas.pdmdocuments.printscreen.PrintDialogEventHandler@pdmdo"
   }
 ]

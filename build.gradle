@@ -1,5 +1,5 @@
 plugins {
-   id "de.abas.esdk" version "0.12.16"
+   id "de.abas.esdk" version "0.12.18"
     id 'jacoco'
    }
 
@@ -39,15 +39,15 @@ apply plugin: "java"
 
 esdk {
 	app {
-		name = "pdmDocumentsCo"
+		name = "pdmDocuments"
 		vendorId = "ag"
-		appId = "pdmco"
+		appId = "pdmdo"
 		shared = true
 		screens=["Purchasing:PurchaseOrder":["A"]]
         infosystems = ["IS.OWPDM.PDMDOCUMENTS"]
         tables = ["Einkauf"]
         data = ["data_aufrufparameter.json" , "data_layout.json" ]
-        keys = ["3011","3012"]
+        keys = []
         enums = ["PdmSystems"]
         workdirs = [ "owpdm" ]
         essentialsVersions = ["2016r2n03-2016r4n15", "2017r1n00-2017r4n17" , "2018r1n00-2018r4n17"]
@@ -83,7 +83,7 @@ esdk {
 	installType = "SSH"
 }
 
-group = 'de.abas.pdmdocuments.coffee'
+group = 'de.abas.pdmdocuments'
 
 dependencies {
 	provided "de.abas.homedir:abas-db-base:1.0.0"
@@ -112,7 +112,7 @@ dependencies {
 	implementation "de.abas.clientdir:abas-db:1.0.0-SNAPSHOT"
 	implementation "de.abas.clientdir:abas-db-infosys:1.0.0-SNAPSHOT"
 	implementation "de.abas.clientdir:abas-db-index:1.0.0-SNAPSHOT"
-	licensing "de.abas.esdk:client-api:0.0.12:all"
+	licensing "de.abas.esdk:client-api:0.0.13:all"
 
 	runtime "de.abas.homedir:commons-collections:1.0.0"
 	implementation "de.abas.homedir:abas-jfop-base:1.0.0"
