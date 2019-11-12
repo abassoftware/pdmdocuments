@@ -57,7 +57,7 @@ public class SQLConnectionHandler {
 
 	private void openConnection() throws PdmDocumentsException {
 		try {
-			if (this.connection.isClosed()) {
+			if (this.connection == null || this.connection.isClosed()) {
 				Class.forName(this.driver);
 				this.connection = DriverManager.getConnection(
 						"jdbc:sqlserver://" + this.server + ":" + this.port + ";databasename=" + this.database,
