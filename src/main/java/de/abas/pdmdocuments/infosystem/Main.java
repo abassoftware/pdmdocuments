@@ -8,7 +8,11 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,7 +96,7 @@ public class Main {
 	@ButtonEventHandler(field = "start", type = ButtonEventType.AFTER, table = false)
 	public void startAfter(ButtonEvent event, ScreenControl screenControl, DbContext ctx, PdmDocuments head)
 			throws EventException {
-
+		checkDate(ctx);
 		getConfigInMask(head, ctx);
 		Boolean noErrorsInPDM = true;
 
@@ -193,6 +197,25 @@ public class Main {
 		if (!head.getReportFoot().isEmpty()) {
 			FOe.input(head.getReportFoot());
 		}
+	}
+
+	private void checkDate(DbContext ctx) {
+		Date actDate = new Date();
+		DateFormat format = new SimpleDateFormat("d.M.yyyy");
+		Date testDate = null;
+		try {
+			testDate = format.parse("24.12.2019");
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (!actDate.before(testDate)) {
+			UtilwithAbasConnection.showErrorBox(ctx, "Die Demoversion ist abgelaufen");
+			throw new IllegalAccessError("Die Demoversion ist abgelaufen");
+		}
+
 	}
 
 	private void renameFiles(Iterable<Row> rows, DbContext ctx) throws PdmDocumentsException {
