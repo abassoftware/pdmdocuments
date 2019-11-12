@@ -33,15 +33,23 @@ PDMDocuments wird mit dem abas-esdk-Installer installiert.
 
 pdm-<Version>.jar 
 
-Es wird das Infosystem PDMDOCUMENTS, das Layout PDMDOCUMENTS, Aufrufparameter
-und die entsprechenden Programme installiert  
-
+Es wird das Infosystem PDMDOCUMENTS, das Layout PDMDOCUMENTS, 
+Aufrufparameter und die entsprechenden Programme installiert.  
 
 === Nacharbeiten
 
-Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts
+Die Aufrufparameter zum Aufrufen des Infosystem aus den Masken:
 
-== 
+Maske 2 Artikel     : PDMDOCUMENTSTEIL
+Maske 42 Bestellung : PDMDOCUMENTSEK
+Infosystem APAPIER  : PDMDOCUMENTSAPAPIER
+Infosystem PRODLIST : PDMDOCUMENTSPRODLIST
+
+
+Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts.
+
+== Anpassungen 
+Über den Berichtsfuss(bfuss) kann ein FOP eingefügt werden. 
 
 
 
