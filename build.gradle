@@ -50,6 +50,7 @@ esdk {
         keys = []
         enums = ["PdmSystems"]
         workdirs = [ "owpdm" ]
+        languages = "DEA"
         essentialsVersions = ["2016r2n03-2016r4n15", "2017r1n00-2017r4n17" , "2018r1n00-2018r4n17"]
 	}
 
@@ -111,7 +112,7 @@ dependencies {
 	
 	implementation "de.abas.clientdir:abas-db:1.0.0-SNAPSHOT"
 	implementation "de.abas.clientdir:abas-db-infosys:1.0.0-SNAPSHOT"
-	implementation "de.abas.clientdir:abas-db-index:1.0.0-SNAPSHOT"
+	// implementation "de.abas.clientdir:abas-db-index:1.0.0-SNAPSHOT"
 	licensing "de.abas.esdk:client-api:0.0.13:all"
 
 	runtime "de.abas.homedir:commons-collections:1.0.0"

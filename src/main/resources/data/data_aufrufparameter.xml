@@ -1,262 +1,262 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ABASData>
     <RecordSet tableNumber="87:9" tableName="Datenexport:Aufrufparameter" identifier="guid" standard="false" importOnce="false" importMode="normal">
-        <Record id="(43446,87,0)">
+        <Record id="(33303,87,0)">
             <Head>
-                <Field name="id" abasType="ID87">(43446,87,0)</Field>
-                <Field name="guid" abasType="GLA38">dedf24e7-66d0-4f20-b0fe-c5cffb433867</Field>
-                <Field name="such" abasType="SWK87">PDMDOCUMENTSTEIL</Field>
-                <Field name="name" abasType="GL64">Zeichnungen zu Artikel</Field>
+                <Field name="id" abasType="ID87">(33303,87,0)</Field>
+                <Field name="guid" abasType="GLA38">496b7278-978e-4561-b970-601c1677deb0</Field>
+                <Field name="such" abasType="SWK87">PDMDOCUMENTSAPAPIER</Field>
+                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
                 <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
                 <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
                 <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="zielobj" abasType="VID12">(629,65,0)</Field>
+                <Field name="zielobj" abasType="VID12">(631,65,0)</Field>
+                <Field name="kontexttyp" abasType="A267">Einzelnes Infosystem</Field>
+                <Field name="aufrktxt" abasType="VID13">(224,65,0)</Field>
+                <Field name="zieltab" abasType="B1">0</Field>
+                <Field name="aufrtab" abasType="B1">1</Field>
+                <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
+                <Field name="dialogart" abasType="A238">Ändernd</Field>
+                <Field name="arb" abasType="GL20">owpdm</Field>
+                <Field name="zielmodus" abasType="A120">hole</Field>
+                <Field name="aufrbedtyp" abasType="A150"></Field>
+                <Field name="aufrbed" abasType="GL200"></Field>
+                <Field name="aufrzieltyp" abasType="A150"></Field>
+                <Field name="aufrziel" abasType="GL200"></Field>
+            </Head>
+            <Row number="3">
+                <Field name="zid" abasType="IDZ87:9">(33303,87,0,3)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="1">
+                <Field name="zid" abasType="IDZ87:9">(33303,87,0,1)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ybeleg</Field>
+                <Field name="aufrwtyp" abasType="A150">Kopffeld</Field>
+                <Field name="aufrwert" abasType="GL200">banummer^id</Field>
+                <Field name="aufrpflicht" abasType="B1">1</Field>
+            </Row>
+            <Row number="2">
+                <Field name="zid" abasType="IDZ87:9">(33303,87,0,2)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ydrucker</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="4">
+                <Field name="zid" abasType="IDZ87:9">(33303,87,0,4)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">bstart</Field>
+                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
+                <Field name="aufrwert" abasType="GL200">1</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+        </Record>
+        <Record id="(33301,87,0)">
+            <Head>
+                <Field name="id" abasType="ID87">(33301,87,0)</Field>
+                <Field name="guid" abasType="GLA38">3d3cbc42-cf15-44e0-b026-6da2821b159b</Field>
+                <Field name="such" abasType="SWK87">PDMDOCUMENTSPRODLIST</Field>
+                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
+                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
+                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="zielobj" abasType="VID12">(631,65,0)</Field>
+                <Field name="kontexttyp" abasType="A267">Einzelnes Infosystem</Field>
+                <Field name="aufrktxt" abasType="VID13">(314,65,0)</Field>
+                <Field name="zieltab" abasType="B1">0</Field>
+                <Field name="aufrtab" abasType="B1">1</Field>
+                <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
+                <Field name="dialogart" abasType="A238">Ändernd</Field>
+                <Field name="arb" abasType="GL20">owpdm</Field>
+                <Field name="zielmodus" abasType="A120">hole</Field>
+                <Field name="aufrbedtyp" abasType="A150"></Field>
+                <Field name="aufrbed" abasType="GL200"></Field>
+                <Field name="aufrzieltyp" abasType="A150"></Field>
+                <Field name="aufrziel" abasType="GL200"></Field>
+            </Head>
+            <Row number="2">
+                <Field name="zid" abasType="IDZ87:9">(33301,87,0,2)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ydrucker</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="1">
+                <Field name="zid" abasType="IDZ87:9">(33301,87,0,1)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ybeleg</Field>
+                <Field name="aufrwtyp" abasType="A150">Tabellenfeld</Field>
+                <Field name="aufrwert" abasType="GL200">order^id</Field>
+                <Field name="aufrpflicht" abasType="B1">1</Field>
+            </Row>
+            <Row number="4">
+                <Field name="zid" abasType="IDZ87:9">(33301,87,0,4)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">bstart</Field>
+                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
+                <Field name="aufrwert" abasType="GL200">1</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="3">
+                <Field name="zid" abasType="IDZ87:9">(33301,87,0,3)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+        </Record>
+        <Record id="(33302,87,0)">
+            <Head>
+                <Field name="id" abasType="ID87">(33302,87,0)</Field>
+                <Field name="guid" abasType="GLA38">d6d94d61-56ae-4cb5-9321-0f838343148f</Field>
+                <Field name="such" abasType="SWK87">PDMDOCUMENTSEK</Field>
+                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
+                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
+                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="zielobj" abasType="VID12">(631,65,0)</Field>
+                <Field name="kontexttyp" abasType="A267">Einzelne Variablentabelle</Field>
+                <Field name="aufrktxt" abasType="VID13">(199,12,0)</Field>
+                <Field name="zieltab" abasType="B1">0</Field>
+                <Field name="aufrtab" abasType="B1">0</Field>
+                <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
+                <Field name="dialogart" abasType="A238">Ändernd</Field>
+                <Field name="arb" abasType="GL20">owpdm</Field>
+                <Field name="zielmodus" abasType="A120">hole</Field>
+                <Field name="aufrbedtyp" abasType="A150"></Field>
+                <Field name="aufrbed" abasType="GL200"></Field>
+                <Field name="aufrzieltyp" abasType="A150"></Field>
+                <Field name="aufrziel" abasType="GL200"></Field>
+            </Head>
+            <Row number="4">
+                <Field name="zid" abasType="IDZ87:9">(33302,87,0,4)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">bstart</Field>
+                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
+                <Field name="aufrwert" abasType="GL200">1</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="2">
+                <Field name="zid" abasType="IDZ87:9">(33302,87,0,2)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ydrucker</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="3">
+                <Field name="zid" abasType="IDZ87:9">(33302,87,0,3)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="1">
+                <Field name="zid" abasType="IDZ87:9">(33302,87,0,1)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ybeleg</Field>
+                <Field name="aufrwtyp" abasType="A150">Kopffeld</Field>
+                <Field name="aufrwert" abasType="GL200">id</Field>
+                <Field name="aufrpflicht" abasType="B1">1</Field>
+            </Row>
+        </Record>
+        <Record id="(33300,87,0)">
+            <Head>
+                <Field name="id" abasType="ID87">(33300,87,0)</Field>
+                <Field name="guid" abasType="GLA38">cbb5b91d-5876-4cf2-95f8-da4b50b65da8</Field>
+                <Field name="such" abasType="SWK87">PDMDOCUMENTSTEIL</Field>
+                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
+                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
+                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
+                <Field name="zielobj" abasType="VID12">(631,65,0)</Field>
                 <Field name="kontexttyp" abasType="A267">Einzelne Variablentabelle</Field>
                 <Field name="aufrktxt" abasType="VID13">(164,12,0)</Field>
                 <Field name="zieltab" abasType="B1">0</Field>
                 <Field name="aufrtab" abasType="B1">0</Field>
                 <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
                 <Field name="dialogart" abasType="A238">Ändernd</Field>
-                <Field name="arb" abasType="GLU20">owpdm</Field>
+                <Field name="arb" abasType="GL20">owpdm</Field>
                 <Field name="zielmodus" abasType="A120">hole</Field>
                 <Field name="aufrbedtyp" abasType="A150"></Field>
                 <Field name="aufrbed" abasType="GL200"></Field>
                 <Field name="aufrzieltyp" abasType="A150"></Field>
                 <Field name="aufrziel" abasType="GL200"></Field>
             </Head>
+            <Row number="3">
+                <Field name="zid" abasType="IDZ87:9">(33300,87,0,3)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
+            <Row number="2">
+                <Field name="zid" abasType="IDZ87:9">(33300,87,0,2)</Field>
+                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
+                <Field name="zielvar" abasType="GL20">ydrucker</Field>
+                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
+                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
+                <Field name="aufrpflicht" abasType="B1">0</Field>
+            </Row>
             <Row number="1">
-                <Field name="zid" abasType="IDZ87:9">(43446,87,0,1)</Field>
+                <Field name="zid" abasType="IDZ87:9">(33300,87,0,1)</Field>
                 <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
                 <Field name="zielvar" abasType="GL20">yartikel</Field>
                 <Field name="aufrwtyp" abasType="A150">Kopffeld</Field>
                 <Field name="aufrwert" abasType="GL200">id</Field>
                 <Field name="aufrpflicht" abasType="B1">1</Field>
             </Row>
-            <Row number="2">
-                <Field name="zid" abasType="IDZ87:9">(43446,87,0,2)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ydrucker</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="3">
-                <Field name="zid" abasType="IDZ87:9">(43446,87,0,3)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
             <Row number="4">
-                <Field name="zid" abasType="IDZ87:9">(43446,87,0,4)</Field>
+                <Field name="zid" abasType="IDZ87:9">(33300,87,0,4)</Field>
                 <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
                 <Field name="zielvar" abasType="GL20">bstart</Field>
                 <Field name="aufrwtyp" abasType="A150">Konstante</Field>
                 <Field name="aufrwert" abasType="GL200">1</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-        </Record>
-        <Record id="(43445,87,0)">
-            <Head>
-                <Field name="id" abasType="ID87">(43445,87,0)</Field>
-                <Field name="guid" abasType="GLA38">3189baa4-bcd8-46d6-9343-699c248b3b52</Field>
-                <Field name="such" abasType="SWK87">PDMDOCUMENTSAPAPIER</Field>
-                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
-                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
-                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="zielobj" abasType="VID12">(629,65,0)</Field>
-                <Field name="kontexttyp" abasType="A267">Einzelnes Infosystem</Field>
-                <Field name="aufrktxt" abasType="VID13">(221,65,0)</Field>
-                <Field name="zieltab" abasType="B1">0</Field>
-                <Field name="aufrtab" abasType="B1">0</Field>
-                <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
-                <Field name="dialogart" abasType="A238">Ändernd</Field>
-                <Field name="arb" abasType="GLU20">owpdm</Field>
-                <Field name="zielmodus" abasType="A120">hole</Field>
-                <Field name="aufrbedtyp" abasType="A150"></Field>
-                <Field name="aufrbed" abasType="GL200"></Field>
-                <Field name="aufrzieltyp" abasType="A150"></Field>
-                <Field name="aufrziel" abasType="GL200"></Field>
-            </Head>
-            <Row number="3">
-                <Field name="zid" abasType="IDZ87:9">(43445,87,0,3)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="4">
-                <Field name="zid" abasType="IDZ87:9">(43445,87,0,4)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">bstart</Field>
-                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
-                <Field name="aufrwert" abasType="GL200">1</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="1">
-                <Field name="zid" abasType="IDZ87:9">(43445,87,0,1)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ybeleg</Field>
-                <Field name="aufrwtyp" abasType="A150">Kopffeld</Field>
-                <Field name="aufrwert" abasType="GL200">banummer^id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="2">
-                <Field name="zid" abasType="IDZ87:9">(43445,87,0,2)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ydrucker</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-        </Record>
-        <Record id="(43444,87,0)">
-            <Head>
-                <Field name="id" abasType="ID87">(43444,87,0)</Field>
-                <Field name="guid" abasType="GLA38">a2e05b49-0459-4460-a93e-e514e3814ab3</Field>
-                <Field name="such" abasType="SWK87">PDMDOCUMENTSEK</Field>
-                <Field name="name" abasType="GL64">Zeichnungen zu Bestellung</Field>
-                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
-                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="zielobj" abasType="VID12">(629,65,0)</Field>
-                <Field name="kontexttyp" abasType="A267">Einzelne Variablentabelle</Field>
-                <Field name="aufrktxt" abasType="VID13">(199,12,0)</Field>
-                <Field name="zieltab" abasType="B1">0</Field>
-                <Field name="aufrtab" abasType="B1">0</Field>
-                <Field name="icontxt" abasType="DV1">icon:screen_empty</Field>
-                <Field name="dialogart" abasType="A238">Ändernd</Field>
-                <Field name="arb" abasType="GLU20">owpdm</Field>
-                <Field name="zielmodus" abasType="A120">hole</Field>
-                <Field name="aufrbedtyp" abasType="A150"></Field>
-                <Field name="aufrbed" abasType="GL200"></Field>
-                <Field name="aufrzieltyp" abasType="A150"></Field>
-                <Field name="aufrziel" abasType="GL200"></Field>
-            </Head>
-            <Row number="4">
-                <Field name="zid" abasType="IDZ87:9">(43444,87,0,4)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">bstart</Field>
-                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
-                <Field name="aufrwert" abasType="GL200">1</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="2">
-                <Field name="zid" abasType="IDZ87:9">(43444,87,0,2)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ydrucker</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="3">
-                <Field name="zid" abasType="IDZ87:9">(43444,87,0,3)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="1">
-                <Field name="zid" abasType="IDZ87:9">(43444,87,0,1)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ybeleg</Field>
-                <Field name="aufrwtyp" abasType="A150">Kopffeld</Field>
-                <Field name="aufrwert" abasType="GL200">id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-        </Record>
-        <Record id="(43447,87,0)">
-            <Head>
-                <Field name="id" abasType="ID87">(43447,87,0)</Field>
-                <Field name="guid" abasType="GLA38">acfcb766-159e-4415-9379-1831cdb9d04a</Field>
-                <Field name="such" abasType="SWK87">PDMDOCUMENTSPRODLIST</Field>
-                <Field name="name" abasType="GL64">Dokumente aus dem PDM-System holen</Field>
-                <Field name="name2" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="name3" abasType="GL64">Obtenir des documents du système PDM</Field>
-                <Field name="name14" abasType="GL64">Get documents from the PDM system</Field>
-                <Field name="zielobj" abasType="VID12">(629,65,0)</Field>
-                <Field name="kontexttyp" abasType="A267">Einzelnes Infosystem</Field>
-                <Field name="aufrktxt" abasType="VID13">(331,65,0)</Field>
-                <Field name="zieltab" abasType="B1">0</Field>
-                <Field name="aufrtab" abasType="B1">1</Field>
-                <Field name="icontxt" abasType="DV1">icon:infosystem</Field>
-                <Field name="dialogart" abasType="A238">Ändernd</Field>
-                <Field name="arb" abasType="GLU20">owpdm</Field>
-                <Field name="zielmodus" abasType="A120">hole</Field>
-                <Field name="aufrbedtyp" abasType="A150"></Field>
-                <Field name="aufrbed" abasType="GL200"></Field>
-                <Field name="aufrzieltyp" abasType="A150"></Field>
-                <Field name="aufrziel" abasType="GL200"></Field>
-            </Head>
-            <Row number="2">
-                <Field name="zid" abasType="IDZ87:9">(43447,87,0,2)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ydrucker</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">diadrucker^id</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="4">
-                <Field name="zid" abasType="IDZ87:9">(43447,87,0,4)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">bstart</Field>
-                <Field name="aufrwtyp" abasType="A150">Konstante</Field>
-                <Field name="aufrwert" abasType="GL200">1</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="3">
-                <Field name="zid" abasType="IDZ87:9">(43447,87,0,3)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">yanhangliste</Field>
-                <Field name="aufrwtyp" abasType="A150">Druckparameter</Field>
-                <Field name="aufrwert" abasType="GL200">anhangliste</Field>
-                <Field name="aufrpflicht" abasType="B1">0</Field>
-            </Row>
-            <Row number="1">
-                <Field name="zid" abasType="IDZ87:9">(43447,87,0,1)</Field>
-                <Field name="zielaktion" abasType="A223">Kopffeld setzen</Field>
-                <Field name="zielvar" abasType="GL20">ybeleg</Field>
-                <Field name="aufrwtyp" abasType="A150">Tabellenfeld</Field>
-                <Field name="aufrwert" abasType="GL200">order^id</Field>
                 <Field name="aufrpflicht" abasType="B1">0</Field>
             </Row>
         </Record>
     </RecordSet>
-    <RecordSet tableNumber="12:26" tableName="Firma:Vartab" identifier="vgrtxt14" standard="true" importOnce="false" importMode="normal">
+    <RecordSet tableNumber="12:26" tableName="Firma:Vartab" identifier="nummer" standard="true" importOnce="false" importMode="normal">
         <Record id="(199,12,0)">
             <Head>
                 <Field name="id" abasType="ID12">(199,12,0)</Field>
-                <Field name="vgrtxt14" abasType="GL40">Purchase order</Field>
+                <Field name="nummer" abasType="NK12">1046</Field>
             </Head>
         </Record>
         <Record id="(164,12,0)">
             <Head>
                 <Field name="id" abasType="ID12">(164,12,0)</Field>
-                <Field name="vgrtxt14" abasType="GL40">Product</Field>
+                <Field name="nummer" abasType="NK12">1011</Field>
             </Head>
         </Record>
     </RecordSet>
-    <RecordSet tableNumber="65:1" tableName="Infosystem:Infosystem" identifier="classname" standard="true" importOnce="false" importMode="normal">
-        <Record id="(221,65,0)">
+    <RecordSet tableNumber="65:1" tableName="Infosystem:Infosystem" identifier="nummer" standard="true" importOnce="false" importMode="normal">
+        <Record id="(314,65,0)">
             <Head>
-                <Field name="id" abasType="ID65">(221,65,0)</Field>
-                <Field name="classname" abasType="GLC40">ShopFloorPapersPerWorkOrder</Field>
+                <Field name="id" abasType="ID65">(314,65,0)</Field>
+                <Field name="nummer" abasType="NK65">10131</Field>
             </Head>
         </Record>
-        <Record id="(629,65,0)">
+        <Record id="(224,65,0)">
             <Head>
-                <Field name="id" abasType="ID65">(629,65,0)</Field>
-                <Field name="classname" abasType="GLC40">PdmDocuments</Field>
+                <Field name="id" abasType="ID65">(224,65,0)</Field>
+                <Field name="nummer" abasType="NK65">10143</Field>
             </Head>
         </Record>
-        <Record id="(331,65,0)">
+        <Record id="(631,65,0)">
             <Head>
-                <Field name="id" abasType="ID65">(331,65,0)</Field>
-                <Field name="classname" abasType="GLC40">ProductionCentre</Field>
+                <Field name="id" abasType="ID65">(631,65,0)</Field>
+                <Field name="nummer" abasType="NK65">100004</Field>
             </Head>
         </Record>
     </RecordSet>
