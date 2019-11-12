@@ -43,6 +43,12 @@
             <cell gridX="3" gridY="2">
              <erpfield s3Name="0:ystruktur" />
             </cell>
+            <cell gridX="0" gridY="3" />
+            <cell gridX="1" gridY="3">
+             <label msgId="pdmdocuments_demotext" />
+            </cell>
+            <cell gridX="2" gridY="3" />
+            <cell gridX="3" gridY="3" />
            </layout.grid>
           </cell>
          </layout.grid>
