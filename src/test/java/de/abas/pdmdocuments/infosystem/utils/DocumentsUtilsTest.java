@@ -7,7 +7,12 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 
 import de.abas.pdmdocuments.infosystem.utils.DocumentsUtil;
 
