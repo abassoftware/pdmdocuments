@@ -1,12 +1,17 @@
 package de.abas.pdmdocuments.keytech;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.DocumentSearchfactory;
@@ -17,10 +22,10 @@ import de.abas.pdmdocuments.infosystem.data.PdmDocument;
 import de.abas.pdmdocuments.infosystem.webservices.keytech.RestServiceKeytech;
 
 public class RestServiceKeytechTest {
-	private DocumentsInterface restService;
+	private static DocumentsInterface restService;
 
-	@Before
-	public void prepareRestService() {
+	@BeforeAll
+	public static void prepareRestService() {
 
 		Configuration config = Configuration.getInstance();
 		config.setPdmSystem(UserEnumPdmSystems.KEYTECH);
@@ -29,7 +34,7 @@ public class RestServiceKeytechTest {
 
 		try {
 			config.setRestServer("https://demo.keytech.de", "jgrant", "", "");
-			this.restService = factory.create(config);
+			restService = factory.create(config);
 		} catch (PdmDocumentsException e) {
 			e.printStackTrace();
 			fail(e.toString());
@@ -38,10 +43,16 @@ public class RestServiceKeytechTest {
 	}
 
 	@Test
+	public void testRestServiceKeytech() {
+		RestServiceKeytech keytechService = new RestServiceKeytech("server", "user", "password");
+		assertNotNull(keytechService);	
+	}
+	
+	@Test
 	public void testSearchPdmProductID() {
 
 		try {
-			RestServiceKeytech keytechService = (RestServiceKeytech) this.restService;
+			RestServiceKeytech keytechService = (RestServiceKeytech) restService;
 			String ergebnis = keytechService.searchPdmProductID("BCU 4010 GP");
 			assertTrue(ergebnis.length() > 0);
 		} catch (PdmDocumentsException e) {
@@ -59,7 +70,7 @@ public class RestServiceKeytechTest {
 		String[] typFileList = new String().split(",");
 		try {
 
-			List<PdmDocument> ergebnis = this.restService.getAllDocuments("ITM004730", typFileList);
+			List<PdmDocument> ergebnis = restService.getAllDocuments("ITM004730", typFileList);
 			assertTrue(ergebnis != null);
 		} catch (PdmDocumentsException e) {
 			e.printStackTrace();

@@ -42,8 +42,8 @@ public class ConfigurationHandlerTest {
 
 		try {
 			Configuration testconfig2 = ConfigurationHandler.loadConfiguration();
-
 			testconfig2.setPdmSystem(null);
+			// FIXME: saveConfigurationtoFile wirft eine NullPointerException! 
 			ConfigurationHandler.saveConfigurationtoFile(testconfig2);
 			Configuration testconfig3 = ConfigurationHandler.loadConfiguration();
 			Assertions.fail("It should throw a PdmDocumentsExceotion");
