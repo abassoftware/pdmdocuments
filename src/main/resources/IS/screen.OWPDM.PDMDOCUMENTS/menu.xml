@@ -4,7 +4,7 @@
 <popups>
  <popup id="menuExecute" />
  <popup id="menuTable">
-  <menuitem msgId="1785ddd58ed04f8c8676b1de67537bf5" s3Name="1:ybuanzeigen" />
+  <menuitem msgId="pdmdocuments_owpdm_mtable_ybuanzeigen" s3Name="1:ybuanzeigen" />
  </popup>
 </popups>
 
