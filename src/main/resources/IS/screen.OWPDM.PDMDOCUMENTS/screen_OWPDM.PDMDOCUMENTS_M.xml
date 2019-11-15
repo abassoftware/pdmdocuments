@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE frame SYSTEM "urn:x-abas.de:abasscreens-1.00.dtd">
 
-<frame frameType="M" msgId="45e3efeab2efe6048d26953fe8864f16">
+<frame frameType="M" msgId="pdmdocuments_owpdm$0">
  <layout.grid>
   <metainfo axis="column" grid="0" stretch="zoom" />
   <metainfo axis="row" grid="0" stretch="zoom" />
@@ -9,7 +9,7 @@
    <layout.split axis="row">
     <pane.split>
      <layout.notebook>
-      <pane.notebook msgId="d95984c6da90849d3f88401c8ff68171">
+      <pane.notebook msgId="pdmdocuments_owpdm$1">
        <layout.grid>
         <cell gridX="0" gridY="0">
          <layout.grid>
@@ -20,47 +20,48 @@
             <cell gridX="2" gridY="0" />
             <cell alignY="beginning" gridX="3" gridY="0" />
             <cell gridX="0" gridY="1">
-             <label msgId="15f40291299d8c47431c7045a05f9cf8" />
+             <label msgId="pdmdocuments_owpdm_fhead_yartikel" />
             </cell>
             <cell gridX="1" gridY="1">
              <erpfield s3Name="0:yartikel" />
             </cell>
             <cell gridX="2" gridY="1">
-             <label msgId="fc91edeb-ced5-494a-91c3-e2e703b3c0dd" />
+             <label msgId="pdmdocuments_owpdm_fhead_ybeleg" />
             </cell>
             <cell gridX="3" gridY="1">
              <erpfield s3Name="0:ybeleg" />
             </cell>
-            <cell gridX="0" gridY="2">
-             <label msgId="f29e844d051ac2c8cc28426fd6c2bdd7" />
+            <cell gridX="0" gridY="2" sizeX="4">
+             <groupline msgId="pdmdocuments_owpdm$2" />
             </cell>
-            <cell gridX="1" gridY="2">
+            <cell gridX="0" gridY="3">
+             <label msgId="pdmdocuments_owpdm_fhead_ydokart" />
+            </cell>
+            <cell gridX="1" gridY="3">
              <erpfield dimX="100" s3Name="0:ydokart" />
             </cell>
-            <cell gridX="2" gridY="2">
-             <label msgId="e6434034cb48693f80cbd1e7c3799e12" />
+            <cell gridX="2" gridY="3">
+             <label msgId="pdmdocuments_owpdm_fhead_ystruktur" />
             </cell>
-            <cell gridX="3" gridY="2">
+            <cell gridX="3" gridY="3">
              <erpfield s3Name="0:ystruktur" />
             </cell>
-            <cell gridX="0" gridY="3" />
-            <cell gridX="1" gridY="3">
-             <label msgId="pdmdocuments_demotext" />
-            </cell>
-            <cell gridX="2" gridY="3" />
-            <cell gridX="3" gridY="3" />
+            <cell gridX="0" gridY="4" />
+            <cell gridX="1" gridY="4" />
+            <cell gridX="2" gridY="4" />
+            <cell gridX="3" gridY="4" />
            </layout.grid>
           </cell>
          </layout.grid>
         </cell>
        </layout.grid>
       </pane.notebook>
-      <pane.notebook msgId="pdmdocuments_owpdm$1">
+      <pane.notebook msgId="pdmdocuments_owpdm$3" scope="KONFIGURATION">
        <layout.grid>
         <cell gridX="0" gridY="0">
          <layout.grid>
           <cell gridX="0" gridY="0">
-           <label msgId="f7e53bc9-8081-41b0-b409-35274f517083" />
+           <label msgId="pdmdocuments_owpdm_fhead_ypdmsystem" />
           </cell>
           <cell gridX="1" gridY="0">
            <erpfield s3Name="0:ypdmsystem" />
@@ -84,7 +85,7 @@
           <cell gridX="2" gridY="2" />
           <cell gridX="3" gridY="2" />
           <cell gridX="0" gridY="3">
-           <label msgId="e78acd2d-5ead-4c2b-a315-e46f2b14f9fe" />
+           <label msgId="pdmdocuments_owpdm_fhead_ybildschirmtypen" />
           </cell>
           <cell gridX="1" gridY="3">
            <erpfield s3Name="0:ybildschirmtypen" />
@@ -101,24 +102,24 @@
         </cell>
         <cell gridX="0" gridY="1">
          <layout.notebook>
-          <pane.notebook msgId="pdmdocuments_owpdm$2" scope="KEYTECH">
+          <pane.notebook msgId="pdmdocuments_owpdm$4" scope="KEYTECH">
            <layout.grid>
             <cell gridX="0" gridY="0">
              <layout.grid>
               <cell gridX="0" gridY="0">
-               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+               <label msgId="pdmdocuments_owpdm_fhead_yserver" />
               </cell>
               <cell gridX="1" gridY="0" sizeX="3">
                <erpfield s3Name="0:yserver" />
               </cell>
               <cell gridX="0" gridY="1">
-               <label msgId="eae5a27d-136d-41a3-ae8d-919fe109623f" />
+               <label msgId="pdmdocuments_owpdm_fhead_yuser" />
               </cell>
               <cell gridX="1" gridY="1">
                <erpfield s3Name="0:yuser" />
               </cell>
               <cell gridX="2" gridY="1">
-               <label msgId="4d3c1aa3-130c-4ba6-a935-675d47340dda" />
+               <label msgId="pdmdocuments_owpdm_fhead_ypassword" />
               </cell>
               <cell gridX="3" gridY="1">
                <erpfield s3Name="0:ypassword" />
@@ -127,12 +128,12 @@
             </cell>
            </layout.grid>
           </pane.notebook>
-          <pane.notebook msgId="pdmdocuments_owpdm$3" scope="PROFILE">
+          <pane.notebook msgId="pdmdocuments_owpdm$5" scope="PROFILE">
            <layout.grid>
             <cell gridX="0" gridY="0">
              <layout.grid>
               <cell gridX="0" gridY="0">
-               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+               <label msgId="pdmdocuments_owpdm_fhead_yserver" />
               </cell>
               <cell gridX="1" gridY="0" sizeX="4">
                <erpfield s3Name="0:yserver" />
@@ -144,13 +145,13 @@
                <erpfield s3Name="0:ytenant" />
               </cell>
               <cell gridX="0" gridY="1">
-               <label msgId="eae5a27d-136d-41a3-ae8d-919fe109623f" />
+               <label msgId="pdmdocuments_owpdm_fhead_yuser" />
               </cell>
               <cell gridX="1" gridY="1">
                <erpfield s3Name="0:yuser" />
               </cell>
               <cell gridX="2" gridY="1">
-               <label msgId="4d3c1aa3-130c-4ba6-a935-675d47340dda" />
+               <label msgId="pdmdocuments_owpdm_fhead_ypassword" />
               </cell>
               <cell gridX="3" gridY="1" sizeX="2">
                <erpfield s3Name="0:ypassword" />
@@ -212,12 +213,12 @@
             </cell>
            </layout.grid>
           </pane.notebook>
-          <pane.notebook msgId="pdmdocuments_owpdm$4" scope="COFFEE">
+          <pane.notebook msgId="pdmdocuments_owpdm$6" scope="COFFEE">
            <layout.grid>
             <cell gridX="0" gridY="0">
              <layout.grid>
               <cell gridX="0" gridY="0">
-               <label msgId="0637163b-7b0f-446c-8248-fc19aa1d5853" />
+               <label msgId="pdmdocuments_owpdm_fhead_yserver" />
               </cell>
               <cell gridX="1" gridY="0" sizeX="3">
                <erpfield s3Name="0:yserver" />
@@ -230,7 +231,7 @@
         </cell>
        </layout.grid>
       </pane.notebook>
-      <pane.notebook msgId="pdmdocuments_owpdm$0">
+      <pane.notebook msgId="pdmdocuments_owpdm$7" scope="DEVELOPER">
        <layout.grid>
         <cell gridX="0" gridY="0">
          <label msgId="pdmdocuments_owpdm_fhead_yanhangliste" />
@@ -239,13 +240,13 @@
          <erpfield dimX="100" s3Name="0:yanhangliste" />
         </cell>
         <cell gridX="0" gridY="1">
-         <label msgId="pdmdocuments_owpdm_fhead_yuebfile" />
+         <label msgId="pdmdocuments_owpdm$9" />
         </cell>
         <cell gridX="1" gridY="1">
          <erpfield dimY="3" s3Name="0:yuebfile" />
         </cell>
         <cell gridX="0" gridY="2">
-         <label msgId="4b0db36b-dc07-442a-a71c-83c1c404981e" />
+         <label msgId="pdmdocuments_owpdm_fhead_ydrucker" />
         </cell>
         <cell gridX="1" gridY="2">
          <erpfield s3Name="0:ydrucker" />
@@ -267,9 +268,9 @@
       <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytstufe" s3Name="1:ytstufe" />
       <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytartikel" s3Name="1:ytartikel" />
       <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ytartikelname" s3Name="1:ytartikelname" />
-      <erpfield access="readOnly" dimX="30" msgId="5ec530b672d5f647cf9146251a254176" s3Name="1:ydateiname" />
-      <erpfield access="readOnly" dimX="0" msgId="042adb5cf4d14a9425cf5416938694ac" s3Name="1:ydatend" />
-      <erpfield access="readOnly" dimX="0" msgId="f0a34e9cfcfe3b12a87828a5fc881831" s3Name="1:ydoktyp" />
+      <erpfield access="readOnly" dimX="30" msgId="pdmdocuments_owpdm_ftable_ydateiname" s3Name="1:ydateiname" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ydatend" s3Name="1:ydatend" />
+      <erpfield access="readOnly" dimX="0" msgId="pdmdocuments_owpdm_ftable_ydoktyp" s3Name="1:ydoktyp" />
      </table>
     </pane.split>
    </layout.split>
