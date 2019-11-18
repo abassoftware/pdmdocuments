@@ -6,27 +6,38 @@ PDMDocuments ist ein Infosystem, welches über eine Rest-Api auf das PDM-System 
 die mit dem Artikel verknüpften Dokumente abholt und anzeigt.
 Das Infosystem ist durch ein Layout in den Druckprozess eingebunden und druckt zu einem Beleg die freigegeben Zeichnungen.
 
-Derzeit ist der Zugriff auf die folgenden PDM-System implementiert : 
-- Keytech
-- ProFile
-- SolidWorksPDM (Lösung von dem SolidWorks-Partner Coffee)    
+Derzeit ist der Zugriff auf die folgenden PDM-System implementiert :
+ 
+- Keytech +
+- ProFile +
+- SolidWorksPDM (Lösung von dem SolidWorks-Partner Coffee) +    
 
 == Technische Vorraussetzungen
 abas: 
-Cloud-Connect
+
+Um die Lizenzprüfung für PDMDocuments ausführen zu können muss das AddOn Cloud-Connect installiert sein bevor die Installation gestartet werden kann.
+Unter dem folgenden Link findet man die Installationsanleitung für Cloud-Connect: +
+ 
+https://documentation.abas.cloud/en/cloud-connect/
 
 Keytech:
-Keytech-RestAPI
-User für den Zugriff
+Es muss die Keytech-RestAPI auf dem Server von Keytech installiert sein.
+
+Für den Zugriff benötigen wir einen Benutzer in Keytech,
+welcher nur Zugriffsrechte für die Dokumente hat, welche in PDMDocuments angeschaut werden sollen.  
+
 
 ProFile:
-ProFile RestAPI 
-User für den Zugriff
+
+Es muss der ProFile APP Server installiert sein.
+
+Für den Zugriff benötigen wir einen Benutzer in ProFile,
+welcher nur Zugriffsrechte für die Dokumente hat, welche in PDMDocuments angeschaut werden sollen.  
 
 SolidWorks:
-RestAPI von Coffee
-User für den Zugriff
- 
+Die RestAPI von Coffee muss installiert sein.
+
+
 
 == Installation
 PDMDocuments wird mit dem abas-esdk-Installer installiert.
@@ -39,23 +50,31 @@ und die entsprechenden Programme installiert
 
 === Nacharbeiten
 
-Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts
-
-== 
+Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts: 
 
 
 
 
-:nofooter:
+== Konfiguration  
 
+include::profile.adoc[]
 
+include::keytech.adoc[]
 
-include::subpage.adoc[]
+include::coffee.adoc[]
+
 
 include::additionalpage.adoc[]
 
+:nofooter:
 == Partner  
+Unser PDM-Partner : 
 
+http://www.procad.de
+
+http://www.keytech.de
+
+http://www.coffee.de
 
 == About
 
