@@ -18,7 +18,9 @@ import org.w3c.dom.events.EventException;
 import de.abas.eks.jfop.annotation.Stateful;
 import de.abas.eks.jfop.remote.FO;
 import de.abas.eks.jfop.remote.FOe;
+import de.abas.erp.api.session.ERPInformation;
 import de.abas.erp.api.session.GUIInformation;
+import de.abas.erp.api.session.OperatorInformation;
 import de.abas.erp.axi.screen.ScreenControl;
 import de.abas.erp.axi2.EventHandlerRunner;
 import de.abas.erp.axi2.annotation.ButtonEventHandler;
@@ -32,6 +34,7 @@ import de.abas.erp.axi2.type.ButtonEventType;
 import de.abas.erp.axi2.type.FieldEventType;
 import de.abas.erp.axi2.type.ScreenEventType;
 import de.abas.erp.common.type.enums.EnumPrinterType;
+import de.abas.erp.common.type.enums.EnumPriorities;
 import de.abas.erp.db.ContextManager;
 import de.abas.erp.db.DbContext;
 import de.abas.erp.db.SelectableObject;
@@ -41,6 +44,7 @@ import de.abas.erp.db.TableDescriptor.FieldQuantum;
 import de.abas.erp.db.infosystem.custom.owpdm.PdmDocuments;
 import de.abas.erp.db.infosystem.custom.owpdm.PdmDocuments.Row;
 import de.abas.erp.db.infosystem.standard.st.MultiLevelBOM;
+import de.abas.erp.db.schema.company.Password;
 import de.abas.erp.db.schema.infrastructure.Printer;
 import de.abas.erp.db.schema.part.Product;
 import de.abas.erp.db.schema.part.SelectablePart;
@@ -80,13 +84,19 @@ import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 @EventHandler(head = PdmDocuments.class, row = PdmDocuments.Row.class)
 @RunFopWith(EventHandlerRunner.class)
 public class Main {
+
 	private static final String MASKKONTEXTFOP = "maskkontextfop";
+	private static final String DEVELOPER = "DEVELOPER";
+	private static final String KONFIGURATION = "KONFIGURATION";
+	private static final String PROFILE = "PROFILE";
+	private static final String KEYTECH = "KEYTECH";
+	private static final String COFFEE = "COFFEE";
 	protected final static Logger log = Logger.getLogger(Main.class);
 	protected final static String SQL_DRIVER_DEFAULT = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	protected final static Integer MAX_TREELEVEL = 999;
 	// protected final static String SEPERATOR = ";";
 	protected final static String SEPERATOR = System.getProperty("line.separator");
-
+	protected String maskenkontext = "";
 	private Configuration config = Configuration.getInstance();
 
 	@ButtonEventHandler(field = "start", type = ButtonEventType.AFTER, table = false)
@@ -745,8 +755,27 @@ public class Main {
 	@ScreenEventHandler(type = ScreenEventType.ENTER)
 	public void screenEnter(ScreenEvent event, ScreenControl screenControl, DbContext ctx, PdmDocuments head)
 			throws EventException {
+		check_Screen(ctx);
 		getConfigInMask(head, ctx);
 		showConfiguration(ctx);
+	}
+
+	private void check_Screen(DbContext ctx) {
+		BufferFactory buff = BufferFactory.newInstance();
+		GlobalTextBuffer globalBuffer = buff.getGlobalTextBuffer();
+		String passw = globalBuffer.getStringValue("currUserPwd");
+		ERPInformation erpInfo = new ERPInformation(ctx);
+		OperatorInformation operatorInformation = new OperatorInformation(ctx);
+		Password passwV = operatorInformation.getPwdRecord();
+		EnumPriorities prio = passwV.getPrio();
+		if (prio.equals(EnumPriorities.E)) {
+			addMaskkontext(KONFIGURATION);
+		}
+
+	}
+
+	private void addMaskkontext(String konfiguration) {
+		this.maskenkontext = this.maskenkontext + " " + konfiguration;
 	}
 
 	private void showConfiguration(DbContext ctx) {
