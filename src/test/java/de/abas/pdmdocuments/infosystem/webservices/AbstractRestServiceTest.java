@@ -31,7 +31,7 @@ public class AbstractRestServiceTest {
 	// .keystorePath(getTrustAndKeystorePath()).port(HTTP_PORT).extensions(new
 	// GZipTransformer()));
 
-
+	/*
 	@Test
 	public void testSetPasword() {
 		restcoffee.setPasword(PASSWORD_NEW);
@@ -49,7 +49,7 @@ public class AbstractRestServiceTest {
 		restcoffee.setServer(SERVER_NEW);
 		assertEquals(SERVER_NEW, restcoffee.server);
 	}
-
+ */
 //	@Test
 //	public void testCallRestservice() {
 //		fail("Not yet implemented");
