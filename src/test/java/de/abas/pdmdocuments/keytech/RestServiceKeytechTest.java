@@ -23,7 +23,7 @@ import de.abas.pdmdocuments.infosystem.webservices.keytech.RestServiceKeytech;
 
 public class RestServiceKeytechTest {
 	private static DocumentsInterface restService;
-
+	
 	@BeforeAll
 	public static void prepareRestService() {
 
@@ -80,5 +80,5 @@ public class RestServiceKeytechTest {
 			fail(e.toString());
 		}
 	}
-
+	
 }
