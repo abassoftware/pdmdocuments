@@ -56,7 +56,7 @@
         </cell>
        </layout.grid>
       </pane.notebook>
-      <pane.notebook msgId="pdmdocuments_owpdm$3" scope="KONFIGURATION">
+      <pane.notebook msgId="pdmdocuments_owpdm$3">
        <layout.grid>
         <cell gridX="0" gridY="0">
          <layout.grid>
@@ -231,7 +231,7 @@
         </cell>
        </layout.grid>
       </pane.notebook>
-      <pane.notebook msgId="pdmdocuments_owpdm$7" scope="DEVELOPER">
+      <pane.notebook msgId="pdmdocuments_owpdm$7">
        <layout.grid>
         <cell gridX="0" gridY="0">
          <label msgId="pdmdocuments_owpdm_fhead_yanhangliste" />
