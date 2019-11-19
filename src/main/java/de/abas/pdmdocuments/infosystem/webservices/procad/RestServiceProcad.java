@@ -128,11 +128,11 @@ public class RestServiceProcad extends AbstractRestService {
 						Values values = response.getValues();
 						Map<String, Object> valueMap = values.getAdditionalProperties();
 						String searchFileName = "/Document/orgName";
-						String searchDocVersionBaseId = "/Document/docVersionBaseId";
+						String searchDocVersionBaseId = "/Document/pdmDocVersionBaseID";
 						String filename = getStringFromMap(valueMap, searchDocVersionBaseId) + "_"
 								+ getStringFromMap(valueMap, searchFileName);
 
-						String searchDocType = "/Document/docType";
+						String searchDocType = "/Document/pdmDocType";
 						String docType = getStringFromMap(valueMap, searchDocType);
 						String searchfileSize = "/Document/fileSize";
 						Integer fileSize = getIntegerFromMap(valueMap, searchfileSize);
