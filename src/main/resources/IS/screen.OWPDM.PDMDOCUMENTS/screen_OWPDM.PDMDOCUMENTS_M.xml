@@ -139,10 +139,10 @@
                <erpfield s3Name="0:yserver" />
               </cell>
               <cell gridX="5" gridY="0">
-               <label msgId="pdmdocuments_owpdm_fhead_ytenant" />
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldfornumber" />
               </cell>
               <cell gridX="6" gridY="0">
-               <erpfield s3Name="0:ytenant" />
+               <erpfield s3Name="0:yfieldfornumber" />
               </cell>
               <cell gridX="0" gridY="1">
                <label msgId="pdmdocuments_owpdm_fhead_yuser" />
@@ -157,10 +157,10 @@
                <erpfield s3Name="0:ypassword" />
               </cell>
               <cell gridX="5" gridY="1">
-               <label msgId="pdmdocuments_owpdm_fhead_yfieldfornumber" />
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldforpartid" />
               </cell>
               <cell gridX="6" gridY="1">
-               <erpfield s3Name="0:yfieldfornumber" />
+               <erpfield s3Name="0:yfieldforpartid" />
               </cell>
               <cell gridX="0" gridY="2">
                <label msgId="pdmdocuments_owpdm_fhead_ysqlserver" />
@@ -175,10 +175,10 @@
                <erpfield s3Name="0:ysqlport" />
               </cell>
               <cell gridX="5" gridY="2">
-               <label msgId="pdmdocuments_owpdm_fhead_yfieldforpartid" />
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldfororgname" />
               </cell>
               <cell gridX="6" gridY="2">
-               <erpfield s3Name="0:yfieldforpartid" />
+               <erpfield s3Name="0:yfieldfororgname" />
               </cell>
               <cell gridX="0" gridY="3">
                <label msgId="pdmdocuments_owpdm_fhead_ysqluser" />
@@ -193,22 +193,40 @@
                <erpfield s3Name="0:ysqlpassword" />
               </cell>
               <cell gridX="5" gridY="3">
-               <label msgId="pdmdocuments_owpdm_fhead_ydatabase" />
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldfordocversid" />
               </cell>
               <cell gridX="6" gridY="3">
+               <erpfield s3Name="0:yfieldfordocversid" />
+              </cell>
+              <cell gridX="0" gridY="4">
+               <label msgId="pdmdocuments_owpdm_fhead_ydatabase" />
+              </cell>
+              <cell gridX="1" gridY="4">
                <erpfield s3Name="0:ydatabase" />
               </cell>
-              <cell gridX="0" gridY="4" />
-              <cell gridX="1" gridY="4" />
-              <cell gridX="2" gridY="4" />
-              <cell gridX="3" gridY="4" />
-              <cell gridX="4" gridY="4" />
-              <cell gridX="5" gridY="4">
+              <cell gridX="2" gridY="4">
                <label msgId="pdmdocuments_owpdm_fhead_ysqldriver" />
               </cell>
-              <cell gridX="6" gridY="4">
-               <erpfield s3Name="0:ysqldriver" />
+              <cell gridX="3" gridY="4" sizeX="2">
+               <erpfield dimX="50" s3Name="0:ysqldriver" />
               </cell>
+              <cell gridX="5" gridY="4">
+               <label msgId="pdmdocuments_owpdm_fhead_yfieldfordoctype" />
+              </cell>
+              <cell gridX="6" gridY="4">
+               <erpfield s3Name="0:yfieldfordoctype" />
+              </cell>
+              <cell gridX="0" gridY="5">
+               <label msgId="pdmdocuments_owpdm_fhead_ytenant" />
+              </cell>
+              <cell gridX="1" gridY="5">
+               <erpfield s3Name="0:ytenant" />
+              </cell>
+              <cell gridX="2" gridY="5" />
+              <cell gridX="3" gridY="5" />
+              <cell gridX="4" gridY="5" />
+              <cell gridX="5" gridY="5" />
+              <cell gridX="6" gridY="5" />
              </layout.grid>
             </cell>
            </layout.grid>

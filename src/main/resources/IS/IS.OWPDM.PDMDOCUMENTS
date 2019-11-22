@@ -94,6 +94,9 @@ Z#1#isybildschirmtypen#GL50#0#Dateitypen für Bildschirmanzeige#(65)#(65)#(2)###
 Z#1#isytenant#GL30#0#Tenant (Datenbank Profile#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyfieldfornumber#GL50#0#Feldname für AbasNumber in ProFile#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyfieldforpartid#GL50#0#Feldname für PartID in ProFile#(65)#(65)#(2)######1#1#1#0##1##
+Z#1#isyfieldfororgname#GL50#0#Feldname fuer orgName in ProFile#(65)#(65)#(2)######1#1#1#0##1##
+Z#1#isyfieldfordocversid#GL50#0#Feldname fuer docVersionBaseId#(65)#(65)#(2)######1#1#1#0##1##
+Z#1#isyfieldfordoctype#GL50#0#Feldname fuer docType#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isysqlserver#GL50#0#SQLServer IP / DNS-Name#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isysqlport#I5#0#SQLServer Port#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isydatabase#GL50#0#SQLServer Datenbank#(65)#(65)#(2)######1#1#1#0##1##
