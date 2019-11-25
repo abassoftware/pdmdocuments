@@ -46,6 +46,7 @@ esdk {
 		screens=["Purchasing:PurchaseOrder":["A"]]
         infosystems = ["IS.OWPDM.PDMDOCUMENTS"]
         tables = ["Einkauf"]
+        languages = "DEFA"
         data = ["data_aufrufparameter.json" , "data_layout.json" ]
         keys = []
         enums = ["PdmSystems"]
