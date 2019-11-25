@@ -9,13 +9,20 @@ public class Configuration {
 	private static Configuration instance;
 
 	// Zugangsdaten für RestService
-
 	private String restServer;
 	private String restUser;
 	private String restPassword;
 	private String restTenant;
+
+	// Felder für die Suche in ProFile
 	private String partAbasNumberFieldName;
+
 	private String partProFileIDFieldName;
+	private String orgNameFieldName;
+
+	private String docVersionBaseIDFieldName;
+
+	private String docTypeFieldName;
 
 	// Name des PDMSystem
 	private UserEnumPdmSystems pdmSystem;
@@ -52,6 +59,11 @@ public class Configuration {
 		this.fileTypesScreen = null;
 		this.sqlDriver = null;
 		this.dokart = null;
+		this.partAbasNumberFieldName = "";
+		this.partProFileIDFieldName = "";
+		this.orgNameFieldName = "";
+		this.docVersionBaseIDFieldName = "";
+		this.docTypeFieldName = "";
 	}
 
 	public static synchronized Configuration getInstance() {
@@ -62,7 +74,8 @@ public class Configuration {
 	}
 
 	public void initConfiguration(String restServer, String restUser, String restPassword, String restTenant,
-			String partFieldName, String partProFileIDFieldName, UserEnumPdmSystems pdmSystem, String sqlServer,
+			String partFieldName, String partProFileIDFieldName, String orgNameFieldName,
+			String docVersionBaseIDFieldName, String docTypeFieldName, UserEnumPdmSystems pdmSystem, String sqlServer,
 			Integer sqlPort, String sqldatabase, String sqlDriver, String sqlUser, String sqlPassword,
 			String fileTypesEmail, String fileTypesPrinter, String fileTypesScreen, String dokart)
 			throws PdmDocumentsException {
@@ -74,6 +87,10 @@ public class Configuration {
 		this.restTenant = restTenant;
 		this.partAbasNumberFieldName = partFieldName;
 		this.partProFileIDFieldName = partProFileIDFieldName;
+		this.orgNameFieldName = orgNameFieldName;
+		this.docVersionBaseIDFieldName = docVersionBaseIDFieldName;
+		this.docTypeFieldName = docTypeFieldName;
+
 		this.pdmSystem = pdmSystem;
 		this.sqlServer = sqlServer;
 		this.sqlPort = sqlPort;
@@ -91,9 +108,46 @@ public class Configuration {
 
 	private void checkPdmSystem() throws PdmDocumentsException {
 		if (this.pdmSystem == null) {
-			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.checkPdmSystem.isnull"));
+			throw new PdmDocumentsException(UtilwithAbasConnection.getMessage("pdmDocument.error.pdmsystemnull", ""));
 		}
 
+	}
+
+	public void checkConfig() throws PdmDocumentsException {
+		checkPdmSystem();
+		areAllFieldsforFieldnameSet();
+
+	}
+
+	private void areAllFieldsforFieldnameSet() throws PdmDocumentsException {
+		if (this.pdmSystem.equals(UserEnumPdmSystems.PROFILE)) {
+			checkFieldsForProfile();
+		}
+
+	}
+
+	private void checkFieldsForProfile() throws PdmDocumentsException {
+		if (this.partAbasNumberFieldName == null || this.partAbasNumberFieldName.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "AbasNumber"));
+		}
+
+		if (this.partProFileIDFieldName == null || this.partProFileIDFieldName.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "PartID"));
+		}
+		if (this.orgNameFieldName == null || this.orgNameFieldName.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "orgName"));
+		}
+		if (this.docVersionBaseIDFieldName == null || this.docVersionBaseIDFieldName.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "docVersionBaseID"));
+		}
+		if (this.docTypeFieldName == null || this.docTypeFieldName.isEmpty()) {
+			throw new PdmDocumentsException(
+					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "docType"));
+		}
 	}
 
 	public void setRestServer(String restServer, String restUser, String restPassword, String restTenant)
@@ -212,7 +266,7 @@ public class Configuration {
 		return partAbasNumberFieldName;
 	}
 
-	public void setPartFieldName(String partFieldName) {
+	public void setPartAbasNumberFieldName(String partFieldName) {
 		this.partAbasNumberFieldName = partFieldName;
 	}
 
@@ -237,4 +291,30 @@ public class Configuration {
 
 	}
 
+	public String getOrgNameFieldName() {
+
+		return this.orgNameFieldName;
+	}
+
+	public String getDocVersionBaseIDFieldName() {
+
+		return this.docVersionBaseIDFieldName;
+	}
+
+	public String getDocTypeFieldName() {
+
+		return this.docTypeFieldName;
+	}
+
+	public void setDocVersionBaseIDFieldName(String docVersionBaseIDFieldName) {
+		this.docVersionBaseIDFieldName = docVersionBaseIDFieldName;
+	}
+
+	public void setDocTypeFieldName(String docTypeFieldName) {
+		this.docTypeFieldName = docTypeFieldName;
+	}
+
+	public void setOrgNameFieldName(String orgNameFieldName) {
+		this.orgNameFieldName = orgNameFieldName;
+	}
 }

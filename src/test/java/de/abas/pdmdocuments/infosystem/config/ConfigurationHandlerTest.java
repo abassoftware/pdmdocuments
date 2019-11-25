@@ -19,8 +19,9 @@ public class ConfigurationHandlerTest {
 	public void setUp() throws Exception {
 
 		config.initConfiguration("localhost", "restUser", "restPassword", "restTenant", "partFieldName",
-				"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-				"sqlUser", "sqlPassword", "fileTypesEmail", "fileTypesPrinter", "fileTypesScreen", "dokart");
+				"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+				UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+				"fileTypesEmail", "fileTypesPrinter", "fileTypesScreen", "dokart");
 		ConfigurationHandler.saveConfigurationtoFile(config);
 
 	}
@@ -46,7 +47,7 @@ public class ConfigurationHandlerTest {
 			// FIXME: saveConfigurationtoFile wirft eine NullPointerException! 
 			ConfigurationHandler.saveConfigurationtoFile(testconfig2);
 			Configuration testconfig3 = ConfigurationHandler.loadConfiguration();
-			Assertions.fail("It should throw a PdmDocumentsExceotion");
+			Assertions.fail("It should throw a PdmDocumentsException");
 		} catch (PdmDocumentsException e) {
 			Assertions.assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.pdmsystemnull", ""),
 					e.getMessage());

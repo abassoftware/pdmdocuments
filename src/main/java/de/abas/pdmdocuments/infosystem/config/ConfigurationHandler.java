@@ -22,8 +22,11 @@ public class ConfigurationHandler {
 	private static final String PDM_CONFIG_USER = "pdm.config.user";
 	private static final String PDM_CONFIG_PASSWORD = "pdm.config.password";
 	private static final String PDM_CONFIG_TENANT = "pdm.config.tenant";
-	private static final String PDM_CONFIG_FIELDFORPARTNUMBER = "pdm.config.fieldforpartnumber";
-	private static final String PDM_CONFIG_FIELDFORPARTPROFILEID = "pdm.config.fieldforpartProFileID";
+	private static final String PDM_CONFIG_FIELD_FOR_PARTNUMBER = "pdm.config.fieldforpartnumber";
+	private static final String PDM_CONFIG_FIELD_FOR_PARTPROFILEID = "pdm.config.fieldforpartProFileID";
+	private static final String PDM_CONFIG_FIELD_FOR_ORGNAME = "pdm.config.fieldforOrgName";
+	private static final String PDM_CONFIG_FIELD_FOR_DOCVERSIONBASEID = "pdm.config.fieldforDocVersionBaseID";
+	private static final String PDM_CONFIG_FIELD_FOR_DOCTYPE = "pdm.config.fieldforDocType";
 	private static final String PDM_CONFIG_PDMSYSTEM = "pdm.config.pdmsystem";
 	private static final String PDM_CONFIG_SQL_SERVER = "pdm.config.sqlserver.server";
 	private static final String PDM_CONFIG_SQL_PORT = "pdm.config.sqlserver.port";
@@ -80,13 +83,18 @@ public class ConfigurationHandler {
 				String fileTypesEmail = configProperties.getProperty(PDM_CONFIG_FILETYPES_EMAIL);
 				String fileTypesPrinter = configProperties.getProperty(PDM_CONFIG_FILETYPES_PRINTER);
 				String fileTypesScreen = configProperties.getProperty(PDM_CONFIG_FILETYPES_SCREEN);
-				String fieldForPartNumber = configProperties.getProperty(PDM_CONFIG_FIELDFORPARTNUMBER);
-				String fieldforPartProFileID = configProperties.getProperty(PDM_CONFIG_FIELDFORPARTPROFILEID);
+				String fieldForPartNumber = configProperties.getProperty(PDM_CONFIG_FIELD_FOR_PARTNUMBER);
+				String fieldforPartProFileID = configProperties.getProperty(PDM_CONFIG_FIELD_FOR_PARTPROFILEID);
+				String fieldforOrgName = configProperties.getProperty(PDM_CONFIG_FIELD_FOR_ORGNAME);
+				String fieldforDocVersionBaseID = configProperties.getProperty(PDM_CONFIG_FIELD_FOR_DOCVERSIONBASEID);
+				String fieldforDocType = configProperties.getProperty(PDM_CONFIG_FIELD_FOR_DOCTYPE);
+
 				String dokart = configProperties.getProperty(PDM_CONFIG_DOKART);
 
 				config.initConfiguration(restServer, restUser, restPassword, restTenant, fieldForPartNumber,
-						fieldforPartProFileID, pdmSystem, sqlServer, sqlPort, sqldatabase, sqldriver, sqlUser,
-						sqlPassword, fileTypesEmail, fileTypesPrinter, fileTypesScreen, dokart);
+						fieldforPartProFileID, fieldforOrgName, fieldforDocVersionBaseID, fieldforDocType, pdmSystem,
+						sqlServer, sqlPort, sqldatabase, sqldriver, sqlUser, sqlPassword, fileTypesEmail,
+						fileTypesPrinter, fileTypesScreen, dokart);
 
 			} catch (IOException e) {
 				throw new PdmDocumentsException(
@@ -105,6 +113,7 @@ public class ConfigurationHandler {
 	}
 
 	public static void saveConfigurationtoFile(Configuration config) throws PdmDocumentsException {
+		config.checkConfig();
 
 		File propertiesFile = new File(CONFIGFILE);
 
@@ -127,8 +136,11 @@ public class ConfigurationHandler {
 		configProperties.setProperty(PDM_CONFIG_FILETYPES_EMAIL, config.getFileTypesEmail());
 		configProperties.setProperty(PDM_CONFIG_FILETYPES_PRINTER, config.getFileTypesPrinter());
 		configProperties.setProperty(PDM_CONFIG_FILETYPES_SCREEN, config.getFileTypesScreen());
-		configProperties.setProperty(PDM_CONFIG_FIELDFORPARTNUMBER, config.getPartFieldName());
-		configProperties.setProperty(PDM_CONFIG_FIELDFORPARTPROFILEID, config.getPartProFileIDFieldName());
+		configProperties.setProperty(PDM_CONFIG_FIELD_FOR_PARTNUMBER, config.getPartFieldName());
+		configProperties.setProperty(PDM_CONFIG_FIELD_FOR_PARTPROFILEID, config.getPartProFileIDFieldName());
+		configProperties.setProperty(PDM_CONFIG_FIELD_FOR_ORGNAME, config.getOrgNameFieldName());
+		configProperties.setProperty(PDM_CONFIG_FIELD_FOR_DOCVERSIONBASEID, config.getDocVersionBaseIDFieldName());
+		configProperties.setProperty(PDM_CONFIG_FIELD_FOR_DOCTYPE, config.getDocTypeFieldName());
 
 		configProperties.setProperty(PDM_CONFIG_DOKART, config.getDokart());
 

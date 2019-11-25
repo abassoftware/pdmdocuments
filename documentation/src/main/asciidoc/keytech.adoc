@@ -1,0 +1,12 @@
+=== Keytech
+
+Folgende Werte müssen bei dem PDM-System Keytech konfiguriert werden:
+[options="header",cols="1,1,1"]
+|===
+|Feld    |Bedeutung   |Beispiel-Eintrag   
+//----------------------
+|PDM-Server|Der Aufruf der Rest-Api von Keytech|http://<keytechserver>:8086/keytech   
+|Benutzer  |Der Keytech-Benutzer mit dem die Dokumente gesucht werden soll |   
+|Passwort  |Das Passwort des Keytechbenutzer   |      
+|===
+
