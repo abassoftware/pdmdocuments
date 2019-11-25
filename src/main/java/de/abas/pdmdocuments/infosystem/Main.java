@@ -18,7 +18,6 @@ import org.w3c.dom.events.EventException;
 import de.abas.eks.jfop.annotation.Stateful;
 import de.abas.eks.jfop.remote.FO;
 import de.abas.eks.jfop.remote.FOe;
-import de.abas.erp.api.session.ERPInformation;
 import de.abas.erp.api.session.GUIInformation;
 import de.abas.erp.api.session.OperatorInformation;
 import de.abas.erp.axi.screen.ScreenControl;
@@ -96,7 +95,7 @@ public class Main {
 	protected final static Integer MAX_TREELEVEL = 999;
 	// protected final static String SEPERATOR = ";";
 	protected final static String SEPERATOR = System.getProperty("line.separator");
-	protected String maskenkontext = "";
+	protected List<String> maskenkontext = new ArrayList<>();
 	private Configuration config = Configuration.getInstance();
 
 	@ButtonEventHandler(field = "start", type = ButtonEventType.AFTER, table = false)
@@ -336,7 +335,7 @@ public class Main {
 			rowNew.setYdateiname(pdmDocument.getFilename());
 			rowNew.setYdatend(pdmDocument.getFiletyp());
 			if (pdmDocument.hasFile()) {
-				rowNew.setYpfad(pdmDocument.getFile().getCanonicalPath().toString());
+				rowNew.setYpfad(pdmDocument.getFile().getCanonicalPath());
 			}
 			rowNew.setYdoktyp(pdmDocument.getDocumenttyp());
 			if (pdmDocument.hasError()) {
@@ -523,13 +522,17 @@ public class Main {
 					head.getYsqlpassword(), head.getYsqldriver());
 			config.setFiletypes(head.getYemailtypen(), head.getYdrucktypen(), head.getYbildschirmtypen());
 			config.setPdmSystem(head.getYpdmsystem());
-			config.setPartFieldName(head.getYfieldfornumber());
+			config.setPartAbasNumberFieldName(head.getYfieldfornumber());
 			config.setPartProFileIDFieldName(head.getYfieldforpartid());
+			config.setDocVersionBaseIDFieldName(head.getYfieldfordocversid());
+			config.setDocTypeFieldName(head.getYfieldfordoctype());
+			config.setOrgNameFieldName(head.getYfieldfororgname());
 			config.setDokart(head.getYdokart());
 			ConfigurationHandler.saveConfigurationtoFile(config);
 		} catch (PdmDocumentsException e) {
 			log.error(e);
-			UtilwithAbasConnection.showErrorBox(ctx, UtilwithAbasConnection.getMessage("main.saveconfiguration.error"));
+			UtilwithAbasConnection.showErrorBox(ctx,
+					UtilwithAbasConnection.getMessage("main.saveconfiguration.error", e.getMessage()));
 
 		}
 
@@ -574,29 +577,52 @@ public class Main {
 	public void ypdmsystemExit(FieldEvent event, ScreenControl screenControl, DbContext ctx, PdmDocuments head)
 			throws EventException {
 
-		BufferFactory buff = BufferFactory.newInstance();
-		PrintBuffer printbuf = buff.getPrintBuffer();
-
 		UserEnumPdmSystems pdmsys = head.getYpdmsystem();
 
 		if (pdmsys != null) {
-
+			replacePDMSystemInMaskkontext(pdmsys);
 			if (pdmsys.equals(UserEnumPdmSystems.PROFILE)) {
-				String maskkont = printbuf.getStringValue(MASKKONTEXTFOP);
-				String newMaskkontext = UserEnumPdmSystems.PROFILE.name().toUpperCase();
-				printbuf.assign(MASKKONTEXTFOP, newMaskkontext);
-			}
 
-			if (pdmsys.equals(UserEnumPdmSystems.KEYTECH)) {
-				printbuf.assign(MASKKONTEXTFOP, UserEnumPdmSystems.KEYTECH.name().toUpperCase());
-			}
-
-			if (pdmsys.equals(UserEnumPdmSystems.COFFEE)) {
-				printbuf.assign(MASKKONTEXTFOP, UserEnumPdmSystems.COFFEE.name().toUpperCase());
+				if (checkFieldnameFieldsAreEmpty(head)) {
+					preFillProFileFields(head);
+				}
 			}
 
 		}
 
+	}
+
+	private void preFillProFileFields(PdmDocuments head) {
+		head.setYfieldfornumber("/Part/pdmPartItemNumber");
+		head.setYfieldforpartid("/Part/pdmPartID");
+		head.setYfieldfororgname("/Document/orgName");
+		head.setYfieldfordocversid("/Document/docVersionBaseId");
+		head.setYfieldfordoctype("/Document/docType");
+
+		head.setYsqldriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	}
+
+	private boolean checkFieldnameFieldsAreEmpty(PdmDocuments head) {
+		if (!head.getYfieldfornumber().isEmpty()) {
+			return false;
+		}
+		if (!head.getYfieldforpartid().isEmpty()) {
+			return false;
+		}
+		if (!head.getYfieldfororgname().isEmpty()) {
+			return false;
+		}
+		if (!head.getYfieldfordocversid().isEmpty()) {
+			return false;
+		}
+		if (!head.getYfieldfordoctype().isEmpty()) {
+			return false;
+		}
+
+		if (!head.getYsqldriver().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	private void deletePathAtAttachmentlist(String ypfad, PdmDocuments head) throws PdmDocumentsException {
@@ -755,48 +781,63 @@ public class Main {
 	@ScreenEventHandler(type = ScreenEventType.ENTER)
 	public void screenEnter(ScreenEvent event, ScreenControl screenControl, DbContext ctx, PdmDocuments head)
 			throws EventException {
-		check_Screen(ctx);
+
 		getConfigInMask(head, ctx);
 		showConfiguration(ctx);
 	}
 
 	private void check_Screen(DbContext ctx) {
-		BufferFactory buff = BufferFactory.newInstance();
-		GlobalTextBuffer globalBuffer = buff.getGlobalTextBuffer();
-		String passw = globalBuffer.getStringValue("currUserPwd");
-		ERPInformation erpInfo = new ERPInformation(ctx);
+
 		OperatorInformation operatorInformation = new OperatorInformation(ctx);
-		Password passwV = operatorInformation.getPwdRecord();
-		EnumPriorities prio = passwV.getPrio();
-		if (prio.equals(EnumPriorities.E)) {
+		Password passw = operatorInformation.getPwdRecord();
+		EnumPriorities prio = passw.getPrio();
+
+		if (prio.compareTo(EnumPriorities.E) >= 0) {
 			addMaskkontext(KONFIGURATION);
 		}
 
 	}
 
 	private void addMaskkontext(String konfiguration) {
-		this.maskenkontext = this.maskenkontext + " " + konfiguration;
+
+		this.maskenkontext.add(konfiguration);
+		actMaskContext();
 	}
 
-	private void showConfiguration(DbContext ctx) {
+	private void removeMaskkontext(String konfiguration) {
+
+		this.maskenkontext.remove(konfiguration);
+		actMaskContext();
+	}
+
+	private void replacePDMSystemInMaskkontext(UserEnumPdmSystems pdmSystem) {
+		UserEnumPdmSystems[] list = UserEnumPdmSystems.values();
+		for (UserEnumPdmSystems userEnumPdmSystems : list) {
+			removeMaskkontext(userEnumPdmSystems.name().toUpperCase());
+		}
+		addMaskkontext(pdmSystem.name().toUpperCase());
+
+	}
+
+	private void actMaskContext() {
 		BufferFactory buff = BufferFactory.newInstance();
 		PrintBuffer printbuf = buff.getPrintBuffer();
 
+		StringBuilder bld = new StringBuilder();
+		for (String value : this.maskenkontext) {
+			bld.append(" ");
+			bld.append(value);
+		}
+		printbuf.assign(MASKKONTEXTFOP, bld.toString());
+	}
+
+	private void showConfiguration(DbContext ctx) {
+
+		check_Screen(ctx);
+
 		if (config.getPdmSystem() != null) {
 
-			if (config.getPdmSystem() == UserEnumPdmSystems.PROFILE) {
-				String maskkont = printbuf.getStringValue(MASKKONTEXTFOP);
-				String newMaskkontext = UserEnumPdmSystems.PROFILE.name().toUpperCase();
-				printbuf.assign(MASKKONTEXTFOP, newMaskkontext);
-			}
-
-			if (config.getPdmSystem() == UserEnumPdmSystems.KEYTECH) {
-				printbuf.assign(MASKKONTEXTFOP, UserEnumPdmSystems.KEYTECH.name().toUpperCase());
-			}
-
-			if (config.getPdmSystem() == UserEnumPdmSystems.COFFEE) {
-				printbuf.assign(MASKKONTEXTFOP, UserEnumPdmSystems.COFFEE.name().toUpperCase());
-			}
+			replacePDMSystemInMaskkontext(config.getPdmSystem());
 
 		} else {
 
@@ -804,9 +845,9 @@ public class Main {
 			for (UserEnumPdmSystems userEnumPdmSystems : pdmSystemValues) {
 
 				if (userEnumPdmSystems != null) {
-					String maskkont = printbuf.getStringValue(MASKKONTEXTFOP);
-					String newMaskkontext = maskkont + " " + userEnumPdmSystems.name().toString().toUpperCase();
-					printbuf.assign(MASKKONTEXTFOP, newMaskkontext);
+
+					addMaskkontext(userEnumPdmSystems.name().toUpperCase());
+
 				}
 			}
 		}
@@ -844,7 +885,9 @@ public class Main {
 			head.setYemailtypen(config.getFileTypesEmail());
 			head.setYfieldfornumber(config.getPartFieldName());
 			head.setYfieldforpartid(config.getPartProFileIDFieldName());
-
+			head.setYfieldfororgname(config.getOrgNameFieldName());
+			head.setYfieldfordocversid(config.getDocVersionBaseIDFieldName());
+			head.setYfieldfordoctype(config.getDocTypeFieldName());
 			head.setYdokart(config.getDokart());
 
 		} catch (PdmDocumentsException e) {
@@ -889,15 +932,6 @@ public class Main {
 			}
 
 		}
-
-		// if (!head.getYsammelzeichnungen().isEmpty()) {
-		// Iterable<Product> productlist =
-		// getProductsFromString(head.getYsammelzeichnungen(), ctx);
-		// for (Product product : productlist) {
-		// insertProductInRow(product, head);
-		// }
-		//
-		// }
 
 		if (head.getYstruktur()) {
 			List<Row> tableRows = head.getTableRows();

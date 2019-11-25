@@ -23,9 +23,10 @@ public class RestServiceProcad extends AbstractRestService {
 
 	private static final String SERVER_ERREICHBAR = "Server erreichbar";
 	private static final String TESTSERVICE_URL = "http://%1s/procad/profile/api/version";
-	/*
-	 * Auf der URL https://{server}:{port}/procad/profile/api/{tenant}/
-	 */
+
+	// Auf der URL https://{server}:{port}/procad/profile/api/{tenant}/ wird der
+	// Rest-Servie von ProFile aufgerufen.
+
 	private static final String BASE_URL = "http://%1s/procad/profile/api/%2s/";
 	private static final String SEARCHPRODUCT_URL = "objects/Part?query='%3s'='%4s'";
 	private static final String GETDOCUMENT_INFO = "objects/Document/%3s/";
@@ -112,7 +113,6 @@ public class RestServiceProcad extends AbstractRestService {
 		ProcadDocument response;
 
 		for (String proString : procadDocuments) {
-//			String testString = BASE_URL + GETDOCUMENT_INFO;
 			String urlDocInfo = String.format(BASE_URL + GETDOCUMENT_INFO, this.server, this.tenant, proString);
 			String urlDocFile = String.format(BASE_URL + GETDOCUMENT_FILE, this.server, this.tenant, proString);
 			log.info(UtilwithAbasConnection.getMessage("pdmDocument.restservice.procad.searchDokid", proString));
@@ -127,15 +127,11 @@ public class RestServiceProcad extends AbstractRestService {
 
 						Values values = response.getValues();
 						Map<String, Object> valueMap = values.getAdditionalProperties();
-						String searchFileName = "/Document/orgName";
-						String searchDocVersionBaseId = "/Document/docVersionBaseId";
-						String filename = getStringFromMap(valueMap, searchDocVersionBaseId) + "_"
-								+ getStringFromMap(valueMap, searchFileName);
 
-						String searchDocType = "/Document/docType";
-						String docType = getStringFromMap(valueMap, searchDocType);
-						String searchfileSize = "/Document/fileSize";
-						Integer fileSize = getIntegerFromMap(valueMap, searchfileSize);
+						String filename = getStringFromMap(valueMap, config.getDocVersionBaseIDFieldName()) + "_"
+								+ getStringFromMap(valueMap, config.getOrgNameFieldName());
+
+						String docType = getStringFromMap(valueMap, config.getDocTypeFieldName());
 						PdmDocument pdmDocument = new PdmDocument(filename, docType, urlDocFile);
 
 						Set<String> keyset = valueMap.keySet();
@@ -144,7 +140,6 @@ public class RestServiceProcad extends AbstractRestService {
 						}
 						pdmDocs.add(pdmDocument);
 
-						//
 					} else {
 						log.error(UtilwithAbasConnection
 								.getMessage("pdmDocument.restservice.procad.error.noFiletoDocID", proString));
@@ -163,26 +158,20 @@ public class RestServiceProcad extends AbstractRestService {
 		return pdmDocs;
 	}
 
-	private String getStringFromMap(Map<String, Object> valueMap, String searchString) {
+	private String getStringFromMap(Map<String, Object> valueMap, String searchString) throws PdmDocumentsException {
 		Object fileNameObj = valueMap.get(searchString);
 		String filename;
-		if (fileNameObj instanceof String) {
-			filename = (String) fileNameObj;
+		if (fileNameObj != null) {
+			if (fileNameObj instanceof String) {
+				filename = (String) fileNameObj;
 
-		} else {
-			filename = fileNameObj.toString();
+			} else {
+				filename = fileNameObj.toString();
+			}
+			return filename;
 		}
-		return filename;
-	}
-
-	private Integer getIntegerFromMap(Map<String, Object> valueMap, String searchString) {
-		Object value = valueMap.get(searchString);
-		Integer intValue = null;
-		if (value instanceof Integer) {
-			intValue = (Integer) value;
-
-		}
-		return intValue;
+		throw new PdmDocumentsException(
+				UtilwithAbasConnection.getMessage("pdmDocument.restservice.profile.error.valueNotinMap", searchString));
 	}
 
 	private List<String> getDokumentsFromSQL(String pdmProductID) throws PdmDocumentsException {

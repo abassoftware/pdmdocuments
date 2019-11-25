@@ -61,10 +61,7 @@ public class RestServiceKeytechTest {
 
 			List<PdmDocument> ergebnis = this.restService.getAllDocuments("ITM004730", typFileList);
 			assertTrue(ergebnis != null);
-		} catch (PdmDocumentsException e) {
-			e.printStackTrace();
-			fail(e.toString());
-		} catch (NullPointerException e) {
+		} catch (PdmDocumentsException | NullPointerException e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}

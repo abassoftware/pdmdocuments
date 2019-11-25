@@ -30,8 +30,9 @@ public class ConfigurationTest {
 
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+					FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 			Assertions.assertEquals(HOST, config.getRestServer());
 			Assertions.assertEquals("restUser", config.getRestUser());
 			Assertions.assertEquals("restPassword", config.getRestPassword());
@@ -63,8 +64,9 @@ public class ConfigurationTest {
 
 		try {
 			config.initConfiguration("localhost1", "restUser1", "restPassword1", "restTenant1", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.KEYTECH, "sqlServer", 2222, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+					FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 
 			Assertions.assertEquals("localhost1", config.getRestServer());
 			Assertions.assertEquals("restUser1", config.getRestUser());
@@ -90,9 +92,9 @@ public class ConfigurationTest {
 		Configuration config = Configuration.getInstance();
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", Integer.valueOf(2222),
-					"sqldatabase", "sqlDriver", "sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER,
-					FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.KEYTECH, "sqlServer", Integer.valueOf(2222), "sqldatabase", "sqlDriver",
+					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 
 			Assertions.assertEquals("sqlServer", config.getSqlServer());
 			Assertions.assertEquals("sqlUser", config.getSqlUser());
@@ -158,8 +160,9 @@ public class ConfigurationTest {
 		Configuration config = Configuration.getInstance();
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+					FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 			Assertions.assertEquals(null, config.getSqlPort());
 		} catch (PdmDocumentsException e) {
 			Assertions.fail(e.getMessage());
@@ -173,8 +176,9 @@ public class ConfigurationTest {
 		Configuration config = Configuration.getInstance();
 		try {
 			config.initConfiguration(HOST, "restUser", "restPassword", "restTenant", "partFieldName",
-					"partProFileIDFieldName", UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver",
-					"sqlUser", "sqlPassword", FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.KEYTECH, "sqlServer", null, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+					FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
 			Assertions.assertEquals("", config.getSqlPortString());
 		} catch (PdmDocumentsException e) {
 			Assertions.fail(e.getMessage());
@@ -198,7 +202,7 @@ public class ConfigurationTest {
 	public void testSetPartFieldName() {
 		Configuration config = Configuration.getInstance();
 
-		config.setPartFieldName("partfield");
+		config.setPartAbasNumberFieldName("partfield");
 
 		Assertions.assertEquals("partfield", config.getPartFieldName());
 
