@@ -1,7 +1,6 @@
 package de.abas.pdmdocuments.infosystem;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -19,7 +18,6 @@ import de.abas.eks.jfop.annotation.Stateful;
 import de.abas.eks.jfop.remote.FO;
 import de.abas.eks.jfop.remote.FOe;
 import de.abas.erp.api.session.GUIInformation;
-import de.abas.erp.api.session.OperatorInformation;
 import de.abas.erp.axi.screen.ScreenControl;
 import de.abas.erp.axi2.EventHandlerRunner;
 import de.abas.erp.axi2.annotation.ButtonEventHandler;
@@ -33,7 +31,6 @@ import de.abas.erp.axi2.type.ButtonEventType;
 import de.abas.erp.axi2.type.FieldEventType;
 import de.abas.erp.axi2.type.ScreenEventType;
 import de.abas.erp.common.type.enums.EnumPrinterType;
-import de.abas.erp.common.type.enums.EnumPriorities;
 import de.abas.erp.db.ContextManager;
 import de.abas.erp.db.DbContext;
 import de.abas.erp.db.SelectableObject;
@@ -43,7 +40,6 @@ import de.abas.erp.db.TableDescriptor.FieldQuantum;
 import de.abas.erp.db.infosystem.custom.owpdm.PdmDocuments;
 import de.abas.erp.db.infosystem.custom.owpdm.PdmDocuments.Row;
 import de.abas.erp.db.infosystem.standard.st.MultiLevelBOM;
-import de.abas.erp.db.schema.company.Password;
 import de.abas.erp.db.schema.infrastructure.Printer;
 import de.abas.erp.db.schema.part.Product;
 import de.abas.erp.db.schema.part.SelectablePart;
@@ -72,7 +68,6 @@ import de.abas.erp.db.util.ContextHelper;
 import de.abas.erp.jfop.rt.api.annotation.RunFopWith;
 import de.abas.jfop.base.buffer.BufferFactory;
 import de.abas.jfop.base.buffer.GlobalTextBuffer;
-import de.abas.jfop.base.buffer.PrintBuffer;
 import de.abas.pdmdocuments.infosystem.config.Configuration;
 import de.abas.pdmdocuments.infosystem.config.ConfigurationHandler;
 import de.abas.pdmdocuments.infosystem.data.PdmDocument;
@@ -84,17 +79,12 @@ import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 @RunFopWith(EventHandlerRunner.class)
 public class Main {
 
-	private static final String MASKKONTEXTFOP = "maskkontextfop";
-	private static final String DEVELOPER = "DEVELOPER";
-	private static final String KONFIGURATION = "KONFIGURATION";
-	private static final String PROFILE = "PROFILE";
-	private static final String KEYTECH = "KEYTECH";
-	private static final String COFFEE = "COFFEE";
-	protected final static Logger log = Logger.getLogger(Main.class);
-	protected final static String SQL_DRIVER_DEFAULT = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	protected final static Integer MAX_TREELEVEL = 999;
-	// protected final static String SEPERATOR = ";";
-	protected final static String SEPERATOR = System.getProperty("line.separator");
+	private ScreenOperations screenOperations = new ScreenOperations();
+	protected static final Logger log = Logger.getLogger(Main.class);
+	protected static final String SQL_DRIVER_DEFAULT = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	protected static final Integer MAX_TREELEVEL = 999;
+
+	protected static final String SEPERATOR = System.getProperty("line.separator");
 	protected List<String> maskenkontext = new ArrayList<>();
 	private Configuration config = Configuration.getInstance();
 
@@ -126,16 +116,11 @@ public class Main {
 
 			DocumentSearchfactory documentSearchfactory = new DocumentSearchfactory();
 
-			try {
+			try (FileWriter fileWriter = new FileWriter(gettempFileAnhangListe(head))) {
 				loadProductsInTable(head, ctx);
 				DocumentsInterface searchdokuments = documentSearchfactory.create(config);
 
-				FileWriter fileWriter;
-				File tempFile;
-				tempFile = gettempFileAnhangListe(head);
-
-				head.setYanhangliste(tempFile.getAbsolutePath());
-				fileWriter = new FileWriter(tempFile);
+				head.setYanhangliste(gettempFileAnhangListe(head).getAbsolutePath());
 
 				if (searchdokuments != null) {
 
@@ -394,123 +379,6 @@ public class Main {
 		return bildschirmtyplist;
 	}
 
-	// private boolean checkdocuments(PdmDocuments head, PdmDocument
-	// pdmDocument, DbContext ctx) {
-	//
-	// String drucktypen = head.getYdrucktypen();
-	// String emailtypen = head.getYemailtypen();
-	// String bildschirmtypen = head.getYbildschirmtypen();
-	//
-	// String[] drucktyplist = drucktypen.split(",");
-	// String[] emailtyplist = emailtypen.split(",");
-	// String[] bildschirmtyplist = bildschirmtypen.split(",");
-	//
-	// Printer printer = getactPrinter(head, ctx);
-	//
-	// if (printer == null) {
-	// printer = head.getYdrucker();
-	// if (printer != null) {
-	// return checkPrinter(head, pdmDocument, drucktyplist, emailtyplist,
-	// bildschirmtyplist, printer);
-	// } else {
-	// if (checkDocumentString(pdmDocument, bildschirmtyplist)
-	// && checkDocumenttyp(pdmDocument, head.getYdokart())) {
-	// return true;
-	// } else
-	// return false;
-	// }
-	// } else {
-	// return checkPrinter(head, pdmDocument, drucktyplist, emailtyplist,
-	// bildschirmtyplist, printer);
-	// }
-	//
-	// }
-
-	// private Boolean checkPrinter(PdmDocuments head, PdmDocument pdmDocument,
-	// String[] drucktyplist,
-	// String[] emailtyplist, String[] bildschirmtyplist, Printer printer2) {
-	// // EnumPrinterType printertyp = printer2.getPrinterType();
-	//
-	// if (isRealPrinter(printer2)) {
-	//
-	// if (checkDocumentString(pdmDocument, drucktyplist) &&
-	// checkDocumenttyp(pdmDocument, head.getYdokart())) {
-	//
-	// return true;
-	// } else {
-	// return false;
-	// }
-	//
-	// } else if (isEmailPrinter(printer2)) {
-	//
-	// if (checkDocumentString(pdmDocument, emailtyplist) &&
-	// checkDocumenttyp(pdmDocument, head.getYdokart())) {
-	//
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// } else {
-	// if (checkDocumentString(pdmDocument, bildschirmtyplist)
-	// && checkDocumenttyp(pdmDocument, head.getYdokart())) {
-	//
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// }
-	//
-	// }
-
-	// private boolean checkDocumenttyp(PdmDocument pdmDocument, String
-	// documentart) {
-	//
-	// if (!documentart.isEmpty()) {
-	// if (pdmDocument.getDocumenttyp().equals(documentart)) {
-	// return true;
-	// } else {
-	// return false;
-	// }
-	// } else {
-	// return true;
-	// }
-	//
-	// }
-
-	// private boolean checkDocumentString(PdmDocument pdmDocument, String[]
-	// typlist) {
-	//
-	// String filetyp = pdmDocument.getFiletyp();
-	// Boolean allempty = true;
-	// // boolean test = typlist.toString().isEmpty();
-	// // int anz = typlist.length;
-	//
-	// if (!typlist.toString().isEmpty()) {
-	// for (String typ : typlist) {
-	// if (!typ.isEmpty()) {
-	// if (typ.trim().toUpperCase().equals(filetyp.toUpperCase())) {
-	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc",
-	// pdmDocument.getFilename(),
-	// Arrays.toString(typlist)));
-	// return true;
-	// }
-	// allempty = false;
-	// }
-	// }
-	// }
-	//
-	// if (allempty) {
-	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.includePdmDoc.emptyTypliste",
-	// pdmDocument.getFilename()));
-	// return true;
-	// } else {
-	// log.trace(UtilwithAbasConnection.getMessage("pdmDocument.checkdocument.excludePdmDoc",
-	// pdmDocument.getFilename(),
-	// Arrays.toString(typlist)));
-	// return false;
-	// }
-	// }
-
 	@ButtonEventHandler(field = "ysaveconfig", type = ButtonEventType.AFTER)
 	public void ysaveconfigAfter(ButtonEvent event, ScreenControl screenControl, DbContext ctx, PdmDocuments head)
 			throws EventException {
@@ -544,7 +412,6 @@ public class Main {
 
 		GUIInformation gui = new GUIInformation(ctx);
 		File clientDir = gui.getClientTempDir();
-		// gP.getStringValue("cltempdir");
 
 		String zieldatvalue = clientDir.getPath() + "\\" + currentRow.getYdateiname();
 		String valuecmd = " -PC -BIN " + currentRow.getYpfad() + " " + zieldatvalue;
@@ -558,7 +425,6 @@ public class Main {
 			PdmDocuments.Row currentRow) throws EventException {
 		try {
 			if (currentRow.getYauswahl()) {
-				// addFilenameAtYuebfile(currentRow.getYdateiname(), head);
 				addFilenameAtYuebdatei(currentRow.getYdateiname(), head);
 				addPathAtAttachmentlist(currentRow.getYpfad(), head);
 			} else {
@@ -580,7 +446,7 @@ public class Main {
 		UserEnumPdmSystems pdmsys = head.getYpdmsystem();
 
 		if (pdmsys != null) {
-			replacePDMSystemInMaskkontext(pdmsys);
+			this.screenOperations.replacePDMSystemInMaskkontext(pdmsys);
 			if (pdmsys.equals(UserEnumPdmSystems.PROFILE)) {
 
 				if (checkFieldnameFieldsAreEmpty(head)) {
@@ -599,7 +465,7 @@ public class Main {
 		head.setYfieldfordocversid("/Document/docVersionBaseId");
 		head.setYfieldfordoctype("/Document/docType");
 
-		head.setYsqldriver("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		head.setYsqldriver(SQL_DRIVER_DEFAULT);
 	}
 
 	private boolean checkFieldnameFieldsAreEmpty(PdmDocuments head) {
@@ -665,18 +531,14 @@ public class Main {
 
 	}
 
-	private void deleteFilenametoFile(File tempFile, String ydateiname) throws FileNotFoundException, IOException {
-		String filenameString = "";
+	private void deleteFilenametoFile(File tempFile, String ydateiname) throws IOException {
 
 		List<String> fileListArray = Util.readStringListFromFile(tempFile);
 
 		if (fileListArray.contains(ydateiname)) {
 			fileListArray.remove(ydateiname);
 		}
-		//
-		// String filenameStringOut = convertStringArraytoString(fileListArray,
-		// SEPERATOR);
-		// Util.writeStringtoFile(tempFile, filenameStringOut);
+
 		Util.writeStringtoFile(tempFile, fileListArray);
 
 	}
@@ -696,7 +558,6 @@ public class Main {
 	}
 
 	private void addFilenametoFile(File tempFile, String ydateiname) throws IOException {
-		// String filenameString = "";
 
 		List<String> fileListArray = Util.readStringListFromFile(tempFile);
 
@@ -704,9 +565,6 @@ public class Main {
 			fileListArray.add(ydateiname);
 		}
 
-		// String filenameStringOut = convertStringArraytoString(fileListArray,
-		// SEPERATOR);
-		// Util.writeStringtoFile(tempFile, filenameStringOut);
 		Util.writeStringtoFile(tempFile, fileListArray);
 	}
 
@@ -737,30 +595,12 @@ public class Main {
 
 		return tempFile;
 	}
-	// private void deleteFilenamFromYuebfile(String ydateiname, PdmDocuments
-	// head) {
-	//
-	// Writer writer = new StringWriter();
-	// try {
-	// ArrayList<String> fileListArray = getyuebFileArray(head);
-	// fileListArray.remove(ydateiname);
-	//
-	// String output = convertStringArraytoString(fileListArray, separator);
-	// Reader reader = new StringReader(output);
-	// head.setYuebfile(reader);
-	// } catch (IOException e) {
-	// log.error(e);
-	// }
-	//
-	// }
 
 	private List<String> getyuebDateiArray(PdmDocuments head) throws IOException {
 		List<String> fileListArray = new ArrayList<String>();
 		if (!head.getYuebdatei().isEmpty()) {
 			File tempFile = new File(head.getYuebdatei());
-			// String stringfromFile = Util.readStringFromFile(tempFile);
-			// fileListArray = convertStringtoStringArray(stringfromFile,
-			// SEPERATOR);
+
 			fileListArray = Util.readStringListFromFile(tempFile);
 		}
 		return fileListArray;
@@ -783,74 +623,7 @@ public class Main {
 			throws EventException {
 
 		getConfigInMask(head, ctx);
-		showConfiguration(ctx);
-	}
-
-	private void check_Screen(DbContext ctx) {
-
-		OperatorInformation operatorInformation = new OperatorInformation(ctx);
-		Password passw = operatorInformation.getPwdRecord();
-		EnumPriorities prio = passw.getPrio();
-
-		if (prio.compareTo(EnumPriorities.E) >= 0) {
-			addMaskkontext(KONFIGURATION);
-		}
-
-	}
-
-	private void addMaskkontext(String konfiguration) {
-
-		this.maskenkontext.add(konfiguration);
-		actMaskContext();
-	}
-
-	private void removeMaskkontext(String konfiguration) {
-
-		this.maskenkontext.remove(konfiguration);
-		actMaskContext();
-	}
-
-	private void replacePDMSystemInMaskkontext(UserEnumPdmSystems pdmSystem) {
-		UserEnumPdmSystems[] list = UserEnumPdmSystems.values();
-		for (UserEnumPdmSystems userEnumPdmSystems : list) {
-			removeMaskkontext(userEnumPdmSystems.name().toUpperCase());
-		}
-		addMaskkontext(pdmSystem.name().toUpperCase());
-
-	}
-
-	private void actMaskContext() {
-		BufferFactory buff = BufferFactory.newInstance();
-		PrintBuffer printbuf = buff.getPrintBuffer();
-
-		StringBuilder bld = new StringBuilder();
-		for (String value : this.maskenkontext) {
-			bld.append(" ");
-			bld.append(value);
-		}
-		printbuf.assign(MASKKONTEXTFOP, bld.toString());
-	}
-
-	private void showConfiguration(DbContext ctx) {
-
-		check_Screen(ctx);
-
-		if (config.getPdmSystem() != null) {
-
-			replacePDMSystemInMaskkontext(config.getPdmSystem());
-
-		} else {
-
-			UserEnumPdmSystems[] pdmSystemValues = UserEnumPdmSystems.values();
-			for (UserEnumPdmSystems userEnumPdmSystems : pdmSystemValues) {
-
-				if (userEnumPdmSystems != null) {
-
-					addMaskkontext(userEnumPdmSystems.name().toUpperCase());
-
-				}
-			}
-		}
+		this.screenOperations.showConfiguration(ctx, this.config);
 	}
 
 	private void getConfigInMask(PdmDocuments head, DbContext ctx) {
@@ -956,7 +729,7 @@ public class Main {
 			de.abas.erp.db.Query<Product> queryproduct = ctx.createQuery(selectionBuilder.build());
 			List<Product> productQueryList = queryproduct.execute();
 
-			if (productQueryList.size() == 0) {
+			if (productQueryList.isEmpty()) {
 				throw new PdmDocumentsException(
 						UtilwithAbasConnection.getMessage("error.sammellist.productnotfound", productNumber));
 			}
@@ -1181,7 +954,7 @@ public class Main {
 		Selection<? extends SelectableRecord> selectionStorage = ExpertSelection
 				.create(new TableDescriptor(database, group, FieldQuantum.Table), criteria);
 		de.abas.erp.db.Query<? extends SelectableRecord> query = ctx.createQuery(selectionStorage);
-		String crittest = selectionStorage.getCriteria();
+
 		for (SelectableRecord row : query) {
 			String productString = row.getString(productFieldName);
 			Product product = getProduct(productString, ctx);
