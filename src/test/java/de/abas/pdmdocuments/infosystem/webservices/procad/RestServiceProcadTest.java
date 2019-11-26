@@ -336,7 +336,11 @@ class RestServiceProcadTest {
 		when(configuration.getSqlUser()).thenReturn("SA");	
 		when(configuration.getSqlPassword()).thenReturn("A_Str0ng_Required_Password");	
 		when(configuration.getSqlDriver()).thenReturn("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		
+			
+		when(configuration.getDocVersionBaseIDFieldName()).thenReturn("/Document/docVersionBaseId");
+		when(configuration.getOrgNameFieldName()).thenReturn("/Document/orgName");
+		when(configuration.getDocTypeFieldName()).thenReturn("/Document/docType");		
+
 		return configuration;
 	}
 	
