@@ -306,7 +306,10 @@ public class Main {
 			for (String dokartString : docArtStringlist) {
 				docArtArray.add(dokartString);
 			}
-
+			String[] docArtStringlist2 = head.getYdokartflex().split(";");
+			for (String dokartString : docArtStringlist2) {
+				docArtArray.add(dokartString);
+			}
 		}
 		return docArtArray;
 	}

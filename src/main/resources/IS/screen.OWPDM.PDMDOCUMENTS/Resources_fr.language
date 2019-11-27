@@ -15,6 +15,7 @@ pdmdocuments_owpdm_fhead_ybeleg=Transaction
 pdmdocuments_owpdm_fhead_yscreen_type=Types de fichiers affichés à l'écran
 pdmdocuments_owpdm_fhead_ydatabase=base de données SQL Server
 pdmdocuments_owpdm_fhead_ydokart=type de document
+pdmdocuments_owpdm_fhead_ydokartflex=type de document
 pdmdocuments_owpdm_fhead_ydrucker=Imprimante
 pdmdocuments_owpdm_fhead_ydrucktypen=Types de fichiers pour l'impression sur des imprimantes
 pdmdocuments_owpdm_fhead_yemailtypen=types de fichiers pour l'envoi d'e-mails
