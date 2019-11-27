@@ -5,34 +5,31 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import de.abas.pdmdocuments.infosystem.data.DocMetaData;
-import de.abas.pdmdocuments.infosystem.data.MetaDataTyp;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DocMetaDataTest {
 	DocMetaData docMetaTest;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Object testintObj = (Object) new Integer(2);
 		docMetaTest = new DocMetaData("inttest", testintObj);
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 

@@ -1,14 +1,12 @@
 package de.abas.pdmdocuments.infosystem.data;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -17,11 +15,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
@@ -30,20 +29,20 @@ public class PdmDocumentTest {
 	private PdmDocument pdmDocTest;
 	private static final String PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE = "pdmDocument.metaDataList.doubleValue";
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfterClass() throws Exception {
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		pdmDocTest = new PdmDocument("test.pdf", "testdoku", "http:\\\\testserver:8990\\");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
@@ -139,14 +138,12 @@ public class PdmDocumentTest {
 
 			assertEquals("22", this.pdmDocTest.getDocMetaDataByName(testname).getValue());
 
-			try {
-				this.pdmDocTest.addDocMetaData(testname, new BigDecimal(23));
+			PdmDocumentsException exception = Assertions.assertThrows(PdmDocumentsException.class,
+					() -> this.pdmDocTest.addDocMetaData(testname, new BigDecimal(23)),
+					"It should be throw an PDMException");
 
-			} catch (PdmDocumentsException e) {
-
-				assertThat(e.getMessage(),
-						is(UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname)));
-			}
+			assertEquals(exception.getMessage(),
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname));
 
 		} catch (PdmDocumentsException e) {
 			fail(e.getMessage());
