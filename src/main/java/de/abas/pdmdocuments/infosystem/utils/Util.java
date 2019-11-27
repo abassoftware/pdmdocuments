@@ -20,9 +20,6 @@ public class Util {
 	private static final String[][] UMLAUT_REPLACEMENTS = { { "Ä", "Ae" }, { "Ü", "Ue" }, { "Ö", "Oe" }, { "ä", "ae" },
 			{ "ü", "ue" }, { "ö", "oe" }, { "ß", "ss" } };
 
-	private static final String[][] SONDERZEICHEN_REPLACEMENTS = { { "/", "_" }, { " ", "_" }, { ";", "_" },
-			{ "\\", "_" }, { "=", "_" } };
-
 	private Util() {
 		throw new IllegalStateException("Utility class");
 	}
@@ -50,8 +47,7 @@ public class Util {
 
 	public static String replaceSonderzeichen(String orig) {
 
-		return replaceZeichen(orig, SONDERZEICHEN_REPLACEMENTS);
-
+		return orig.replaceAll("[^A-Za-z0-9._]", "_");
 	}
 
 	public static String replaceZeichen(String orig, String[][] replacements) {
@@ -60,7 +56,6 @@ public class Util {
 		for (int i = 0; i < replacements.length; i++) {
 			result = result.replace(replacements[i][0], replacements[i][1]);
 		}
-
 		return result;
 	}
 
