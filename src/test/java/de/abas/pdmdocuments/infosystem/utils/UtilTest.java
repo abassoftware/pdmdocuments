@@ -101,6 +101,7 @@ public class UtilTest {
 		assertEquals("Getr_aenk", Util.replaceSonderzeichen("Getr=aenk"));
 		assertEquals("Getr_ae_nk", Util.replaceSonderzeichen("Getr=ae;nk"));
 		assertEquals("", Util.replaceSonderzeichen(""));
+		assertEquals("test_Test", Util.replaceSonderzeichen("testøTest"));
 		try {
 			assertEquals(null, Util.replaceSonderzeichen(null));
 			fail("NullpointerException erwartet");
