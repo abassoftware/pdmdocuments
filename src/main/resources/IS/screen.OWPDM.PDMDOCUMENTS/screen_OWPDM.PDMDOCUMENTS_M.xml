@@ -35,10 +35,10 @@
              <groupline msgId="pdmdocuments_owpdm$2" />
             </cell>
             <cell gridX="0" gridY="3">
-             <label msgId="pdmdocuments_owpdm_fhead_ydokart" />
+             <label msgId="pdmdocuments_owpdm_fhead_ydokartflex" />
             </cell>
             <cell gridX="1" gridY="3">
-             <erpfield dimX="100" s3Name="0:ydokart" />
+             <erpfield dimX="50" s3Name="0:ydokartflex" />
             </cell>
             <cell gridX="2" gridY="3">
              <label msgId="pdmdocuments_owpdm_fhead_ystruktur" />
@@ -46,10 +46,6 @@
             <cell gridX="3" gridY="3">
              <erpfield s3Name="0:ystruktur" />
             </cell>
-            <cell gridX="0" gridY="4" />
-            <cell gridX="1" gridY="4" />
-            <cell gridX="2" gridY="4" />
-            <cell gridX="3" gridY="4" />
            </layout.grid>
           </cell>
          </layout.grid>
@@ -92,12 +88,20 @@
           </cell>
           <cell gridX="2" gridY="3" />
           <cell gridX="3" gridY="3" />
-          <cell gridX="0" gridY="4" />
+          <cell gridX="0" gridY="4">
+           <label msgId="pdmdocuments_owpdm_fhead_ydokart" />
+          </cell>
           <cell gridX="1" gridY="4">
-           <erpfield dimX="0" msgId="pdmdocuments_owpdm_fhead_ysaveconfig" s3Name="0:ysaveconfig" />
+           <erpfield s3Name="0:ydokart" />
           </cell>
           <cell gridX="2" gridY="4" />
           <cell gridX="3" gridY="4" />
+          <cell gridX="0" gridY="5" />
+          <cell gridX="1" gridY="5">
+           <erpfield dimX="0" msgId="pdmdocuments_owpdm_fhead_ysaveconfig" s3Name="0:ysaveconfig" />
+          </cell>
+          <cell gridX="2" gridY="5" />
+          <cell gridX="3" gridY="5" />
          </layout.grid>
         </cell>
         <cell gridX="0" gridY="1">

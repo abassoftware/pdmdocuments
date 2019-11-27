@@ -78,7 +78,8 @@ Z#1#isypdf#B#0#pdf Dateien#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isydwg#B#0#dwg Dateien#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isydxf#B#0#dxf Dateien#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyalle#B#0#alle Dateitypen#(65)#(65)#(2)######1#1#1#0##1##
-Z#1#isydokart#GL255#0#Dokumentenart#(65)#(65)#(2)######1#1#1#0##1##
+Z#1#isydokart#GL255#0#Dokumententyp Filter in Konfiguration#(65)#(65)#(2)######1#1#1#0##1##
+Z#1#isydokartflex#GL255#0#Dokumententyp Filter#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isypdmsystem#AZL1000007#0#PDM-SYSTEM#(65)#(65)#(2)#####java:de.abas.pdmdocuments.infosystem.Main@pdmdo#1#1#1#0##1##
 Z#1#isyserver#GL100#0#PDM -Server#(65)#(65)#(2)######1#1#1#0##1##
 Z#1#isyuser#GL30#0#Benutzer#(65)#(65)#(2)######1#1#1#0##1##
