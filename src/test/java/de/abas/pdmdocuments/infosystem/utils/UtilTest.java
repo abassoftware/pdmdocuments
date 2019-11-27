@@ -1,8 +1,8 @@
 package de.abas.pdmdocuments.infosystem.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,8 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import de.abas.eks.jfop.annotation.RunFop;
 
@@ -46,11 +47,14 @@ public class UtilTest {
 		assertEquals("\"Fehler\"", Util.getMessage("main.exception.title", Locale.GERMAN));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void testGetMessageStringNullpointer() {
 
 		String testnull = null;
-		Util.getMessage(testnull, Locale.GERMAN);
+
+		Assertions.assertThrows(NullPointerException.class, () -> {
+			Util.getMessage(testnull, Locale.GERMAN);
+		});
 
 	}
 
