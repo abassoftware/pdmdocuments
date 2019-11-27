@@ -26,21 +26,6 @@ public class SQLConnectionHandler {
 	private String password;
 	private String driver;
 
-//	public Connection getConnection() throws PdmDocumentsException {
-//		if (connection == null) {
-//			openConnection();
-//		} else
-//			try {
-//				if (connection.isClosed()) {
-//					openConnection();
-//				}
-//			} catch (SQLException e) {
-//				throw new PdmDocumentsException(
-//						UtilwithAbasConnection.getMessage(PDM_DOCUMENT_ERROR_SQLCONNECTION_CONNECT), e);
-//			}
-//		return connection;
-//	}
-
 	public SQLConnectionHandler(Configuration config) throws PdmDocumentsException {
 
 		this.server = config.getSqlServer();
