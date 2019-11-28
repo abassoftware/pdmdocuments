@@ -2,8 +2,13 @@ package de.abas.pdmdocuments.infosystem.data;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -12,11 +17,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
@@ -26,13 +28,10 @@ public class PdmDocumentTest {
 	private static PdmDocument pdmDocTest;
 	private static final String PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE = "pdmDocument.metaDataList.doubleValue";
 
-
 	@BeforeAll
 	public static void setUp() throws Exception {
 		pdmDocTest = new PdmDocument("test.pdf", "testdoku", "http:\\\\testserver:8990\\");
 	}
-
-
 
 	@Test
 	public void testPdmDocumentFileString() {
@@ -122,17 +121,17 @@ public class PdmDocumentTest {
 	public void testAddDocMetaDataStringBigDecimal() {
 		String testname = "testBigDec";
 		try {
-	
+
 			this.pdmDocTest.addDocMetaData("testBigDec", new BigDecimal(22));
 
 			assertEquals("22", this.pdmDocTest.getDocMetaDataByName(testname).getValue());
 
-		} catch (PdmDocumentsException e) {
-			fail(e.getMessage());
-		}
+			PdmDocumentsException exception = Assertions.assertThrows(PdmDocumentsException.class,
+					() -> this.pdmDocTest.addDocMetaData(testname, new BigDecimal(23)),
+					"It should be throw an PDMException");
 
-		try {
-			this.pdmDocTest.addDocMetaData(testname, new BigDecimal(23));
+			assertEquals(exception.getMessage(),
+					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname));
 
 		} catch (PdmDocumentsException e) {
 
