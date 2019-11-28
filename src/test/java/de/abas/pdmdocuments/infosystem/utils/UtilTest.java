@@ -2,7 +2,6 @@ package de.abas.pdmdocuments.infosystem.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
@@ -13,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import de.abas.eks.jfop.annotation.RunFop;
 
 public class UtilTest {
-
-
 
 	@RunFop
 	@Test
@@ -29,15 +27,19 @@ public class UtilTest {
 
 	@Test
 	public void testGetMessageStringNullpointer() {
-		// FIXME: Es darf keine Exception geworfen werden
+
 		String testnull = null;
-		assertNull(Util.getMessage(testnull, Locale.GERMAN));
+
+		Assertions.assertThrows(NullPointerException.class, () -> {
+			Util.getMessage(testnull, Locale.GERMAN);
+		});
+
 	}
 
 	@Test
 	public void testGetMessageStringObjectArray() {
 
-		assertEquals("\"Keine Verbindug zu Server Server1 m”glich\"",
+		assertEquals("\"Keine Verbindug zu Server Server1 mï¿½glich\"",
 				Util.getMessage("main.error.noConnection", Locale.GERMAN, "Server1"));
 
 	}

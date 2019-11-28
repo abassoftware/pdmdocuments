@@ -1,5 +1,6 @@
 package de.abas.pdmdocuments.infosystem;
 
+<<<<<<< HEAD
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -94,4 +95,10 @@ public class PDMDocumentsInfosystemTest extends AbstractTest {
 		
 	}
 	*/
+=======
+public class PDMDocumentsInfosystemTest {
+
+	// public PDMDocuments infosystem = ctx.openInfosystem(PDMDocuments.class);
+
+>>>>>>> e542106c4509fb2ac220d193794e19c8a275c326
 }
