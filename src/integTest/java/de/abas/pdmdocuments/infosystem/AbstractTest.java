@@ -1,232 +1,194 @@
 package de.abas.pdmdocuments.infosystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import org.junit.BeforeClass;
-
-import de.abas.erp.db.SelectableObject;
+import de.abas.erp.db.schema.customer.Customer;
+import de.abas.erp.db.schema.customer.CustomerContact;
+import de.abas.erp.db.schema.customer.CustomerContactEditor;
 import de.abas.erp.db.schema.customer.CustomerEditor;
 import de.abas.erp.db.schema.customer.SelectableCustomer;
+import de.abas.erp.db.schema.part.Product;
 import de.abas.erp.db.schema.part.ProductEditor;
 import de.abas.erp.db.schema.part.SelectablePart;
 import de.abas.erp.db.schema.referencetypes.PurchasingAndSalesProcessEditor;
-import de.abas.erp.db.schema.sales.Opportunity;
+import de.abas.erp.db.schema.referencetypes.TradingPartner;
+import de.abas.erp.db.schema.referencetypes.TradingPartnerEditor;
+import de.abas.erp.db.schema.sales.BlanketOrderEditor;
+import de.abas.erp.db.schema.sales.InvoiceEditor;
 import de.abas.erp.db.schema.sales.OpportunityEditor;
-import de.abas.erp.db.schema.sales.Quotation;
+import de.abas.erp.db.schema.sales.PackingSlipEditor;
 import de.abas.erp.db.schema.sales.QuotationEditor;
-import de.abas.erp.db.schema.sales.RepairOrder;
 import de.abas.erp.db.schema.sales.RepairOrderEditor;
 import de.abas.erp.db.schema.sales.SalesOrderEditor;
-import de.abas.erp.db.schema.sales.SalesOrderEditor.Row;
-import de.abas.erp.db.schema.sales.ServiceOrder;
-import de.abas.erp.db.schema.sales.ServiceQuotation;
+import de.abas.erp.db.schema.sales.SelectableSales;
 import de.abas.erp.db.schema.sales.ServiceQuotationEditor;
-import de.abas.erp.db.schema.sales.WebOrder;
 import de.abas.erp.db.schema.sales.WebOrderEditor;
-import de.abas.erp.db.schema.vendor.SelectableVendor;
+import de.abas.erp.db.schema.sales.BlanketOrderEditor.Row;
+import de.abas.erp.db.schema.vendor.Vendor;
+import de.abas.erp.db.schema.vendor.VendorContact;
+import de.abas.erp.db.schema.vendor.VendorContactEditor;
 import de.abas.erp.db.schema.vendor.VendorEditor;
 import de.abas.esdk.test.util.EsdkIntegTest;
+import de.abas.esdk.test.util.TestData;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
-public class AbstractTest extends EsdkIntegTest {
+import static de.abas.pdmdocuments.infosystem.AbstractTest.CustomerData.CUSTOMER;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.VendorData.VENDOR;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+import java.util.List;
+import java.util.Random;
 
+import static de.abas.pdmdocuments.infosystem.AbstractTest.ProductData.PRODUCT1;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.ProductData.PRODUCT2;
+
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.SALESORDER;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.BLANKETORDER;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.INVOICE;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.PACKINGSLIP;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.OPPORTUNITY;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.QUOTATION;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.REPAIRORDER;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.SERVICEQUOTATION;
+import static de.abas.pdmdocuments.infosystem.AbstractTest.SalesData.WEBORDER;
+
+
+
+public abstract class AbstractTest extends EsdkIntegTest {
+	
 	@BeforeClass
 	public static void prepare() {
-		// create customer and vendor
-		SelectableCustomer customer = createCustomer();
-		SelectableVendor vendor = createVendor();
+		createTestDataCustomer(CUSTOMER);
+		createTestDataVendor(VendorEditor.class, VENDOR);
 
-		// create products
-		String[] productsSwd = { "PDMDOC1", "PDMDOC2", "PDMDOC3" };
-		List<SelectablePart> products = new ArrayList<SelectablePart>();
-		for (String s : productsSwd) {
-			products.add(createProducts(s));
-		}
-
-		// create sales
-		SelectableObject salesorder = createPurchasingAndSalesObject(SalesOrderEditor.class, customer, null, products);
-		SelectableObject purchaseBlanketOrder = createPurchasingAndSalesObject(SalesOrderEditor.class, null, vendor,
-				products);
+		createTestDataProduct(ProductEditor.class, PRODUCT1);
+		createTestDataProduct(ProductEditor.class, PRODUCT2);
+		
+		createTestDataSales(de.abas.erp.db.schema.sales.SalesOrderEditor.class, SALESORDER);
 
 	}
+	
+	@AfterAll
+	public static void cleanup() {
+		TestData.deleteData(ctx, Customer.class, Customer.META.swd, CUSTOMER.swd);
 
-	private static <T extends PurchasingAndSalesProcessEditor> SelectableObject createPurchasingAndSalesObject(
-			Class<T> clazz, SelectableCustomer customer, SelectableVendor vendor, List<SelectablePart> products) {
-
+	}
+	
+	
+	private static <T extends PurchasingAndSalesProcessEditor> void createTestDataSales(Class<T> clazz, PDMDocumentsInfosystemTest.SalesData testData) {
 		T editor = ctx.newObject(clazz);
-		// Sales
-		if (editor instanceof SalesOrderEditor) {
-			createSalesOrder(customer, products, editor);
-		} else if (editor instanceof de.abas.erp.db.schema.sales.BlanketOrder) {
-			createSalesBlanketOrder(customer, products, editor);
-		} else if (editor instanceof de.abas.erp.db.schema.sales.Invoice) {
-			createSalesInvoice(customer, products, editor);
-		} else if (editor instanceof de.abas.erp.db.schema.sales.PackingSlip) {
-			createSalesPackingSlip(customer, products, editor);
-		} else if (editor instanceof Opportunity) {
-			createSalesOpportunity(customer, products, editor);
-		} else if (editor instanceof Quotation) {
-			crateSalesQuotation(customer, products, editor);
-		} else if (editor instanceof RepairOrder) {
-			createSalesRepairOrder(customer, products, editor);
-		} else if (editor instanceof ServiceQuotation) {
-			createSalesServiceQuotation(customer, products, editor);
-		} else if (editor instanceof WebOrder) {
-			createSalesWebOder(customer, products, editor);
-		} else if (editor instanceof ServiceOrder) {
-			// TODO
-			/*
-			 * ((ServiceOrderEditor) editor).setCustomer(customer); for(SelectablePart prod
-			 * : products) { de.abas.erp.db.schema.sales.ServiceOrderEditor.Row row =
-			 * ((ServiceOrderEditor) editor).table().appendRow(); row.setProduct(prod);
-			 * row.setUnitQty(new Random().nextDouble()); row.setPrice(new
-			 * Random().nextDouble()); }
-			 */
+		if (editor instanceof de.abas.erp.db.schema.sales.SalesOrderEditor) {
+			createSalesOrder(testData, editor);
 		}
-		// Purchasing
-		else if (editor instanceof de.abas.erp.db.schema.purchasing.BlanketOrder) {
-
-		} else if (editor instanceof de.abas.erp.db.schema.purchasing.Invoice) {
-
-		} else if (editor instanceof de.abas.erp.db.schema.purchasing.PackingSlip) {
-
-		} else if (editor instanceof de.abas.erp.db.schema.purchasing.PurchaseOrder) {
-
-		} else if (editor instanceof de.abas.erp.db.schema.purchasing.Request) {
-
-		}
-
+		
 		editor.commit();
-		SelectableObject salesobject = editor.getId();
-		return salesobject;
+		testData.sales = (SelectableSales) editor.getId();
 	}
 
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesWebOder(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((WebOrderEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.WebOrderEditor.Row row = ((WebOrderEditor) editor).table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
+	private static <T extends PurchasingAndSalesProcessEditor> void createSalesOrder(
+			PDMDocumentsInfosystemTest.SalesData testData, T editor) {
+		((de.abas.erp.db.schema.sales.SalesOrderEditor) editor).setCustomer(testData.customer);	
+		
+		de.abas.erp.db.schema.sales.SalesOrderEditor.Row row = ((de.abas.erp.db.schema.sales.SalesOrderEditor) editor).table().appendRow();
+		row.setProduct(testData.product1);
+		row.setUnitQty(200);
+		row.setPrice(20);
+		
+		de.abas.erp.db.schema.sales.SalesOrderEditor.Row row2 = ((de.abas.erp.db.schema.sales.SalesOrderEditor) editor).table().appendRow();
+		row2.setProduct(testData.product2);
+		row2.setUnitQty(200);
+		row2.setPrice(20);
 	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesServiceQuotation(
-			SelectableCustomer customer, List<SelectablePart> products, T editor) {
-		((ServiceQuotationEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.ServiceQuotationEditor.Row row = ((ServiceQuotationEditor) editor).table()
-					.appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesRepairOrder(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((RepairOrderEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.RepairOrderEditor.Row row = ((RepairOrderEditor) editor).table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void crateSalesQuotation(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((QuotationEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.QuotationEditor.Row row = ((QuotationEditor) editor).table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesOpportunity(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((OpportunityEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.OpportunityEditor.Row row = ((OpportunityEditor) editor).table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesPackingSlip(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((de.abas.erp.db.schema.sales.PackingSlipEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.PackingSlipEditor.Row row = ((de.abas.erp.db.schema.sales.PackingSlipEditor) editor)
-					.table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesInvoice(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((de.abas.erp.db.schema.sales.InvoiceEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.InvoiceEditor.Row row = ((de.abas.erp.db.schema.sales.InvoiceEditor) editor)
-					.table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesBlanketOrder(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((de.abas.erp.db.schema.sales.BlanketOrderEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			de.abas.erp.db.schema.sales.BlanketOrderEditor.Row row = ((de.abas.erp.db.schema.sales.BlanketOrderEditor) editor)
-					.table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static <T extends PurchasingAndSalesProcessEditor> void createSalesOrder(SelectableCustomer customer,
-			List<SelectablePart> products, T editor) {
-		((SalesOrderEditor) editor).setCustomer(customer);
-		for (SelectablePart prod : products) {
-			Row row = ((SalesOrderEditor) editor).table().appendRow();
-			row.setProduct(prod);
-			row.setUnitQty(new Random().nextDouble());
-			row.setPrice(new Random().nextDouble());
-		}
-	}
-
-	private static SelectablePart createProducts(String product) {
-		ProductEditor editor = ctx.newObject(ProductEditor.class);
-		editor.setSwd(product);
+	
+	private static void createTestDataProduct(Class<ProductEditor> clazz, AbstractTest.ProductData testData) {
+		ProductEditor editor = ctx.newObject(clazz);	
+		editor.setSwd(testData.swd);
 		editor.commit();
-		SelectablePart part = editor.getId();
-		return part;
+		testData.product = editor;
 	}
-
-	private static SelectableCustomer createCustomer() {
-		CustomerEditor editor = ctx.newObject(CustomerEditor.class);
-		editor.setSwd("PDMCust");
+	private static <T extends VendorEditor> void createTestDataVendor(Class<T> clazz, AbstractTest.VendorData testData) {
+		VendorEditor editor = ctx.newObject(clazz);	
+		editor.setSwd(testData.swd);
 		editor.commit();
-		SelectableCustomer customer = editor.getId();
-		return customer;
+		testData.vendor = editor;
 	}
-
-	private static SelectableVendor createVendor() {
-		VendorEditor editor = ctx.newObject(VendorEditor.class);
-		editor.setSwd("PDMVend");
+	private static void createTestDataCustomer(PDMDocumentsInfosystemTest.CustomerData testData) {
+		CustomerEditor editor = ctx.newObject(CustomerEditor.class);	
+		editor.setSwd(testData.swd);
 		editor.commit();
-		SelectableVendor vendor = editor.getId();
-		return vendor;
+		testData.customer = editor;
 	}
+	
+	
+	enum ProductData {
+		PRODUCT1("PDMProduct1"),
+		PRODUCT2("PDMProduct2");
 
+		String swd;
+		Product product;
+
+		ProductData(String swd) {
+			this.swd = swd;
+		}
+
+	}
+	
+	enum VendorData {
+		VENDOR("PDMVend");
+
+		String swd;
+		Vendor vendor;
+
+		VendorData(String swd) {
+			this.swd = swd;
+		}
+
+	}
+	
+	enum CustomerData {
+		CUSTOMER("PDMCust");
+
+		String swd;
+		Customer customer;
+
+		CustomerData(String swd) {
+			this.swd = swd;
+		}
+
+	}
+	
+	enum SalesData {
+		
+		SALESORDER(CUSTOMER.customer, PRODUCT1.product, PRODUCT2.product),
+		BLANKETORDER(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		INVOICE(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		PACKINGSLIP(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		OPPORTUNITY(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		QUOTATION(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		REPAIRORDER(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		SERVICEQUOTATION(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product),
+		WEBORDER(CustomerData.CUSTOMER.customer, ProductData.PRODUCT1.product, ProductData.PRODUCT2.product);
+			
+		
+		Customer customer;
+		Product product1;
+		Product product2;
+		SelectableSales sales;
+
+
+		SalesData(Customer customer, Product product1, Product product2) {
+			System.out.println("SALES");
+
+			System.out.println(CUSTOMER.customer);
+			System.out.println(CustomerData.CUSTOMER.customer);
+			System.out.println(customer);
+
+			this.customer = customer;
+			this.product1 = product1;
+			this.product2 = product1;
+		}
+
+	}
+	
+	
 }

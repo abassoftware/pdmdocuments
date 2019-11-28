@@ -359,7 +359,6 @@ class RestServiceProcadTest {
 		      sql = "INSERT INTO VERBIND " +
 	                   "VALUES (46900, 176839, 2, 3)";
 	      stmt.executeUpdate(sql);
-		      System.out.println("Inserted records into the table...");
 
 		   }catch(SQLException se){
 		      se.printStackTrace();
