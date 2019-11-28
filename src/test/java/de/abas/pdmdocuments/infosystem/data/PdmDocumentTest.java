@@ -1,5 +1,7 @@
 package de.abas.pdmdocuments.infosystem.data;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -15,35 +17,20 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
 import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class PdmDocumentTest {
-	private PdmDocument pdmDocTest;
+	private static PdmDocument pdmDocTest;
 	private static final String PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE = "pdmDocument.metaDataList.doubleValue";
 
 	@BeforeAll
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	public void setUp() throws Exception {
+	public static void setUp() throws Exception {
 		pdmDocTest = new PdmDocument("test.pdf", "testdoku", "http:\\\\testserver:8990\\");
-	}
-
-	@AfterEach
-	public void tearDown() throws Exception {
 	}
 
 	@Test
@@ -132,8 +119,9 @@ public class PdmDocumentTest {
 
 	@Test
 	public void testAddDocMetaDataStringBigDecimal() {
+		String testname = "testBigDec";
 		try {
-			String testname = "testBigDec";
+
 			this.pdmDocTest.addDocMetaData("testBigDec", new BigDecimal(22));
 
 			assertEquals("22", this.pdmDocTest.getDocMetaDataByName(testname).getValue());
@@ -146,7 +134,9 @@ public class PdmDocumentTest {
 					UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname));
 
 		} catch (PdmDocumentsException e) {
-			fail(e.getMessage());
+
+			assertThat(e.getMessage(),
+					is(UtilwithAbasConnection.getMessage(PDM_DOCUMENT_META_DATA_LIST_DOUBLE_VALUE, testname)));
 		}
 	}
 
@@ -154,9 +144,9 @@ public class PdmDocumentTest {
 	public void testGetDocMetaDataByName() {
 		try {
 
-			this.pdmDocTest.addDocMetaData("testBigDec", new BigDecimal(22));
+			this.pdmDocTest.addDocMetaData("testBigDec2", new BigDecimal(22));
 
-			assertEquals("testBigDec", this.pdmDocTest.getDocMetaDataByName("testBigDec").getName());
+			assertEquals("testBigDec2", this.pdmDocTest.getDocMetaDataByName("testBigDec2").getName());
 
 		} catch (PdmDocumentsException e) {
 			fail(e.getMessage());

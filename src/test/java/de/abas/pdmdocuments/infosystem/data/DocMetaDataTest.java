@@ -1,36 +1,20 @@
 package de.abas.pdmdocuments.infosystem.data;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DocMetaDataTest {
-	DocMetaData docMetaTest;
+	static DocMetaData docMetaTest;
 
 	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	public void setUp() throws Exception {
 		Object testintObj = (Object) new Integer(2);
 		docMetaTest = new DocMetaData("inttest", testintObj);
-
-	}
-
-	@AfterEach
-	public void tearDown() throws Exception {
 	}
 
 	@Test

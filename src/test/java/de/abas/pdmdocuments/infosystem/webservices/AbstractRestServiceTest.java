@@ -2,17 +2,17 @@ package de.abas.pdmdocuments.infosystem.webservices;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 
 import de.abas.pdmdocuments.infosystem.webservices.coffee.RestServiceCoffee;
 
 public class AbstractRestServiceTest {
 
-	private RestServiceCoffee restcoffee;
 	private final String PASSWORD_DEFAULT = "password";
 	private final String PASSWORD_NEW = "passwordnew";
 
@@ -21,6 +21,9 @@ public class AbstractRestServiceTest {
 
 	private final String SERVER_DEFAULT = "server";
 	private final String SERVER_NEW = "servernew";
+	
+	private  RestServiceCoffee restcoffee = new RestServiceCoffee(SERVER_DEFAULT, USER_DEFAULT, PASSWORD_DEFAULT);
+
 
 //	@Rule
 //	public final WireMockRule serviceMock = new WireMockRule(
@@ -28,23 +31,7 @@ public class AbstractRestServiceTest {
 	// .keystorePath(getTrustAndKeystorePath()).port(HTTP_PORT).extensions(new
 	// GZipTransformer()));
 
-	@BeforeClass
-	public static void setUpBeforeClass() {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-		restcoffee = new RestServiceCoffee(SERVER_DEFAULT, USER_DEFAULT, PASSWORD_DEFAULT);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	/*
 	@Test
 	public void testSetPasword() {
 		restcoffee.setPasword(PASSWORD_NEW);
@@ -62,7 +49,7 @@ public class AbstractRestServiceTest {
 		restcoffee.setServer(SERVER_NEW);
 		assertEquals(SERVER_NEW, restcoffee.server);
 	}
-
+ */
 //	@Test
 //	public void testCallRestservice() {
 //		fail("Not yet implemented");
