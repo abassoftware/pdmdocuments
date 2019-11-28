@@ -39,7 +39,7 @@ public class UtilTest {
 	@Test
 	public void testGetMessageStringObjectArray() {
 
-		assertEquals("\"Keine Verbindug zu Server Server1 m�glich\"",
+		assertEquals("\"Keine Verbindug zu Server Server1 möglich\"",
 				Util.getMessage("main.error.noConnection", Locale.GERMAN, "Server1"));
 
 	}
