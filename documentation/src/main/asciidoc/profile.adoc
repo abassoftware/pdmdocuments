@@ -1,12 +1,26 @@
 == ProFile
 
-Folgende Werte müssen bei dem PDM-System Keytech konfiguriert werden:
+Folgende Werte müssen bei dem PDM-System ProFile konfiguriert werden:
 [options="header",cols="1,1,1"]
 |===
 |Feld    |Bedeutung   |Beispiel-Eintrag   
 //----------------------
-|PDM-Server|Der Aufruf der Rest-Api von Keytech|http://<keytechserver>:8086/keytech   
-|Benutzer  |Der Keytech-Benutzer mit dem die Dokumente gesucht werden soll |   
-|Passwort  |Das Passwort des Keytechbenutzer   |      
+|PDM-Server|Der Aufruf der Rest-Api von ProFile|<ProFile-Server>   
+|Benutzer  |Der ProFile-Benutzer mit dem die Dokumente gesucht werden soll |   
+|Passwort  |Das Passwort des ProFile-Benutzer   |
+|SQLServer IP / DNS-Name| SQL-Server|
+|SQLServer Port|Zugriffsport auf den SQL-Server|z.B. 1433
+|SQLServer Benutzer|Benutzer für Zugriff auf SQL-Server |
+|SQLServer Passwort|Passwort für den Benutzer für Zugriff auf SQL-Server |
+|SQLServer Datenbank|Profile Datenbank im SQL-Server |
+|Tenant (Datenbank Profile)|Über den Tenant wird auf die ProFile-RestApi zugegriffen |z.B.: profile
+|SqlServerDriver | Java SQL ServerDriver |com.microsoft.sqlserver.jdbc.SQLServerDriver
+|Feldname für AbasNumber|Feld für die Abas - Identnummer in der Profile Artikeldatenbank | z.B.: /Part/pdmPartItemNumber
+|Feldname für PartID|Feld für die ID des Artikel in der Artikeldatenbank in Profile| z.B.: /Part/pdmPartID
+|Feldname für orgName|Feld für den Original-Dateinamen in der Dokumentendatenbank in ProFile | z.B.: /Document/orgName
+|Feldname für docVersionBaseID|Feld für die original DocID in der Dokumentendatenbank in ProFile | z.B.:  /Document/docVersionBaseId
+|Feldname für docType|Feld für den Dokumententyp in der Dokumentendatenbank in ProFile | z.B.: /Document/docType
+
+Diese Felder sind für den Zugriff auf ProFile notwendig.
 |===
 

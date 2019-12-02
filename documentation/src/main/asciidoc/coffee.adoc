@@ -1,3 +1,9 @@
 == ProFile
 
-All content goes into subpages.
+Folgende Werte müssen bei dem PDM-System SolidWorksPDM von Coffee konfiguriert werden:
+[options="header",cols="1,1,1"]
+|===
+|Feld    |Bedeutung   |Beispiel-Eintrag   
+//----------------------
+|PDM-Server|Der Aufruf der Rest-Api von Coffee|Eintrag: <Coffee-Server>:85 
+|===
