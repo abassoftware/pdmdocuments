@@ -9,15 +9,15 @@ public class InitialConfigurationProcad {
 		throw new UnsupportedOperationException();
 	}
 
-	public static void preFillProFileFields(PdmDocuments head) {
+	public static void preFillProFileFields(PdmDocuments pdmDocuments) {
 
-		if (checkFieldnameFieldsAreEmpty(head)) {
-			head.setYfieldfornumber("/Part/pdmPartItemNumber");
-			head.setYfieldforpartid("/Part/pdmPartID");
-			head.setYfieldfororgname("/Document/orgName");
-			head.setYfieldfordocversid("/Document/docVersionBaseId");
-			head.setYfieldfordoctype("/Document/docType");
-			head.setYsqldriver(SQL_DRIVER_DEFAULT);
+		if (checkFieldnameFieldsAreEmpty(pdmDocuments)) {
+			pdmDocuments.setYfieldfornumber("/Part/pdmPartItemNumber");
+			pdmDocuments.setYfieldforpartid("/Part/pdmPartID");
+			pdmDocuments.setYfieldfororgname("/Document/orgName");
+			pdmDocuments.setYfieldfordocversid("/Document/docVersionBaseId");
+			pdmDocuments.setYfieldfordoctype("/Document/docType");
+			pdmDocuments.setYsqldriver(SQL_DRIVER_DEFAULT);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class InitialConfigurationProcad {
 		return SQL_DRIVER_DEFAULT;
 	}
 
-	private static boolean checkFieldnameFieldsAreEmpty(PdmDocuments head) {
+	protected static boolean checkFieldnameFieldsAreEmpty(PdmDocuments head) {
 		if (!head.getYfieldfornumber().isEmpty()) {
 			return false;
 		}
@@ -44,6 +44,7 @@ public class InitialConfigurationProcad {
 		if (!head.getYsqldriver().isEmpty()) {
 			return false;
 		}
+
 		return true;
 	}
 

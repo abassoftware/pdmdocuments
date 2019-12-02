@@ -13,8 +13,6 @@ public class DocumentSearchfactory {
 
 	public DocumentsInterface create(Configuration config) throws PdmDocumentsException {
 
-		// testserver(server);
-
 		switch (config.getPdmSystem()) {
 		case PROFILE: {
 			log.info("Procad Service");

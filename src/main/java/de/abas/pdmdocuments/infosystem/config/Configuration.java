@@ -126,7 +126,7 @@ public class Configuration {
 
 	}
 
-	private void checkFieldsForProfile() throws PdmDocumentsException {
+	protected void checkFieldsForProfile() throws PdmDocumentsException {
 		if (this.partAbasNumberFieldName == null || this.partAbasNumberFieldName.isEmpty()) {
 			throw new PdmDocumentsException(
 					UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "AbasNumber"));

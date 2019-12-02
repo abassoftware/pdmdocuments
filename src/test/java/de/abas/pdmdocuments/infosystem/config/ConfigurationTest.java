@@ -1,10 +1,13 @@
 package de.abas.pdmdocuments.infosystem.config;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import de.abas.erp.db.schema.userenums.UserEnumPdmSystems;
 import de.abas.pdmdocuments.infosystem.PdmDocumentsException;
+import de.abas.pdmdocuments.infosystem.utils.UtilwithAbasConnection;
 
 public class ConfigurationTest {
 
@@ -54,6 +57,78 @@ public class ConfigurationTest {
 
 		} catch (PdmDocumentsException e) {
 			Assertions.fail(e.getMessage());
+		}
+
+	}
+
+	@Test
+	public void testcheckFieldsForProfile() {
+
+		Configuration config = Configuration.getInstance();
+
+		try {
+			config.initConfiguration("localhost1", "restUser1", "restPassword1", "restTenant1", "partFieldName",
+					"partProFileIDFieldName", "fieldforOrgName", "fieldforDocVersionBaseID", "fieldforDocType",
+					UserEnumPdmSystems.PROFILE, "sqlServer", 2222, "sqldatabase", "sqlDriver", "sqlUser", "sqlPassword",
+					FILE_TYPES_EMAIL, FILE_TYPES_PRINTER, FILE_TYPES_SCREEN, DOKART);
+			config.checkFieldsForProfile();
+			config.setPartAbasNumberFieldName("");
+
+			PdmDocumentsException exception = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "AbasNumber"),
+					exception.getMessage());
+
+			PdmDocumentsException exception0 = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "AbasNumber"),
+					exception0.getMessage());
+
+			config.setPartAbasNumberFieldName("partFieldName");
+
+			config.setPartProFileIDFieldName("");
+			PdmDocumentsException exception2 = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "PartID"),
+					exception2.getMessage());
+			config.setPartProFileIDFieldName("partProFileIDFieldName");
+
+			config.setOrgNameFieldName("");
+			PdmDocumentsException exception3 = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "orgName"),
+					exception3.getMessage());
+			config.setOrgNameFieldName("orgNameFieldName");
+
+			config.setDocVersionBaseIDFieldName("");
+			PdmDocumentsException exception4 = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "docVersionBaseID"),
+					exception4.getMessage());
+			config.setDocVersionBaseIDFieldName("docVersionBaseIDFieldName");
+
+			config.setDocTypeFieldName("");
+			PdmDocumentsException exception5 = Assertions.assertThrows(PdmDocumentsException.class, () -> {
+				config.checkFieldsForProfile();
+			});
+
+			assertEquals(UtilwithAbasConnection.getMessage("pdmDocument.error.profile.fieldnotset", "docType"),
+					exception5.getMessage());
+			config.setDocVersionBaseIDFieldName("docTypeFieldName");
+
+		} catch (PdmDocumentsException e) {
+
+			Assertions.fail("Es darf keine Exeption geworfen werden!");
 		}
 
 	}
