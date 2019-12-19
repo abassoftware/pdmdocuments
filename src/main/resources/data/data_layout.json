@@ -14,16 +14,16 @@
                 {
                         "dbnr" : 88,
                         "grnr" : 6,
-                        "identifier" : "classname",
+                        "identifier" : "nummer",
                         "standard" : true,
-                        "headfields" : [ "id", "classname" ],
+                        "headfields" : [ "id", "nummer" ],
                         "tablefields" : []
                 }, {
                         "dbnr" : 65,
                         "grnr" : 1,
                         "standard" : true,
-                        "identifier" : "classname",
-                        "headfields" : [ "id", "classname" ],
+                        "identifier" : "nummer",
+                        "headfields" : [ "id", "nummer" ],
                         "tablefields" : []
                 }
                 

@@ -46,13 +46,19 @@
             <cell gridX="3" gridY="3">
              <erpfield s3Name="0:ystruktur" />
             </cell>
+            <cell gridX="0" gridY="4" />
+            <cell gridX="1" gridY="4" />
+            <cell gridX="2" gridY="4" />
+            <cell gridX="3" gridY="4" />
            </layout.grid>
           </cell>
          </layout.grid>
         </cell>
        </layout.grid>
       </pane.notebook>
+
       <pane.notebook msgId="pdmdocuments_owpdm$3" scope="KONFIGURATION">
+
        <layout.grid>
         <cell gridX="0" gridY="0">
          <layout.grid>

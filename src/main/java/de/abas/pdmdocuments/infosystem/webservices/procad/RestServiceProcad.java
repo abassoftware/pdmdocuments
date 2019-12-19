@@ -132,6 +132,7 @@ public class RestServiceProcad extends AbstractRestService {
 								+ getStringFromMap(valueMap, config.getOrgNameFieldName());
 
 						String docType = getStringFromMap(valueMap, config.getDocTypeFieldName());
+
 						PdmDocument pdmDocument = new PdmDocument(filename, docType, urlDocFile);
 
 						Set<String> keyset = valueMap.keySet();

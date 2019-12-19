@@ -65,6 +65,7 @@ public class Main {
 			throws EventException {
 
 		ConfigurationMaskManager.getConfigInMask(head, ctx);
+
 		Boolean noErrorsInPDM = true;
 
 		log.info(UtilwithAbasConnection.getMessage("pdmDocument.info.startvalues", head.getYartikel(), head.getYbeleg(),

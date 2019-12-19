@@ -51,6 +51,7 @@ esdk {
         keys = []
         enums = ["PdmSystems"]
         workdirs = [ "owpdm" ]
+        languages = "DEA"
         essentialsVersions = ["2016r2n03-2016r4n15", "2017r1n00-2017r4n17" , "2018r1n00-2018r4n17"]
 	}
 
@@ -99,6 +100,7 @@ dependencies {
 
     provided "de.abas.homedir:abas-erpapi:1.0.0"
     provided "de.abas.homedir:abas-db-util:1.0.0"
+
     provided "de.abas.homedir:abas-axi2:1.0.0"
     provided "de.abas.homedir:abas-axi:1.0.0"
     provided "de.abas.homedir:abas-db-internal:1.0.0"
@@ -112,7 +114,7 @@ dependencies {
     implementation "de.abas.homedir:abas-jfop-base:1.0.0"
     implementation "de.abas.clientdir:abas-db:1.0.0-SNAPSHOT"
     implementation "de.abas.clientdir:abas-db-infosys:1.0.0-SNAPSHOT"
-    implementation "de.abas.clientdir:abas-db-index:1.0.0-SNAPSHOT"
+
     implementation "org.json:json:20170516"
     
     licensing "de.abas.esdk:client-api:0.0.13:all"
@@ -128,9 +130,22 @@ dependencies {
     testImplementation "de.abas.esdk.test.util:esdk-test-utils:0.0.2"
     testImplementation "junit:junit:4.12"
     
-    implementation 'de.abas.esdk.test.util:esdk-test-utils:0.0.2'
-    
-    compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.1.2.Final'
+	
+	
+	implementation "de.abas.clientdir:abas-db:1.0.0-SNAPSHOT"
+	implementation "de.abas.clientdir:abas-db-infosys:1.0.0-SNAPSHOT"
+	licensing "de.abas.esdk:client-api:0.0.13:all"
+
+	runtime "de.abas.homedir:commons-collections:1.0.0"
+	implementation "de.abas.homedir:abas-jfop-base:1.0.0"
+	runtime "de.abas.homedir:jcl-over-slf4j:1.0.0"
+	runtime "de.abas.homedir:slf4j-api:1.0.0"	
+	testImplementation "org.hamcrest:hamcrest-all:1.3"
+	
+	implementation 'de.abas.esdk.test.util:esdk-test-utils:0.0.2'
+	
+	compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.1.2.Final'
+
     compile group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.1.2.Final'
     compile group: 'org.jboss.resteasy', name: 'resteasy-multipart-provider', version: '3.1.2.Final'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'

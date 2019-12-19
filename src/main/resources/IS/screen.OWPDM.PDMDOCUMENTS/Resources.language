@@ -14,8 +14,12 @@ pdmdocuments_owpdm_fhead_yartikel=Artikel
 pdmdocuments_owpdm_fhead_ybeleg=Vorgang
 pdmdocuments_owpdm_fhead_ybildschirmtypen=Dateitypen für Bildschirmanzeige
 pdmdocuments_owpdm_fhead_ydatabase=SQLServer Datenbank
+<<<<<<< HEAD
 pdmdocuments_owpdm_fhead_ydokart=Dokumententyp fix
 pdmdocuments_owpdm_fhead_ydokartflex=Dokumententyp Filter
+=======
+pdmdocuments_owpdm_fhead_ydokart=Dokumententyp
+>>>>>>> a09432532b2bc1679fa0aff8ace0417773358ad3
 pdmdocuments_owpdm_fhead_ydrucker=Drucker
 pdmdocuments_owpdm_fhead_ydrucktypen=Dateitypen für den Druck auf Drucker
 pdmdocuments_owpdm_fhead_yemailtypen=Dateitypen für den Emailversand

@@ -37,6 +37,8 @@ public class UtilwithAbasConnection {
 
 	public static void shownoticebar(DbContext ctx, ScreenControl screenControl, String message) {
 
-		screenControl.setNote(Util.getMessage("main.exception.title", getLocale()) + " " + message, true, true);
+		screenControl.setNote(Util.getMessage("main.exception.title", getLocale()) + " " + message);
+		screenControl.setNote(Util.getMessage("main.exception.title", getLocale()) + " " + message, true, false);
+
 	}
 }
