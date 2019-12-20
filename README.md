@@ -1,50 +1,287 @@
-# pdmDocumentsCo
-This is the source code of pdmDocumentsCo, an abas Essentials App build on the abas Essentials SDK.
 
-## General setup
-If you are using proxies, add a gradle.properties file to your $GRADLE_USER_HOME.
+pdmDocuments
 
-```
-#If you use a proxy add it here
-systemProp.http.proxyHost=<webproxy>
-systemProp.http.proxyPort=<port>
-systemProp.https.proxyHost=<webproxy>
-systemProp.https.proxyPort=<port>
-```
+Documentation
 
-Run `./initGradleProperties.sh` in your terminal (use Git Bash on Windows)
 
-Use your favorite IDE to import the project.
+PDMDocuments ist ein Infosystem, welches über eine Rest-Api auf das PDM-System zugreift und die mit dem Artikel verknüpften Dokumente abholt und anzeigt. Das Infosystem ist durch ein Layout in den Druckprozess eingebunden und druckt zu einem Beleg die freigegeben Zeichnungen.
 
-## Installation
-To install the project make sure you are running the docker-compose.yml file
-or else change the gradle.properties file accordingly to use another erp client
-(you will still need a nexus server, but it can of course also be installed in your erp installation
-or elsewhere as long as it is configured in the gradle.properties file).
+Derzeit ist der Zugriff auf die folgenden PDM-System implementiert :
 
-To use the project's docker-compose.yml file, in the project's root directory run:
-```shell
-docker login --username <extranet user> --password <extranet password> sdp.registry.abas.sh
-docker-compose up
-```
+•Keytech
 
-Now you can install the project as follows:
-```shell
-./gradlew fullInstall
-```
-## Development
-If you want to make changes to the project before installing you still need to run the docker-compose.yml file
-or at least have a Nexus Server set up to work with.
+•ProFile
 
-Then run
-```shell
-./gradlew publishHomeDirJars
-```
+•SolidWorksPDM (Lösung von dem SolidWorks-Partner Coffee)
 
-You also need to run
-```shell
-./gradlew publishClientDirJars
-```
-to upload the $MANDANTDIR/java/lib dependencies to the Nexus Server and set your IDE up to work with the uploaded dependencies.
 
-After that the code should compile both with gradle and in your IDE and you are set up to work on the code or resource files as you want.
+Technische Vorraussetzungen
+
+abas: Version 2017 / 2018
+
+
+Keytech: Es muss die Keytech-RestAPI auf dem Server von Keytech installiert sein.
+
+
+Für den Zugriff benötigen wir einen Benutzer in Keytech, welcher nur Zugriffsrechte für die Dokumente hat, welche in PDMDocuments angeschaut werden sollen.
+
+
+ProFile:
+
+
+Es muss der ProFile APP Server installiert sein.
+
+
+Für den Zugriff benötigen wir einen Benutzer in ProFile, welcher nur Zugriffsrechte für die Dokumente hat, welche in PDMDocuments angeschaut werden sollen.
+
+
+SolidWorks: Die RestAPI von Coffee muss installiert sein.
+
+
+Installation
+
+
+
+PDMDocuments wird mit dem abas-esdk-Installer installiert.
+
+
+pdm-<Version>.jar
+
+
+Es wird das Infosystem PDMDOCUMENTS, das Layout PDMDOCUMENTS, Aufrufparameter und die entsprechenden Programme installiert.
+
+
+Nacharbeiten
+
+
+Die Aufrufparameter zum Aufrufen des Infosystem aus den Masken:
+
+
+Maske 2 Artikel : PDMDOCUMENTSTEIL Maske 42 Bestellung : PDMDOCUMENTSEK Infosystem APAPIER : PDMDOCUMENTSAPAPIER Infosystem PRODLIST : PDMDOCUMENTSPRODLIST
+
+
+Einbinden des Layouts PDMDOCUMENT in die individuellen Drucklayouts.
+
+
+Anpassungen
+
+
+
+Über den Berichtsfuss(bfuss) kann ein FOP eingefügt werden.
+
+
+Konfiguration
+
+
+
+
+ProFile
+
+
+
+Folgende Werte müssen bei dem PDM-System ProFile konfiguriert werden:
+
+
+
+
+
+
+Feld
+
+Bedeutung
+
+Beispiel-Eintrag
+
+
+
+PDM-Server
+ 
+Der Aufruf der Rest-Api von ProFile
+ 
+<ProFile-Server>
+ 
+
+Benutzer
+ 
+Der ProFile-Benutzer mit dem die Dokumente gesucht werden soll
+  
+
+Passwort
+ 
+Das Passwort des ProFile-Benutzer
+  
+
+SQLServer IP / DNS-Name
+ 
+SQL-Server
+  
+
+SQLServer Port
+ 
+Zugriffsport auf den SQL-Server
+ 
+z.B. 1433
+ 
+
+SQLServer Benutzer
+ 
+Benutzer für Zugriff auf SQL-Server
+  
+
+SQLServer Passwort
+ 
+Passwort für den Benutzer für Zugriff auf SQL-Server
+  
+
+SQLServer Datenbank
+ 
+Profile Datenbank im SQL-Server
+  
+
+Tenant (Datenbank Profile)
+ 
+Über den Tenant wird auf die ProFile-RestApi zugegriffen
+ 
+z.B.: profile
+ 
+
+SqlServerDriver
+ 
+Java SQL ServerDriver
+ 
+com.microsoft.sqlserver.jdbc.SQLServerDriver
+ 
+
+Feldname für AbasNumber
+ 
+Feld für die Abas - Identnummer in der Profile Artikeldatenbank
+ 
+z.B.: /Part/pdmPartItemNumber
+ 
+
+Feldname für PartID
+ 
+Feld für die ID des Artikel in der Artikeldatenbank in Profile
+ 
+z.B.: /Part/pdmPartID
+ 
+
+Feldname für orgName
+ 
+Feld für den Original-Dateinamen in der Dokumentendatenbank in ProFile
+ 
+z.B.: /Document/orgName
+ 
+
+Feldname für docVersionBaseID
+ 
+Feld für die original DocID in der Dokumentendatenbank in ProFile
+ 
+z.B.: /Document/docVersionBaseId
+ 
+
+Feldname für docType
+ 
+Feld für den Dokumententyp in der Dokumentendatenbank in ProFile
+ 
+z.B.: /Document/docType
+
+Diese Felder sind für den Zugriff auf ProFile notwendig.
+ 
+
+
+Keytech
+
+
+Folgende Werte müssen bei dem PDM-System Keytech konfiguriert werden:
+
+
+
+
+
+
+Feld
+
+Bedeutung
+
+Beispiel-Eintrag
+
+
+
+PDM-Server
+ 
+Der Aufruf der Rest-Api von Keytech
+ 
+http://<keytechserver>:8086/keytech
+ 
+
+Benutzer
+ 
+Der Keytech-Benutzer mit dem die Dokumente gesucht werden soll
+  
+
+Passwort
+ 
+Das Passwort des Keytechbenutzer
+  
+
+
+ProFile
+
+
+
+Folgende Werte müssen bei dem PDM-System SolidWorksPDM von Coffee konfiguriert werden:
+
+
+
+
+
+
+Feld
+
+Bedeutung
+
+Beispiel-Eintrag
+
+
+
+PDM-Server
+ 
+Der Aufruf der Rest-Api von Coffee
+ 
+Eintrag: <Coffee-Server>:85
+ 
+
+
+Additional Page
+
+
+
+Another page with content!
+
+
+Partner
+
+
+
+Unser PDM-Partner :
+
+
+http://www.procad.de
+
+
+http://www.keytech.de
+
+
+http://www.coffee.de
+
+
+About
+
+
+
+pdmDocuments
+© abas Software GmbH
+
+
+https://www.abas-erp.com/
